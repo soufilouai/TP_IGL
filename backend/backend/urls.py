@@ -19,7 +19,7 @@ from django.contrib import admin
 from django.urls import path, include
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('api/', include('api.urls')),  # Use the app name 'articles' in include
+    path('admin/', admin.site.urls, name='admin'),
+    path('api/', include('api.urls'), name='api'),  # Use the app name 'articles' in include
     # Add other URL patterns as needed
 ]

@@ -3,9 +3,9 @@ from .views import *
 
 urlpatterns = [
     
-    path('register/', UserRegistrationAPIView.as_view()),
-    path('', UserViewAPI.as_view()),
-    path('login/', UserLoginAPIView.as_view()),
-    path('logout/', UserLogoutViewAPI.as_view()),
+    path('register/', UserRegistrationAPIView.as_view(), name='registration'),
+    path('', UserViewAPI.as_view(), name='user_info'),
+    path('login/', UserLoginAPIView.as_view(), name='login'),
+    path('logout/', UserLogoutViewAPI.as_view(), name='logout'),
 
 ]
