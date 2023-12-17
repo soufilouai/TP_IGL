@@ -1,0 +1,1 @@
+- this folder contains the necessary js files for linking the react app with the backend app 
