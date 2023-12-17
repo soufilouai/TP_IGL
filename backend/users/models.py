@@ -3,7 +3,6 @@ from django.contrib.auth.base_user import BaseUserManager
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, UserManager
 from articles.models import Article
 
-# Create your models here.
 
 
 class CustomUserManager(BaseUserManager):
