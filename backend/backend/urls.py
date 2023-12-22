@@ -17,9 +17,43 @@ Including another URLconf
 # myproject/urls.py
 from django.contrib import admin
 from django.urls import path, include
+from django.http import HttpResponse
+from articles.models import Article
+from django.shortcuts import render
+from elasticsearch_dsl import Search
+
+
+
+def home(request) : 
+    
+    """ new_article = Article(
+    title='Sample Article',
+    summary='A  summary of the article.',
+    keywords='keyword1, keyword2',
+    content='This is the main content of the article.',
+    pdf='sample.pdf',
+    date='2023-01-01T12:00:00Z'  # Adjust the date format as needed
+    ) 
+    new_article.save() """
+   
+    # Your search logic here
+    s = Search(using='default')
+   
+    s = s.query('match', summary='brief')
+
+
+    response = s.execute()
+    hits = response['hits']['hits']
+    for hit in response :
+      hit.summary = "this is a correction"
+
+    # Render the results in a template
+    return render(request, 'search_results.html', {'hits': hits})
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+     path('', home, name='search_view'),
     path('api/', include('api.urls')),  # Use the app name 'articles' in include
     # Add other URL patterns as needed
 ]

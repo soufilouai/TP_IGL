@@ -13,6 +13,8 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 from pathlib import Path
 from .credentials import pwd, user
 
+
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -51,9 +53,9 @@ INSTALLED_APPS = [
 ]
 
 ELASTICSEARCH_DSL = {
-    'default ' : { 
-        "hosts" : "localhost:9200"
-    }
+    'default': {
+        'hosts': 'http://localhost:9200/',
+    },
 }
 
 CKEDITOR_CONFIGS = {
@@ -79,7 +81,7 @@ ROOT_URLCONF = 'backend.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

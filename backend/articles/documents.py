@@ -4,7 +4,7 @@ from django_elasticsearch_dsl import (
 
 from .models import Article
 
-PUBLISHER_INDEX = Index('bdd_tp_igl')
+PUBLISHER_INDEX = Index('article_index')
 
 PUBLISHER_INDEX.settings(
     number_of_shards=1,
@@ -24,6 +24,26 @@ class ArticleDocument(Document):
             
         }
     )
+  summary = fields.TextField(
+        fields={
+            'raw': {
+                'type': 'keyword',
+                
+            }
+        },
+    )
+  keywords=fields.KeywordField() ; 
+
+  content  = fields.TextField(
+        fields={
+            'raw': {
+                'type': 'keyword',
+                
+            }
+        },
+    )
+  
+  date = fields.DateField()
 
   class Django(object):
         model = Article
