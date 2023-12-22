@@ -38,6 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django_elasticsearch_dsl',
+    'django_elasticsearch_dsl_drf',
     
     'api',
 
@@ -47,6 +49,12 @@ INSTALLED_APPS = [
 
 
 ]
+
+ELASTICSEARCH_DSL = {
+    'default ' : { 
+        "hosts" : "localhost:9200"
+    }
+}
 
 CKEDITOR_CONFIGS = {
     'default': {
