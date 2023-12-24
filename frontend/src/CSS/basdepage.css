@@ -1,0 +1,105 @@
+.basdepage {
+    position: relative;
+    height: 35vh;
+    width: 100vw;
+    background-image: url('../images/bas.png');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: flex;
+  }
+
+.extreme .copyrights{
+    position:absolute;
+    left: 85%;
+    top:70%;
+    color: grey;
+}
+
+.extreme .follow{
+    position: absolute;
+    left:85%;
+    top:5%;
+    color: white;
+    font-family: 'Source Sans Pro';
+    font-weight: 500;
+    
+
+}
+
+.resButton{
+    padding : 0 ;
+    border : none ;
+    background: none;
+    cursor : pointer ;
+}
+
+.fbicone{
+    position: absolute;
+    width:5vh;
+    left: 85%;
+    top: 32%
+}
+
+.instaicone{
+    position: absolute;
+    width: 5vh;
+    left:88.5%;
+    top:32%
+}
+
+.adresse{
+    position: absolute;
+    color: gray;
+    left:3%;
+    top:22%;
+    font-family: 'Source Sans Pro';
+}
+
+
+.plus{
+    
+    padding : 0 ;
+    border : none ;
+    background: none;
+    cursor : pointer ;
+}
+
+
+.textaboutus{
+    position: absolute;
+    color:#F2F0E6;
+    font-family: 'Source Sans Pro';
+    font-weight: 900;
+    left:50%;
+    top : 5%;
+}
+
+.textpolicy{
+    position: absolute;
+    color: #F2F0E6;
+    font-family: 'Source Sans Pro';
+    font-weight: 900;
+    left:50%;
+    top : 15%;
+}
+
+.textcontact{
+    position: absolute;
+    color: #F2F0E6;
+    font-family: 'Source Sans Pro';
+    font-weight: 900;
+    left:50%;
+    top : 25%;
+}
+
+.textfaq{
+    position: absolute;
+    color: #F2F0E6;
+    font-family: 'Source Sans Pro';
+    font-weight: 900;
+    left:50%;
+    top : 35%;
+}
+
+
