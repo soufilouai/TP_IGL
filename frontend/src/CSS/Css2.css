@@ -1,0 +1,10 @@
+/* first section */
+.barrerecherche{
+    width: 100vw;
+    height: 100vh; 
+    background-image: url("../images/recherche1.png");
+    background-size: cover ;
+    background-repeat: no-repeat; 
+    margin: 0;
+}
+

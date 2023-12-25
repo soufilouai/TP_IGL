@@ -1,17 +1,16 @@
 import React from "react";
-import { ScholarHub, Acceuil2, ApercuHome} from "../Components/HomeComponents";
+import { Acceuil2, Discover, ScholarHub} from "../Components/HomeComponents";
 import { BasDePage } from "../Components/SharedComponents";
-
 
 
 function Home() {
     return (
       <div className="Home">
         <ScholarHub  />
-        <Acceuil2 />
-        <ApercuHome />
-        <BasDePage />
-
+       <Acceuil2 /> 
+       <Discover />
+       <BasDePage />
+      
       </div>
     );
   }

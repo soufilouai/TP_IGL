@@ -1,0 +1,293 @@
+/* first section */
+
+.body1{
+    width: 100vw;
+    height: 90vh; 
+    background-image: url("../images/acceuil20.png");
+    background-size: cover ;
+    background-repeat: no-repeat; 
+    margin: 0;
+  }
+  
+  @media screen and (max-width:480px){
+    .button2{
+      display: none;
+    }
+    .Registernow{
+      font-size: 300px;
+    }
+    
+  
+  }
+  
+  .container{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  
+  .button1 {
+    margin-right: 35%;
+    border : 0;
+    background: none;
+    cursor: pointer;
+    font-weight: bold;
+    font-family: 'Source Sans Pro';
+    width: 9%;
+  }
+  .button2{
+    margin-right: 35%;
+    border : 0;
+    background: none;
+    cursor: pointer;
+    font-weight: bold;
+    font-family: 'Source Sans Pro';
+    width: 9%;
+  }
+  .logo{
+    width: 12%;
+  }
+  
+  .titre_description_boutton{
+    transform: translate(-50%, -50%);
+    position: absolute;
+    margin-top: 35vh;
+    margin-left: 50vw;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: #F2F0E6;
+  }
+  .titre_description_boutton > * {
+   margin-bottom:  1%;
+  }
+  
+  .Registernow{
+    margin-top: 4%;
+    padding: 1.5% 5%;
+    border-color: #DBB071;
+    background: transparent;
+    text-align: center;
+    color: #DBB071;
+    font-size: 2vw;
+    font-weight: bold;
+    font-family: 'Imperial Roman';
+  
+  }
+  
+/* second section */
+.body2{
+    width: 100vw;
+    height: 70vh; 
+    background-image: url("../images/Acceuil2.png");
+    background-size: cover ;
+    background-repeat: no-repeat; 
+    margin: 0;
+}
+
+.quote{
+    position: relative;
+    display:flex;
+    top:5%;
+    left: 5%;
+    height: 20%;
+}
+
+.titre_description{
+    display: flex;
+    flex-direction: column;
+    color: #F2F0E6;
+    margin-left: 8%;
+    white-space: 'wrap';
+}
+
+.titre2{
+    font-family: 'Lora';
+    font-weight: bold;
+    font-size: 3.5vw;
+    margin-top: -0.5%;
+}
+
+.desc{
+    font-family: 'Source Sans Pro';
+    font-size: 1.5vw;
+
+}
+
+.droite{
+    position: relative;
+    margin-right: 10%;
+  }
+
+
+/* third section */ 
+.body3{
+    width: 100vw;
+    height: 180vh; 
+    background-color: #F2F0E6;
+    background-size: cover;
+    margin: 0;
+}
+
+.Readfull{
+    margin-top: 2.5%;
+    margin-left: 35%;
+    width: 50%;
+}
+
+
+  
+.boxContainer {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  
+
+
+.Author{
+    font-weight: bolder;
+    color: #393731;
+    font-family: 'Source Sans Pro';
+    font-size: 1.4vw;
+}
+
+.boxtitre{
+    font-family: 'Lora';
+    font-weight: 900;
+    font-size: 2vw;
+    color: #100F0E;
+}
+  
+.descr{
+    font-family: 'Source Sans Pro';
+    color: #393731;
+    font-size: 1.5vw;
+}
+
+.box {
+    margin: 1%;
+    width: calc(400px - 2%);
+}
+
+.boxInner {
+    border: 3px solid #393731; 
+    padding: 2%;
+    box-sizing: border-box; /* Inclure la bordure et le padding dans la largeur */
+}
+
+.Author, .descr {
+    margin-top: 15%;
+}
+
+/* last section */
+.basdepage {
+    position: relative;
+    height: 30vh;
+    width: 100vw;
+    background-image: url('../images/bas.png');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: flex;
+  }
+
+.extreme .copyrights{
+    display: flex;
+    position:absolute;
+    left: 85%;
+    top:65%;
+    color: grey;
+    white-space: 'nowrap';
+}
+
+.extreme .follow{
+    position: absolute;
+    left:87.25%;
+    top:5%;
+    color: white;
+    font-family: 'Source Sans Pro';
+    font-weight: 500;
+    
+
+}
+
+.resButton{
+    padding : 0 ;
+    border : none ;
+    background: none;
+    cursor : pointer ;
+}
+
+.fbicone{
+    position: absolute;
+    width:5vh;
+    left: 85%;
+    top: 32%
+}
+
+.instaicone{
+    position: absolute;
+    width: 5vh;
+    left:92.5%;
+    top:32%
+}
+
+.adresse{
+    position: absolute;
+    color: gray;
+    left:3%;
+    top:28%;
+    font-family: 'Source Sans Pro';
+}
+
+
+.plus{
+    
+    padding : 0 ;
+    border : none ;
+    background: none;
+    cursor : pointer ;
+}
+
+
+.textaboutus{
+    position: absolute;
+    color:#F2F0E6;
+    font-family: 'Source Sans Pro';
+    font-weight: 900;
+    left:50%;
+    top : 5%;
+}
+
+.textpolicy{
+    position: absolute;
+    color: #F2F0E6;
+    font-family: 'Source Sans Pro';
+    font-weight: 900;
+    left:50%;
+    top : 15%;
+}
+
+.textcontact{
+    position: absolute;
+    color: #F2F0E6;
+    font-family: 'Source Sans Pro';
+    font-weight: 900;
+    left:50%;
+    top : 25%;
+}
+
+.textfaq{
+    position: absolute;
+    color: #F2F0E6;
+    font-family: 'Source Sans Pro';
+    font-weight: 900;
+    left:50%;
+    top : 35%;
+}
+
+
