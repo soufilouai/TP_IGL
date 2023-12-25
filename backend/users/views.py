@@ -37,7 +37,7 @@ class UserRegistrationAPIView(APIView):
 				access_token = generate_access_token(new_user)
 				data = { 'access_token': access_token }
 				response = Response(data, status=status.HTTP_201_CREATED)
-				response.set_cookie(key='access_token', value=access_token, httponly=True)
+				response.set_cookie(key='access_token', value=access_token, httponly=True, samesite='Strict')
 				return response
 		return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 	
