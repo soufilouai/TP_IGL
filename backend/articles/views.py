@@ -5,8 +5,19 @@ from .serializers import ArticleSerializer
 from rest_framework.decorators import APIView
 from django.http import JsonResponse
 from rest_framework.response import Response
-from rest_framework import status
-generics.CreateAPIView
+from django.contrib.auth.models import Permission , Group
+from rest_framework import status,permissions
+from rest_framework.permissions import IsAuthenticated
+
+
+
+
+class CanModerateContentPermission(permissions.BasePermission):
+    def has_permission(self, request, view):
+        # Check if the user has the 'can_moderate_content' permission
+        
+       
+        return request.user.is_moderator
 
 
 
@@ -16,10 +27,14 @@ generics.CreateAPIView
 class ArticlesAPIView(generics.ListCreateAPIView):
     queryset = Article.objects.all()
     serializer_class = ArticleSerializer
+    permission_classes = [IsAuthenticated,CanModerateContentPermission]
+   
 
 class ArticleDetails(generics.RetrieveUpdateDestroyAPIView):
     queryset = Article.objects.all()
     serializer_class = ArticleSerializer
+    permission_classes = [IsAuthenticated]
+    
     
 
     

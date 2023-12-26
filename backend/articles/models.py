@@ -18,7 +18,7 @@ class Author(models.Model):
 class Article(models.Model):
     title = models.CharField(max_length=255)
     summary = models.TextField()
-    author = models.ManyToManyField(Author, related_name='author')
+    author = models.ManyToManyField(Author, related_name='author',blank=True)
     keywords = models.CharField(max_length=255)
     content = RichTextField()
     pdf = models.CharField(max_length=255)
