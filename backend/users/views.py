@@ -151,6 +151,12 @@ class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
 class MyTokenObtainPairView(TokenObtainPairView):
     serializer_class= MyTokenObtainPairSerializer
 
+
+
+
+
+
+
 class UserRegistrationAPIView(APIView):
 	serializer_class = UserRegisterSerializer
 	permission_classes = (AllowAny,)

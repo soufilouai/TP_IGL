@@ -90,7 +90,7 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
         
         super().save(*args, **kwargs)
         
-        moderator_group = Group.objects.get(id=4)
+        moderator_group = Group.objects.get(name='Moderator')
         permission= Permission.objects.get(codename='can_moderate_content')
         id = (self.id)
         print('le id', id)
