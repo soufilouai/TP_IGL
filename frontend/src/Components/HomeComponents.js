@@ -28,6 +28,7 @@ export const ScholarHub = () => {
         <p style={{fontFamily:'Source Sans Pro', fontSize:'1.5vw'}}>Your gateway to a rich repository of academic articles spanning diverse fields of knowledge.
         <br/>Explore groundbreaking research, insightful analyses, and thought-provoking studies curated by experts in their respective fields.</p>
         <button className='Registernow'>Register now</button>
+        
     </div>
    </div>
    </div>
@@ -49,6 +50,8 @@ export const Acceuil2 = () =>{
 }
 
 export const Discover =() =>{
+
+    
     return(
         <div className='body3'>
             <img src={imgDiscover} alt='Icon' className='Readfull'/>
