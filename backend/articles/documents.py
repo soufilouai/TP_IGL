@@ -1,5 +1,5 @@
 from django_elasticsearch_dsl import (
-    Document , fields , Index
+    Document , fields , Index , Date
 )
 
 from .models import Article
@@ -32,7 +32,15 @@ class ArticleDocument(Document):
             }
         },
     )
-  keywords=fields.KeywordField() ; 
+  
+  keywords  = fields.TextField(
+        fields={
+            'raw': {
+                'type': 'keyword',
+                
+            }
+        },
+    ) 
 
   content  = fields.TextField(
         fields={

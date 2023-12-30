@@ -10,7 +10,7 @@ class Article(models.Model):
     keywords = models.CharField(max_length=255)
     content = RichTextField()
     pdf = models.CharField(max_length=255)
-    date = models.DateTimeField()
+    date = models.DateField()
 
     def __str__(self):
         return self.title
