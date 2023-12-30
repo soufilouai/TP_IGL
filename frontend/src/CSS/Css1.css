@@ -9,16 +9,7 @@
     margin: 0;
   }
   
-  @media screen and (max-width:480px){
-    .button2{
-      display: none;
-    }
-    .Registernow{
-      font-size: 300px;
-    }
-    
   
-  }
   
   .container {
     display: flex;
@@ -53,7 +44,7 @@
   
   .titre_description_boutton{
     transform: translate(-50%, -50%);
-    position: absolute;
+    position: relative;
     margin-top: 35vh;
     margin-left: 50vw;
     text-align: center;
@@ -62,6 +53,17 @@
     align-items: center;
     justify-content: center;
     color: #F2F0E6;
+  }
+
+  .titre{
+    font-size: 6vw;
+    white-space: nowrap;
+    font-family: 'Imperial Roman';
+  }
+
+  .descrip{
+    font-family: 'Source Sans Pro';
+    font-size: 1.5vw;
   }
   .titre_description_boutton > * {
    margin-bottom:  1%;
@@ -118,11 +120,6 @@
     font-size: 1.5vw;
 
 }
-
-.droite{
-    position: relative;
-    margin-right: 10%;
-  }
 
 
 /* third section */ 
@@ -205,6 +202,10 @@
   margin-left: 12vw;
   font-size: 2.5vw;
   color: #DBB071;
+}
+
+.box2{
+  display: none;
 }
 
 /* last section */
@@ -312,6 +313,184 @@
     font-weight: 900;
     left:50%;
     top : 35%;
+}
+
+@media screen and (max-width:560px){
+  /* first section */ 
+  .body1{
+    height: 100vh;
+    width: 100vw;
+    background-image: url("../images/Background1.png");
+    background-size: cover;
+
+  }
+  .logo{
+    width: 20vw;
+  }
+  .button1{
+    margin-left: 55vw;
+    margin-right: 0;
+  }
+  .button2{
+    display: none;
+  }
+
+  .titre_description_boutton{
+    position: relative;
+    margin-top: 40vh;
+  }
+  .titre{
+    font-size: 15vw;
+    font-weight: 200;
+  }
+
+  .descrip{
+    font-size: 4vw;
+  }
+
+
+  .titre_description_boutton > * {
+   margin-bottom:  2vh;
+  }
+  
+  .Registernow{
+    margin-top: 4%;
+    padding: 5% 10vw;
+    font-size: 6vw;
+    white-space: nowrap;
+  }
+
+  /* second section */ 
+.body2{
+    height: 50vh;
+    width: 100vw;
+    background-image: url("../images/Acceuil2media.png");
+  }
+.titre_description{
+  margin-left: 8%;
+}
+
+.titre2{
+    font-size: 7vw;
+    margin-top: -0.5%;
+}
+
+.desc{
+    font-size: 3vw;
+    text-align: left;
+    white-space: normal;
+    flex-wrap: wrap;
+    justify-content: left;
+}
+
+/* third section */
+
+.body3{
+  height:90vh
+}
+
+.boxContainer{
+  margin-left: 15%;
+}
+
+
+.Readfull{
+  margin-left: 30%;
+  width: 60%;
+}
+
+.Author{
+  font-size: 2.5vw;
+}
+
+.boxtitre{
+  font-size: 5vw;
+
+}
+
+.descr{
+  font-size: 3.5vw;
+}
+
+.box {
+display: none;
+}
+
+
+.Author, .descr {
+  margin-top: 10%;
+}
+
+.box2{
+  display: flex;
+  margin: 1%;
+  width: calc(400px - 2%);
+  margin-bottom: 5%;
+}
+
+/* last section */
+.basdepage {
+  height: 80vh;
+  background-image: url('../images/bas2.png');
+  display: flex;
+}
+
+.extreme .copyrights{
+  left: 30%;
+  top: 92%;
+  white-space: nowrap;
+}
+
+.icone{
+  position: absolute;
+  left: 25%;
+}
+
+.extreme .follow{
+  left:40%;
+  top:60%;
+  width: 30vw;
+}
+
+.fbicone{
+  position: absolute;
+  left: 35%;
+  top: 68%
+}
+
+.instaicone{
+  position: absolute;
+  left:50%;
+  top:68%
+}
+
+.adresse{
+  left:30%;
+  top:15%;
+
+}
+
+.textaboutus{
+ left:40%;
+  top : 30%;
+}
+
+.textpolicy{
+  left:40%;
+  top : 35%;
+}
+
+.textcontact{
+  left:40%;
+  top : 40%;
+}
+
+.textfaq{
+  left:40%;
+  top : 45%;
+}
+
+
 }
 
 

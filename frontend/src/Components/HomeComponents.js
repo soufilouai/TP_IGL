@@ -24,8 +24,8 @@ export const ScholarHub = () => {
         </div>
     </header>
     <div className='titre_description_boutton'>
-        <h1 className='titre' style={{ fontSize:'6vw' , whiteSpace:'nowrap', fontFamily: 'Imperial Roman'}}> Scholar Hub </h1>
-        <p style={{fontFamily:'Source Sans Pro', fontSize:'1.5vw'}}>Your gateway to a rich repository of academic articles spanning diverse fields of knowledge.
+        <h1 className='titre' > Scholar Hub </h1>
+        <p className="descrip">Your gateway to a rich repository of academic articles spanning diverse fields of knowledge.
         <br/>Explore groundbreaking research, insightful analyses, and thought-provoking studies curated by experts in their respective fields.</p>
         <button className='Registernow'>Register now</button>
         
@@ -63,17 +63,35 @@ export const Discover =() =>{
                 <p className='Author'>Author: Dr. Olivia Sterling</p>
                 </div>
             </div>
-            <div className='box'>
-            <div className='boxInner'>
-                <h2 className="boxtitre" style={{overflowWrap:'break-word'}}>Neuroplasticity: The Brain's Astonishing Resilience</h2>
-                <p className='descr'>Explore the groundbreaking research of Dr. Olivia Sterling as she unravels the mysteries of quantum entanglement, revealing the interconnected fabric of the universe.</p>
+            {/*  */}
+            <div className='box2'>
+                <div className='boxInner'>
+                <h2 className="boxtitre" style={{overflowWrap:'break-word'}}>Quantum Entanglement:<br/> Bridging the Unseen<br/> Realms</h2>
+                <p className='descr'>Explore the groundbreaking research of Dr. <br/> Olivia Sterling as she unravels the mysteries <br/> of quantum entanglement, revealing the <br/> interconnected fabric of the universe.<br/> Explore the groundbreaking research of Dr.<br/> Olivia Sterling as she unravels the</p>
                 <p className='Author'>Author: Dr. Olivia Sterling</p>
                 </div>
             </div>
+            {/*  */}
+            <div className='box'>
+                <div className='boxInner'>
+                <h2 className="boxtitre" style={{overflowWrap:'break-word'}}>Quantum Entanglement: Bridging the Unseen Realms</h2>
+                <p className='descr'>Explore the groundbreaking research of Dr. Olivia Sterling as she unravels the mysteries of quantum entanglement, revealing the interconnected fabric of the universe. Explore the groundbreaking research of Dr. Olivia Sterling as she unravels the</p>
+                <p className='Author'>Author: Dr. Olivia Sterling</p>
+                </div>
+            </div>
+            {/*  */}
+            <div className='box2'>
+                <div className='boxInner'>
+                <h2 className="boxtitre" style={{overflowWrap:'break-word'}}>Quantum Entanglement:<br/> Bridging the Unseen<br/> Realms</h2>
+                <p className='descr'>Explore the groundbreaking research of Dr.<br/> Olivia Sterling as she unravels the mysteries<br/> of quantum entanglement, revealing<br/> the interconnected fabric of the universe.<br/> Explore the groundbreaking research of Dr.<br/> Olivia Sterling as she unravels the</p>
+                <p className='Author'>Author: Dr. Olivia Sterling</p>
+                </div>
+            </div>
+            {/*  */}
             <div className='box'>
             <div className='boxInner'>
                 <h2 className="boxtitre" style={{overflowWrap:'break-word'}}>Green Technology: Harnessing Nature's Blueprint</h2>
-                <p className='descr'>Explore the groundbreaking research of Dr. Olivia Sterling as she unravels the mysteries of quantum entanglement, revealing the interconnected fabric of the universe. Explore the groundbreaking research of Dr. Olivia Sterling as she unravels the mysteries of quantum entanglement, revealing</p>
+                <p className='descr'>Explore the groundbreaking research of Dr. Olivia Sterling as she unravels the mysteries of quantum entanglement, revealing the<br/> interconnected fabric of the universe. Explore the groundbreaking research of Dr.<br/> Olivia Sterling as she unravels the mysteries of quantum entanglement, revealing</p>
                 <p className='Author'>Author: Dr. Olivia Sterling</p>
                 </div>
             </div>
