@@ -24,16 +24,27 @@ class CanModerateContentPermission(permissions.BasePermission):
 
         
 
-class ArticlesAPIView(generics.ListCreateAPIView):
+class ArticlesAPIView(generics.ListAPIView):
+    queryset = Article.objects.all()
+    serializer_class = ArticleSerializer
+    permission_classes = [IsAuthenticated]
+   
+
+class ArticleDetails(generics.RetrieveAPIView):
+    queryset = Article.objects.all()
+    serializer_class = ArticleSerializer
+    permission_classes = [IsAuthenticated]
+    
+class ArticlesModAPIView(generics.ListCreateAPIView):
     queryset = Article.objects.all()
     serializer_class = ArticleSerializer
     permission_classes = [IsAuthenticated,CanModerateContentPermission]
    
 
-class ArticleDetails(generics.RetrieveUpdateDestroyAPIView):
+class ArticleDetailsMod(generics.RetrieveUpdateDestroyAPIView):
     queryset = Article.objects.all()
     serializer_class = ArticleSerializer
-    permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticated,CanModerateContentPermission]
     
     
 
