@@ -8,15 +8,14 @@ const api = axios.create({
 
 
 export const register = async (username,email,password) => {
-try {
-    const registerdata = [username,email,password];
-    const response = await api.post('/api/users/register',registerdata);
-    return response.data;
-} catch (error) {
-    
-} 
-
-
+    let response  = fetch(MAIN_URL+'api/users/register', {
+        method:'POST',
+        headers:{
+            'Content-Type' : 'application/json'
+        },
+        body: JSON.stringify({'username': username,'password':password,'email':email})
+    })
+    return response;
 };
 
 export const login = async () => {

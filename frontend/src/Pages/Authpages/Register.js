@@ -35,7 +35,7 @@ const handlecheckbox=() =>{
 const register= () =>{
     console.log("ur username is :",usernameinput+"ur email is : ",emailinput+" and your password is :",passwordinput)
     const response = register(usernameinput,emailinput,passwordinput);
-    console.log(response.data);
+    console.log(response);
 
 }
 
