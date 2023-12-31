@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'ckeditor',
     'articles',
     'users',
+    'corsheaders',
 
     'rest_framework.authtoken',
     'rest_framework_simplejwt',
@@ -69,11 +70,25 @@ MIDDLEWARE = [
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
+   
+   
     
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'corsheaders.middleware.CorsMiddleware',
     
+]
+
+
+CORS_ALLOW_ALL_ORIGINS = True
+
+
+CORS_ALLOW_CREDENTIALS = True
+
+CORS_ALLOW_HEADERS = [
+    'access-control-allow-headers',
+    'Access-Control-Allow-Origin',
+    'Content-Type',
 ]
 
 ROOT_URLCONF = 'backend.urls'
@@ -109,6 +124,10 @@ REST_FRAMEWORK = {
         'rest_framework.renderers.BrowsableAPIRenderer',
        
     ],
+    
+    # 'DEFAULT_PARSER_CLASSES': (
+    #     'rest_framework.parsers.JSONParser',
+    # ),
     
     
 }

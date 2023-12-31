@@ -7,9 +7,10 @@ const api = axios.create({
 });
 
 
-export const register = async (username,email,password) => {
-    let response  = fetch(MAIN_URL+'api/users/register', {
+export const RegisterRequest = async (username,email,password) => {
+    let response  = fetch('http://127.0.0.1:8000/api/users/register/', {
         method:'POST',
+        // mode: 'no-cors',
         headers:{
             'Content-Type' : 'application/json'
         },
