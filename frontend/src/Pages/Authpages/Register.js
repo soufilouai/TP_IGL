@@ -5,7 +5,7 @@ import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 
 import Authcomponennts from "../../Components/AuthComponents";
 
-import { RegisterRequest } from "../../Services/Api";
+import { RegisterRequest,Loginrequest } from "../../Services/Api";
 
 
 import "../../Styles/Authpages/register.css"
@@ -32,10 +32,23 @@ const [showpassword,setshowpassword] = useState(false)
 const handlecheckbox=() =>{
     setshowpassword(!showpassword)
 }
-const register= () =>{
+const register= async () =>{
     console.log("ur username is :",usernameinput+"ur email is : ",emailinput+" and your password is :",passwordinput)
-    const response = RegisterRequest(usernameinput,emailinput,passwordinput);
-    console.log(response);
+    const response =await RegisterRequest(usernameinput,emailinput,passwordinput)
+    const data = await response.json()// to display the messages according to the specific 404 err 
+    if(response.status === 200 ){
+       console.log("u r registered ",data)
+       const response2 = Loginrequest(usernameinput,passwordinput)
+       const data2 = await response2.json() // to retrieve the token and send it to the next page 
+       if(response2.status ===200){
+        console.log("u r loged in ",data2)
+
+       }else{
+        console.log("ther's some err",data2)
+       }
+    }else{
+        console.log("there's some err",data)
+    }
 
 }
 
@@ -57,8 +70,8 @@ const handlesubmit=(e) =>{
             <img id="textimage" src="Sources/Images/text2.png" alt="text "/>
                 <div id="infocontainer">
                     <form onSubmit={handlesubmit}>
-                        <Authcomponennts.Usernameinput username={usernameinput} handlechange={handleusernamechange}/>
                         <Authcomponennts.Emailinput email={emailinput} handlechange={handleemailchange}/>
+                        <Authcomponennts.Usernameinput username={usernameinput} handlechange={handleusernamechange}/>
                         <Authcomponennts.Passwordinput showpassword={showpassword} password={passwordinput} handlechange={handlpasswordchange}/>
                         <Authcomponennts.Checkbox content={"Show password"} check={showpassword} handlechange={handlecheckbox}/>
                         <Authcomponennts.Submitbutton content={'Get started'} submitfunction={register}/>

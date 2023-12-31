@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+import jwt_decode from "jwt-decode";
 
 import Authcomponennts from "../../Components/AuthComponents";
 
+import { Loginrequest } from "../../Services/Api";
 
 import "../../Styles/Authpages/login.css"
 
@@ -15,9 +17,9 @@ const Login = () => {
         history.push(page)
     }
 
-    const [emailinput,setemailinput] = useState('')
-    const handleemailchange= (email) => {
-        setemailinput(email)
+    const [usernameinput,setusernameinput] = useState('')
+    const handleusernamechange= (username) => {
+        setusernameinput(username)
     } 
 
     const [passwordinput,setpasswordinput] = useState('')
@@ -28,15 +30,20 @@ const Login = () => {
     const handlecheckbox=() =>{
         setshowpassword(!showpassword)
     }
-    const login= () =>{
-        console.log("ur email is : ",emailinput+" and your password is :",passwordinput)
+    const login= async () =>{
+        console.log("ur username is : ",usernameinput+" and your password is :",passwordinput)
+        const response = await Loginrequest(usernameinput,passwordinput)
+        console.log(response)
+        const data =await response.json()
+        if(response.status === 200){
+            console.log("u r loged in ",data)
+        }else{
+            console.log("there's some err",data)
+        }
     }
-
     const handlesubmit=(e) =>{
         e.preventDefault()
     }
-
-
     return (  
 
         
@@ -54,7 +61,7 @@ const Login = () => {
                 <img id="textimage" src="Sources/Images/text.png" alt="text "/>
                 <div id="infocontainer">
                     <form onSubmit={handlesubmit}>
-                        <Authcomponennts.Emailinput email={emailinput} handlechange={handleemailchange}/>
+                        <Authcomponennts.Usernameinput username={usernameinput} handlechange={handleusernamechange}/>
                         <Authcomponennts.Passwordinput showpassword={showpassword} password={passwordinput} handlechange={handlpasswordchange}/>
                         <Authcomponennts.Checkbox content={"Show password"} check={showpassword} handlechange={handlecheckbox}/>
                         <Authcomponennts.Submitbutton content={'Log in'} submitfunction={login}/>

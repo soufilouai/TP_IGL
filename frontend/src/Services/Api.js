@@ -1,11 +1,3 @@
-import axios from 'axios'
-
-const MAIN_URL = 'http://127.0.0.1:8000/';
-
-const api = axios.create({
-    baseURL : '${MAIN_URL}',
-});
-
 
 export const RegisterRequest = async (username,email,password) => {
     let response  = fetch('http://127.0.0.1:8000/api/users/register/', {
@@ -19,10 +11,18 @@ export const RegisterRequest = async (username,email,password) => {
     return response;
 };
 
-export const login = async () => {
+export const Loginrequest = async (username,password) => {
     
 
-
+    let response  = fetch('http://127.0.0.1:8000/api/users/login/', {
+        method:'POST',
+        // mode: 'no-cors',
+        headers:{
+            'Content-Type' : 'application/json'
+        },
+        body: JSON.stringify({'username': username,'password':password})
+    })
+    return response;
 
 };
  

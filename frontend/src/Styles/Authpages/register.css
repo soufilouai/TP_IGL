@@ -1,4 +1,4 @@
-/* login.css */
+/* register.css */
 
 #container {
     display: flex;
@@ -96,7 +96,7 @@
     left: 57%;
     
   }
-  #usernamelabel{
+  #emaillabel{
     font-family: Sourcesans;
     font-weight: 600;
     position: absolute;
@@ -106,7 +106,7 @@
     left: 7%;
     white-space: nowrap;
   }
-  .usernameinput{
+  .emailinput{
     position: absolute;
     width: 80%;
     height: 3%;
@@ -118,7 +118,7 @@
     padding: 5px;
     outline: none;
   }
-  #emaillabel{
+  #usernamelabel{
     font-family: Sourcesans;
     font-weight: 600;
     position: absolute;
@@ -128,7 +128,7 @@
     left: 7%;
     white-space: nowrap;
   }
-  .emailinput{
+  .usernameinput{
     position: absolute;
     width: 80%;
     height: 3%;
