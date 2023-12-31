@@ -36,9 +36,9 @@ const register= async () =>{
     console.log("ur username is :",usernameinput+"ur email is : ",emailinput+" and your password is :",passwordinput)
     const response =await RegisterRequest(usernameinput,emailinput,passwordinput)
     const data = await response.json()// to display the messages according to the specific 404 err 
-    if(response.status === 200 ){
+    if(response.status === 201 ){
        console.log("u r registered ",data)
-       const response2 = Loginrequest(usernameinput,passwordinput)
+       const response2 = await Loginrequest(usernameinput,passwordinput)
        const data2 = await response2.json() // to retrieve the token and send it to the next page 
        if(response2.status ===200){
         console.log("u r loged in ",data2)
