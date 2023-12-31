@@ -5,6 +5,8 @@ import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 
 import Authcomponennts from "../../Components/AuthComponents";
 
+import { register } from "../../Services/Api";
+
 
 import "../../Styles/Authpages/register.css"
 
@@ -32,6 +34,9 @@ const handlecheckbox=() =>{
 }
 const register= () =>{
     console.log("ur username is :",usernameinput+"ur email is : ",emailinput+" and your password is :",passwordinput)
+    const response = register(usernameinput,emailinput,passwordinput);
+    console.log(response.data);
+
 }
 
 const handlesubmit=(e) =>{
