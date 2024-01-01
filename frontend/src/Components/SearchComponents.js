@@ -24,10 +24,12 @@ export const BarreDeRecherche= () => {
       },
       body: JSON.stringify({ keywords: motsCles }),
     })
-    .then(() => {
-      console.log('Keywords sent to the backend');
-    })
-    .catch(error => console.error('Error sending keywords to backend:', error));
+    .then(response => response.json())
+      .then(data => {
+        console.log('Donnes recues:', data);
+        onSearch(data);
+      })
+      .catch(error => console.error('Error:', error));
   };
 return(
       <div className="barrerecherche">
@@ -68,7 +70,7 @@ export const Discoverrech = () => {
   const [totalPages, setTotalPages] = useState(0);
 
   useEffect(() => {
-    const apiUrl = '';
+    const apiUrl = 'http://localhost:8000/api/articles/Search';
     fetch(apiUrl)
     .then(response =>response.json)
     .then(data => {
