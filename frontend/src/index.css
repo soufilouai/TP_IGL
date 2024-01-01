@@ -1,15 +1,5 @@
-@font-face {
-  font-family: Lora;
-  src: url(../public/Sources/Fonts/Lora-Regular.ttf);
-}
-@font-face {
-  font-family: Sourcesans;
-  src: url(../public/Sources/Fonts/SourceSans3-ExtraLight.ttf);
-}
-
 body {
   margin: 0;
   padding: 0;
   height: 100%;
-  overflow: hidden;
 }
