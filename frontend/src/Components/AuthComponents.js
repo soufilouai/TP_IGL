@@ -60,6 +60,18 @@ const Submitbutton=({content,submitfunction}) =>{
     </button>
   )
 }
+const Errormessage=({content,handleclosebutton})=>{
+
+  return(
+    <div>
+      <label className="errorlabel" > 
+      <img className="warningsign" src="Sources/Images/warningsign.png" alt="warningsign" />
+      <span className="errormessage">{content}</span>
+      <img className="closebutton" src="Sources/Images/closingbutton.png" alt="closingbutton" onClick={()=>{handleclosebutton()}}/>
+      </label>
+    </div>
+  )
+}
 const Authcomponennts = {
   Redirectbutton,
   Usernameinput,
@@ -67,6 +79,7 @@ const Authcomponennts = {
   Passwordinput,
   Submitbutton,
   Checkbox,
+  Errormessage,
 }
 
 export default Authcomponennts;
