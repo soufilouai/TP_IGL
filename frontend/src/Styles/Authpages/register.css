@@ -1,9 +1,13 @@
 /* register.css */
-
-#container {
+.body{
+  min-width: 1000px;
+  min-height: 800px;
+}
+#Registercontainer {
     display: flex;
     width: 100vw;
     height: 100vh;
+
   }
   
   #presentationbox {
@@ -102,7 +106,7 @@
     position: absolute;
     width: 15%;
     height: 15%;
-    top: 8%;
+    top: 14%;
     left: 7%;
     white-space: nowrap;
   }
@@ -110,7 +114,7 @@
     position: absolute;
     width: 80%;
     height: 3%;
-    top: 15%;
+    top: 21%;
     left: 7%;
     border: none; 
     border-bottom: 1px solid #393731B2;
@@ -189,4 +193,40 @@
     background-color: #B08B56;
     color:#B08B56;
   }
-  
+  .errorlabel{
+    position: absolute;
+    display: flex;
+    white-space: nowrap;
+    overflow: hidden; 
+    top: 4%;
+    left: 7%;
+    width: 84%;
+    height: 9%;
+    border: 2px solid #9D4141;
+    border-width: 2.5px;
+    background-color: #ECD3D3;
+  }
+  .errormessage{
+    position: absolute;
+    font-family: Sourcesans;
+    white-space: nowrap; 
+    text-overflow: ellipsis;
+    overflow: hidden; 
+    font-weight:bolder;
+    top: 28%;
+    left: 12%;
+    font-size: 90%;
+    color: #9D4141 ;
+  }
+  .closebutton{
+    position: absolute;
+    top: 33%;
+    left: 95%;
+    width: 4%;
+  }
+  .warningsign{
+    position: absolute;
+    top: 28%;
+    left: 3%;
+    width: 7%;
+  }
