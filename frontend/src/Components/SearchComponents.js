@@ -15,10 +15,20 @@ export const BarreDeRecherche= () => {
   
   const handleRecherche = () => {
     console.log("Mots-clés saisis :", motsCles);
+    const apiUrl = 'http://localhost:3001/search';
+    fetch(apiUrl, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ keywords: motsCles }),
+    })
+    .then(() => {
+      console.log('Keywords sent to the backend');
+    })
+    .catch(error => console.error('Error sending keywords to backend:', error));
   };
-
-
-  return(
+return(
       <div className="barrerecherche">
         <div className="container">
           <img src={iconImage} alt='Icon' className="logo" />
@@ -48,14 +58,27 @@ export const BarreDeRecherche= () => {
     )
 }
 
-export const Discoverrech= () => {
+
+
+export const Discoverrech = () => {
+  const articlesPerPage = 4;
   const [articles, setArticles] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(0);
+
   useEffect(() => {
-    fetch('http://localhost:8000/api/articles/')
-      .then(response => response.json())
-      .then(data => setArticles(data))
-      .catch(error => console.error('Error fetching articles:', error));
-  }, []);
+    const apiUrl = '';
+    fetch(apiUrl)
+    .then(response =>response.json)
+    .then(data => {
+    setTotalPages(Math.ceil(data.length / articlesPerPage));
+    const startIndex = (currentPage - 1) * articlesPerPage;
+    const endIndex = startIndex + articlesPerPage;
+    setArticles(data.slice(startIndex, endIndex));
+    })
+    .catch(error =>console.error('Error fetching articles :',error));
+  }, [currentPage]);
+
   const [isClicked, setIsClicked] = useState(false);
   const [buttonContent, setButtonContent] = useState('☆');
 
@@ -64,24 +87,35 @@ export const Discoverrech= () => {
     setButtonContent(isClicked ? '☆' : '★');
   };
 
+  const loadPage = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  };
 
-
-  return(
+  return (
     <div className="discoverecherche">
-      <img src={disvoverImage} alt='Discover' className="discoverimage"  />
-      <div className='boxContainer'>
-      {articles.map(article => (
-        <div key={article.title} className='box'>
-          <div className='boxInner'>
-            <h2 className="boxtitre" style={{ overflowWrap: 'break-word' }}>{article.title}</h2>
-            <p className='descr'>{article.summary}</p>
-            <p className='Author'>Author: {article.author}</p>
-            <button className='Readmore'>Read more</button>
-            <button className='favori' onClick={handleClick}> {buttonContent}</button>
+      <img src={disvoverImage} alt="Discover" className="discoverimage" />
+      <div className="boxContainer">
+        {articles.map((article) => (
+          <div key={article.title} className="box">
+            <div className="boxInner">
+              <h2 className="boxtitre" style={{ overflowWrap: 'break-word' }}>
+                {article.title}
+              </h2>
+              <p className="descr">{article.summary}</p>
+              <p className="Author">Author: {article.author}</p>
+              <button className="Readmore">Read more</button>
+              <button className="favori" onClick={handleClick}>
+                {buttonContent}
+              </button>
+            </div>
           </div>
-        </div>
-      ))}
+        ))}
+      </div>
+      <div className="pagination">
+        {Array.from({ length: totalPages }, (_, index) => (
+          <button key={index} className={`pagination-dot ${currentPage === index + 1 ? 'active' : ''}`} onClick={() => loadPage(index + 1)}></button>
+        ))}
       </div>
     </div>
-  )
-}
+  );
+};

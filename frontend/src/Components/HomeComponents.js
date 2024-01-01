@@ -1,5 +1,5 @@
 import React from 'react';
-import '../CSS/Css1.css';
+import "../CSS/Css1.css"
 import iconImage from "../images/logo.png"
 import iconQuote from "../images/quote.png"
 import imgDiscover from "../images/Titrediscover.png"
@@ -58,7 +58,7 @@ export const Discover =() =>{
         <div className='boxContainer'>
             <div className='box'>
                 <div className='boxInner'>
-                <h2 className="boxtitre" style={{overflowWrap:'break-word'}}>Quantum Entanglement: Bridging the Unseen Realms</h2>
+                <button className="boxtitre" >Quantum Entanglement: Bridging the Unseen Realms</button>
                 <p className='descr'>Explore the groundbreaking research of Dr. Olivia Sterling as she unravels the mysteries of quantum entanglement, revealing the interconnected fabric of the universe. Explore the groundbreaking research of Dr. Olivia Sterling as she unravels the</p>
                 <p className='Author'>Author: Dr. Olivia Sterling</p>
                 </div>
@@ -66,7 +66,7 @@ export const Discover =() =>{
             {/*  */}
             <div className='box2'>
                 <div className='boxInner'>
-                <h2 className="boxtitre" style={{overflowWrap:'break-word'}}>Quantum Entanglement:<br/> Bridging the Unseen<br/> Realms</h2>
+                <button className="boxtitre" >Quantum Entanglement:<br/> Bridging the Unseen<br/> Realms</button>
                 <p className='descr'>Explore the groundbreaking research of Dr. <br/> Olivia Sterling as she unravels the mysteries <br/> of quantum entanglement, revealing the <br/> interconnected fabric of the universe.<br/> Explore the groundbreaking research of Dr.<br/> Olivia Sterling as she unravels the</p>
                 <p className='Author'>Author: Dr. Olivia Sterling</p>
                 </div>
@@ -74,7 +74,7 @@ export const Discover =() =>{
             {/*  */}
             <div className='box'>
                 <div className='boxInner'>
-                <h2 className="boxtitre" style={{overflowWrap:'break-word'}}>Quantum Entanglement: Bridging the Unseen Realms</h2>
+                <button className="boxtitre" >Quantum Entanglement: Bridging the Unseen Realms</button>
                 <p className='descr'>Explore the groundbreaking research of Dr. Olivia Sterling as she unravels the mysteries of quantum entanglement, revealing the interconnected fabric of the universe. Explore the groundbreaking research of Dr. Olivia Sterling as she unravels the</p>
                 <p className='Author'>Author: Dr. Olivia Sterling</p>
                 </div>
@@ -82,7 +82,7 @@ export const Discover =() =>{
             {/*  */}
             <div className='box2'>
                 <div className='boxInner'>
-                <h2 className="boxtitre" style={{overflowWrap:'break-word'}}>Quantum Entanglement:<br/> Bridging the Unseen<br/> Realms</h2>
+                <button className="boxtitre" >Quantum Entanglement:<br/> Bridging the Unseen<br/> Realms</button>
                 <p className='descr'>Explore the groundbreaking research of Dr.<br/> Olivia Sterling as she unravels the mysteries<br/> of quantum entanglement, revealing<br/> the interconnected fabric of the universe.<br/> Explore the groundbreaking research of Dr.<br/> Olivia Sterling as she unravels the</p>
                 <p className='Author'>Author: Dr. Olivia Sterling</p>
                 </div>
@@ -90,28 +90,28 @@ export const Discover =() =>{
             {/*  */}
             <div className='box'>
             <div className='boxInner'>
-                <h2 className="boxtitre" style={{overflowWrap:'break-word'}}>Green Technology: Harnessing Nature's Blueprint</h2>
+                <button className="boxtitre" >Green Technology: Harnessing Nature's Blueprint</button>
                 <p className='descr'>Explore the groundbreaking research of Dr. Olivia Sterling as she unravels the mysteries of quantum entanglement, revealing the<br/> interconnected fabric of the universe. Explore the groundbreaking research of Dr.<br/> Olivia Sterling as she unravels the mysteries of quantum entanglement, revealing</p>
                 <p className='Author'>Author: Dr. Olivia Sterling</p>
                 </div>
             </div>
             <div className='box'>
             <div className='boxInner'>
-                <h2 className="boxtitre" style={{overflowWrap:'break-word'}}>Quantum Entanglement: Bridging the Unseen Realms</h2>
+                <button className="boxtitre" >Quantum Entanglement: Bridging the Unseen Realms</button>
                 <p className='descr'>Explore the groundbreaking research of Dr. Olivia Sterling as she unravels the mysteries of quantum entanglement, revealing the interconnected fabric of the universe.</p>
                 <p className='Author'>Author: Dr. Olivia Sterling</p>
                 </div>
             </div>
             <div className='box'>
             <div className='boxInner'>
-                <h2 className="boxtitre" style={{overflowWrap:'break-word'}}>Quantum Entanglement: Bridging the Unseen Realms</h2>
+                <button className="boxtitre" >Quantum Entanglement: Bridging the Unseen Realms</button>
                 <p className='descr'>Explore the groundbreaking research of Dr. Olivia Sterling as she unravels the mysteries of quantum entanglement, revealing the interconnected fabric of the universe. Explore the groundbreaking research of Dr. Olivia Sterling as she unravels the mysteries</p>
                 <p className='Author'>Author: Dr. Olivia Sterling</p>
                 </div>
             </div>
             <div className='box'>
             <div className='boxInner'>
-                <h2 className="boxtitre" style={{overflowWrap:'break-word'}}>Quantum Entanglement: Bridging the Unseen Realms</h2>
+                <button className="boxtitre" >Quantum Entanglement: Bridging the Unseen Realms</button>
                 <p className='descr'>Explore the groundbreaking research of Dr. Olivia Sterling as she unravels the mysteries of quantum entanglement, revealing the interconnected fabric of the universe.</p>
                 <p className='Author'>Author: Dr. Olivia Sterling</p>
                 </div>

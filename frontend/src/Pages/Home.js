@@ -6,7 +6,7 @@ import { BasDePage } from "../Components/SharedComponents";
 function Home() {
     return (
       <div className="Home">
-        <ScholarHub  />
+      <ScholarHub  />
        <Acceuil2 /> 
        <Discover />
        <BasDePage />

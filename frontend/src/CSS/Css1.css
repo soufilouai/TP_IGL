@@ -18,7 +18,7 @@
     align-items: center;
   }
   
-  .button1 {
+  .button1{
     margin-left: 73vw;
     margin-right: 4.5vw;
     border: 0;
@@ -29,7 +29,7 @@
     width: 3%;
   }
   
-  .button2 {
+  .button2{
     border: 0;
     background: none;
     cursor: pointer;
@@ -125,7 +125,7 @@
 /* third section */ 
 .body3{
     width: 100vw;
-    height: 180vh; 
+    height: auto; 
     background-color: #F2F0E6;
     background-size: cover;
     margin: 0;
@@ -138,10 +138,12 @@
 }
 
 
+
   
 .boxContainer {
     display: flex;
     flex-wrap: wrap;
+    margin-left: 4%;
   }
   
 
@@ -150,35 +152,50 @@
     font-weight: bolder;
     color: #393731;
     font-family: 'Source Sans Pro';
-    font-size: 1.4vw;
+    font-size: 3vw;
 }
 
 .boxtitre{
     font-family: 'Lora';
     font-weight: 900;
-    font-size: 2vw;
+    font-size: 3vw;
     color: #100F0E;
+    background: none;
+    border: none;
+    cursor: pointer;
 }
   
 .descr{
     font-family: 'Source Sans Pro';
     color: #393731;
-    font-size: 1.5vw;
+    font-size: 2vw;
 }
 
 .box {
     margin: 1%;
     width: calc(400px - 2%);
+    position: relative;
+}
+
+.favori{
+  cursor: pointer;
+  background-color: transparent;
+  border: none;
+  position: absolute;
+  right: 2%;
+  top: 85%;
+  font-size: 2.5vw;
+  color: #DBB071;
 }
 
 .boxInner {
     border: 3px solid #393731; 
     padding: 2%;
-    box-sizing: border-box; /* Inclure la bordure et le padding dans la largeur */
+    box-sizing: border-box; 
 }
 
 .Author, .descr {
-    margin-top: 15%;
+    margin-top: 3%;
 }
 
 .Readmore{
@@ -195,18 +212,11 @@
   height: 5.5vh;
 }
 
-.favori{
-  cursor: pointer;
-  background-color: transparent;
-  border: none;
-  margin-left: 12vw;
-  font-size: 2.5vw;
-  color: #DBB071;
-}
 
 .box2{
   display: none;
 }
+
 
 /* last section */
 .basdepage {
@@ -386,7 +396,7 @@
 /* third section */
 
 .body3{
-  height:90vh
+  height:auto
 }
 
 .boxContainer{
@@ -405,7 +415,6 @@
 
 .boxtitre{
   font-size: 5vw;
-
 }
 
 .descr{
@@ -489,6 +498,7 @@ display: none;
   left:40%;
   top : 45%;
 }
+
 
 
 }

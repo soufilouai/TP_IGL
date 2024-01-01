@@ -13,7 +13,7 @@
 .logoetrecherche{
     transform: translate(-50%, -50%);
     position: absolute;
-    margin-top: 50vh;
+    margin-top: 35vh;
     margin-left: 50vw;
     text-align: center;
     display: flex;
@@ -49,11 +49,12 @@
 
 .discoverecherche{
     width: 100vw;
-    height: 200vh; 
+    height: auto; 
     background-color: #F2F2F2;
     background-size: cover ;
     background-repeat: no-repeat; 
     margin: 0;
+
 }
 
 .discoverimage{
@@ -69,5 +70,56 @@
 
 }
 
+.pagination{
+    display: flex;
+    justify-content: center;
+}
+
+.pagination-dot {
+    width: 0.3%;
+    height: 2%;
+    border-radius: 50%;
+    margin: 0.1%;
+    cursor: pointer;
+    border: 1px solid #DBB071;
+    background-color: #F2F2F2;
+    margin-bottom: 2%;
+  }
+  
+  .pagination-dot.active {
+    background-color: #B08B56;
+    border: 2px solid #B08B56;
+  }
 
 
+
+
+
+
+  @media screen and (max-width:560px){
+/******************************second page ***********************/
+.barrerecherche{
+    background-image: url('../images/background2media.png');
+    height: 140vh;
+  }
+  .barrerecherche .button1 {
+    display: none;
+  }
+  
+  .logoetrecherche{
+    margin-top: 50vh;
+  }
+  
+  .barrerecherche .logo{
+    display: none;
+  }
+
+  .barre-recherche{
+    width: 70vw;
+  }
+
+  .bouton-recherche{
+    width: 10vw;
+  }
+
+  }

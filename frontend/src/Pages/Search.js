@@ -5,7 +5,7 @@ import { Discoverrech } from "../Components/SearchComponents";
 
 function Search() {
     return (
-      <div className="Home">
+      <div className="Search">
         <BarreDeRecherche />
         <Discoverrech />
         <BasDePage />
