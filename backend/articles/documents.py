@@ -69,12 +69,12 @@ class ArticleDocument(Document):
                 'full_name': author.fullname,
                 'institut_name': author.institut,
             }
-            for author in instance.authors.all()
+            for author in instance.author.all()
         ]
   
   def prepare(self, instance):
         data = super().prepare(instance)
-        data['authors'] = self.prepare_authors(instance)
+        data['author'] = self.prepare_authors(instance)
         return data
   
   """def get_authors_fullname(self, instance):

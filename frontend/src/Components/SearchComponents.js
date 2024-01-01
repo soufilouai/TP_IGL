@@ -13,13 +13,14 @@ export const BarreDeRecherche= () => {
   const [showContent, setShowContent] = useState(false);
 
   
-  const handleRecherche = () => {
+  const handleRecherche = async () => {
     console.log("Mots-clés saisis :", motsCles);
-    const apiUrl = 'http://localhost:3001/search';
-    fetch(apiUrl, {
+    const apiUrl = 'http://127.0.0.1:8000/api/articles/results/';
+    let response = await fetch(apiUrl, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
+        'Origin': 'http://localhost:3000',
       },
       body: JSON.stringify({ keywords: motsCles }),
     })

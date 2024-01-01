@@ -10,3 +10,4 @@ class Article_results(serializers.ModelSerializer):
     class Meta :
         model = Article
         fields = ('id' , 'title' , 'content' , 'pdf' )
+        

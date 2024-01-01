@@ -11,6 +11,7 @@ def search_Article(q) :
     #query = MultiMatch(query='einstein', fields=['title' , 'keywords', 'content' , 'authors.full_name' ] )
     
     s = Search(using='default')
+   
     #s = s.query(query)
     
 

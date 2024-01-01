@@ -2,7 +2,8 @@
 from rest_framework import generics
 from .models import Article
 from .serializers import *
-from rest_framework.decorators import APIView
+from rest_framework.views import APIView
+from rest_framework.decorators import api_view
 from django.http import JsonResponse
 from rest_framework.response import Response
 from django.contrib.auth.models import Permission , Group
@@ -23,13 +24,15 @@ class CanModerateContentPermission(permissions.BasePermission):
 class ArticlesAPIView(generics.ListAPIView):
     queryset = Article.objects.all()
     serializer_class = ArticleSerializer
-    permission_classes = [IsAuthenticated]
+    # permission_classes = [IsAuthenticated]
+    permission_classes = [permissions.AllowAny]
    
 
 class ArticleDetails(generics.RetrieveAPIView):
     queryset = Article.objects.all()
     serializer_class = ArticleSerializer
-    permission_classes = [IsAuthenticated]
+    # permission_classes = [IsAuthenticated]
+    permission_classes = [permissions.AllowAny]
     
 class ArticlesModAPIView(generics.ListCreateAPIView):
     queryset = Article.objects.all()
@@ -41,21 +44,34 @@ class ArticleDetailsMod(generics.RetrieveUpdateDestroyAPIView):
     queryset = Article.objects.all()
     serializer_class = ArticleSerializer
     permission_classes = [IsAuthenticated,CanModerateContentPermission]
+
+
+
+class SearchResults(APIView):
     
-    
-def search_results(request):
-    if request.method == 'GET':
-        query = request.GET.get('query', '')
-        search_results_ids = search_Article(query)
+    permission_classes = [permissions.AllowAny]
+    def post(self, request):
+        if request.method == 'POST':
         
-        articles = Article.objects.filter(id__in=search_results_ids)
+            data = request.data
+            
+            
+            query = data.get('keywords')
+            
         
-        
-        serializer = Article_results(articles, many=True)
-        serialized_data = serializer.data
-        
-        return Response({'results': serialized_data}, status=status.HTTP_200_OK)
-    
+            search_results_ids = search_Article(query)
+            
+            
+            articles = Article.objects.filter(id__in=search_results_ids)
+            
+            
+            serializer = Article_results(articles, many=True)
+            serialized_data = serializer.data
+            
+            return Response({'results': serialized_data}, status=status.HTTP_200_OK)
+
+
+
 
     
 """def filter_results(request , ids):
