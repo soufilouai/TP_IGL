@@ -3,6 +3,12 @@ import { BrowserRouter as Router,Route,Switch } from 'react-router-dom';
 
 import Login from './Pages/Authpages/Login';
 import Register from './Pages/Authpages/Register';
+import React from 'react';
+import Home from './Pages/Home'
+import Search from './Pages/Search';
+
+
+
 
 function App() {
   return (
@@ -16,6 +22,10 @@ function App() {
           <Register/>
         </Route>
       </Switch>
+       <Home />
+       <Search />
+
+
     </div>
     </Router>
   );

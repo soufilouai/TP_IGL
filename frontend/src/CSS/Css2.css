@@ -1,0 +1,125 @@
+/* first section */
+.barrerecherche{
+    width: 100vw;
+    height: 90vh; 
+    background-image: url("../images/recherche1.png");
+    background-size: cover ;
+    background-repeat: no-repeat; 
+    margin: 0;
+    
+}
+
+
+.logoetrecherche{
+    transform: translate(-50%, -50%);
+    position: absolute;
+    margin-top: 35vh;
+    margin-left: 50vw;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: #F2F0E6;
+    width: 45vw;
+}
+
+.barre-recherche{
+    outline: 0.3vh solid #DBB071;
+    border: 0;
+    color: #F2F0E6;
+    font-family: 'Source Sans Pro';
+    background-color: transparent;
+    margin-top: 5vh;
+    width: 30vw;
+    height: 5vh;
+    
+}
+
+.bouton-recherche{
+    border: transparent;
+    color: #F2F0E6;
+    background-color: #B08B56;
+    height: 5.8vh ;
+    width: 8vw;
+    font-family: 'Lora';
+    font-weight: 400;
+    cursor: pointer;
+}
+
+.discoverecherche{
+    width: 100vw;
+    height: auto; 
+    background-color: #F2F2F2;
+    background-size: cover ;
+    background-repeat: no-repeat; 
+    margin: 0;
+
+}
+
+.discoverimage{
+    width: 50%;
+    margin-top: 2.5%;
+    margin-left: 2%;
+}
+
+.fleches{
+    position: relative;
+    top: 10vh;
+    width: 5%;
+
+}
+
+.pagination{
+    display: flex;
+    justify-content: center;
+}
+
+.pagination-dot {
+    width: 0.3%;
+    height: 2%;
+    border-radius: 50%;
+    margin: 0.1%;
+    cursor: pointer;
+    border: 1px solid #DBB071;
+    background-color: #F2F2F2;
+    margin-bottom: 2%;
+  }
+  
+  .pagination-dot.active {
+    background-color: #B08B56;
+    border: 2px solid #B08B56;
+  }
+
+
+
+
+
+
+  @media screen and (max-width:560px){
+/******************************second page ***********************/
+.barrerecherche{
+    background-image: url('../images/background2media.png');
+    height: 140vh;
+  }
+  .barrerecherche .button1 {
+    display: none;
+  }
+  
+  .logoetrecherche{
+    margin-top: 50vh;
+  }
+  
+  .barrerecherche .logo{
+    display: none;
+  }
+
+  .barre-recherche{
+    width: 70vw;
+  }
+
+  .bouton-recherche{
+    width: 10vw;
+  }
+
+  }
