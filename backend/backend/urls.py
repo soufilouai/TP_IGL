@@ -70,7 +70,7 @@ def home(request) :
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', home, name='search_view'),
+    path('search/', home, name='search_view'),
     path('api/', include('api.urls')),
     path('articles/', include('articles.urls')),  # Use the app name 'articles' in include
     # Add other URL patterns as needed
