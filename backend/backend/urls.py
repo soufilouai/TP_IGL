@@ -23,61 +23,7 @@ from django.shortcuts import render , get_object_or_404
 from elasticsearch_dsl import Search , Q , DateRange
 from elasticsearch_dsl.query import MultiMatch
 from datetime import date
-
-
-def search_Article(q) : 
-   
-    query = MultiMatch(query=q, fields=['title', 'summary' , 'keywords', 'content'] )
-    
-    
-    s = Search(using='default')
-    s = s.query(query)
-    s = s.sort('-date')
-    #s = Search(using='default', index='article_index')
-    response = s.execute()
-
-    list = [] 
-
-    for hit in response :
-     list.append(hit.id)
-    
-
-    return list
-
-
-def filter_results(result_ids, title=None , author=None, keywords=None):
-   
-    s = Search(using='default').query(Q('ids', values=result_ids))
-    if author:
-        s = s.filter('term', author=author)
-
-    if keywords:
-        s = s.filter('term', keywords=keywords)
-
-    if title:
-        s = s.filter('term', title=title)
-
-    s = s.sort('-date')
-    response = s.execute()
-    filtered_result_ids = [hit.id for hit in response]
-
-    return filtered_result_ids
-
-
-  
-def filter_date(result_ids , date_debut , date_fin ) :
-
-    s = Search(using='default').query(Q('ids', values=result_ids))
-    s = s.filter('range', date={'gte': date_debut, 'lte': date_fin})
-
-    s.sort("-date")
-    response = s.execute()
-    print(f"Found {len(response)} hits")
-
-    filtered_result_ids = [hit.id for hit in response]
-
-    return filtered_result_ids
-
+from articles.article_utils import *
 
 
 
@@ -102,18 +48,19 @@ def home(request) :
     #print(article.title)
     #article.delete()
 
-    r = search_Article("test")
+    r = search_Article('einstein')
    
 
     d= date(2022, 1, 1)
     f= date(2022, 3, 1)
-    res =filter_date(r , d , f )
+    #res =filter_date(r , d , f )
 
     
-    #res = filter_results(r ,'' , '' , "")
+    res = filter_results(r ,'' , 'einstein' , "")
     for i in res:
         article = get_object_or_404(Article, id=i)
-        print(article.title , article.id , article.keywords )
+        print(article.title , article.id  )
+        
   
     
     return render(request, 'search_results.html')
@@ -124,6 +71,7 @@ def home(request) :
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', home, name='search_view'),
-    path('api/', include('api.urls')),  # Use the app name 'articles' in include
+    path('api/', include('api.urls')),
+    path('articles/', include('articles.urls')),  # Use the app name 'articles' in include
     # Add other URL patterns as needed
 ]

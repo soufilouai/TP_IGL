@@ -3,10 +3,19 @@ from ckeditor.fields import RichTextField
 
 # Create your models here.
 
+class Author(models.Model) : 
+    fullname = models.CharField(max_length=255)
+    email = models.CharField(max_length=255)
+    institut = models.CharField(max_length=255)
+
+
+
+
+
 class Article(models.Model):
     title = models.CharField(max_length=255)
     summary = models.TextField()
-    # author
+    authors = models.ManyToManyField(Author)
     keywords = models.CharField(max_length=255)
     content = RichTextField()
     pdf = models.CharField(max_length=255)
@@ -22,5 +31,8 @@ class Article(models.Model):
 
     def set_keywords_list(self, keywords_list):
         self.keywords = ', '.join(keywords_list)
+
+
+    
 
 
