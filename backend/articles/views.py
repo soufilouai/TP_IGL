@@ -8,6 +8,9 @@ from rest_framework.response import Response
 from django.contrib.auth.models import Permission , Group
 from rest_framework import status,permissions
 from rest_framework.permissions import IsAuthenticated
+from .utils.extract_pdf import extractpdf
+from django.http import HttpResponse
+import os
 
 
 
@@ -34,8 +37,16 @@ class ArticleDetails(generics.RetrieveUpdateDestroyAPIView):
     queryset = Article.objects.all()
     serializer_class = ArticleSerializer
     permission_classes = [IsAuthenticated]
+
     
     
 
     
 
+def extract(request):
+  
+        current_directory = os.path.dirname(os.path.abspath(__file__))
+        path = os.path.join(current_directory ,'..',  'drive-download-20231228T162223Z-001', f'Article_07.pdf')
+        Response = extractpdf(path)
+    
+        return JsonResponse(Response)
