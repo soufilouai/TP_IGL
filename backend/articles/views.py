@@ -50,21 +50,25 @@ class ArticleDetailsMod(generics.RetrieveUpdateDestroyAPIView):
 class SearchResults(APIView):
     
     permission_classes = [permissions.AllowAny]
+    def get(self, request):
+        if request.method == 'GET':
+            resultat = discover_Article()
+            articles = Article.objects.filter(id__in=resultat)
+            
+            
+            serializer = Article_results(articles, many=True)
+            serialized_data = serializer.data
+            json_data = json.dumps(serialized_data)
+            print(json_data)
+            return Response(json_data, status=status.HTTP_200_OK)
+        
     def post(self, request):
         if request.method == 'POST':
         
             data = request.data
-            
-            
             query = data.get('keywords')
-            
-        
             search_results_ids = search_Article(query)
-            
-            
             articles = Article.objects.filter(id__in=search_results_ids)
-            
-            
             serializer = Article_results(articles, many=True)
             serialized_data = serializer.data
             json_data = json.dumps(serialized_data)
@@ -99,17 +103,7 @@ class SearchResults(APIView):
 
             #     response_data.append(article_data)
         
-    def get(self, request):
-        if request.method == 'GET':
-            resultat = discover_Article()
-            articles = Article.objects.filter(id__in=resultat)
-            
-            
-            serializer = Article_results(articles, many=True)
-            serialized_data = serializer.data
-            json_data = json.dumps(serialized_data)
-            print(json_data)
-            return Response(json_data, status=status.HTTP_200_OK)
+   
 
                 
             

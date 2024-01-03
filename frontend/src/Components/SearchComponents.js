@@ -1,55 +1,82 @@
-import React, {useState } from "react";
+import React, { useState, useEffect } from "react";
 import "../CSS/Css1.css";
-import '../CSS/Css2.css';
-import iconImage from "../images/logo.png"
-import logo2 from "../images/Logo2.png"
-import disvoverImage from "../images/Discover.png"
-import imageFleches from "../images/fleches.png"
-import logo3 from "../images/logoalt.png"
+import "../CSS/Css2.css";
+import iconImage from "../images/logo.png";
+import logo2 from "../images/Logo2.png";
+import disvoverImage from "../images/Discover.png";
+import imageFleches from "../images/fleches.png";
+import logo3 from "../images/logoalt.png";
 
-
-export const Recherche= () => {
-
+export const Recherche = () => {
   const [articles, setArticles] = useState([]);
+  const [articles2, setArticles2] = useState([]);
   const [isClicked, setIsClicked] = useState(false);
-  const [buttonContent, setButtonContent] = useState('☆');
+  const [buttonContent, setButtonContent] = useState("☆");
   const [motsCles, setMotsCles] = useState("");
   const [showContent, setShowContent] = useState(false);
 
   const handleClick = () => {
     setIsClicked(!isClicked);
-    setButtonContent(isClicked ? '☆' : '★');
+    setButtonContent(isClicked ? "☆" : "★");
   };
 
   const handleRecherche = async () => {
-    console.log("Mots-clés saisis :", motsCles);
-          
-    const apiUrl = 'http://localhost:8000/api/articles/results/';
-    const response = await fetch(apiUrl, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Origin': 'http://localhost:3000',
-      },
-      body: JSON.stringify({ keywords: motsCles }),
-    })
-    if (!response.ok){
-      console.log("erreur");
-      return;
+    console.log("Mots-clés saisis:", motsCles);
+
+    try {
+      const apiUrl = "http://localhost:8000/api/articles/results/";
+      const response = await fetch(apiUrl, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Origin: "http://localhost:3000",
+        },
+        body: JSON.stringify({ keywords: motsCles }),
+      });
+
+      if (!response.ok) {
+        console.log("Erreur");
+        return;
+      }
+
+      const data = await response.json();
+      console.log("Données reçues:", data);
+      const parsedData = JSON.parse(data);
+      setArticles(parsedData);
+    } catch (error) {
+      console.error("Erreur lors de la récupération des données:", error);
     }
+  };
 
-    const data = await response.json();
-    const parsedData = JSON.parse(data);
-    
-    
-    console.log('Donnes recues:', data);
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const apiUrl2 = "http://localhost:8000/api/articles/results/";
+        const response2 = await fetch(apiUrl2, {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Origin: "http://localhost:3000",
+          },
+        });
 
-    setArticles(parsedData);
-     
-    console.log("affichage2" , articles);
-  }; 
+        if (!response2.ok) {
+          console.log("Erreur2");
+          return;
+        }
 
+        const data2 = await response2.json();
+        const parsedData2 = JSON.parse(data2);
+        console.log("Données reçues2:", data2);
+        setArticles2(parsedData2);
+      } catch (error) {
+        console.error("Erreur lors de la récupération des données2:", error);
+      }
+    };
 
+    fetchData();
+  }, []); // Empty dependency array to run the effect only once when the component mounts
+  
 
 return(
   <div className="all">
@@ -86,7 +113,7 @@ return(
         <div className="discoverecherche">
         <img src={disvoverImage} alt="Discover" className="discoverimage" />
      <div className="boxContainer">
-        {articles.map((article) => (
+        {articles2.map((article) => (
           <div key={article.title} className="box2">
             <div className="boxInner">
              <h2 className="boxtitre" style={{ overflowWrap: 'break-word' }}>

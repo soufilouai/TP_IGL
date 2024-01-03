@@ -130,31 +130,22 @@
     background-size: cover;
     margin: 0;
 }
-
 .Readfull{
     margin-top: 2.5%;
     margin-left: 35%;
     width: 50%;
 }
-
-
-
-  
 .boxContainer {
     display: flex;
     flex-wrap: wrap;
     margin-left: 4%;
-  }
-  
-
-
+}
 .Author{
     font-weight: bolder;
     color: #393731;
     font-family: 'Source Sans Pro';
-    font-size: 3vw;
+    font-size: 2vw;
 }
-
 .boxtitre{
     font-family: 'Lora';
     font-weight: 900;
@@ -164,40 +155,31 @@
     border: none;
     cursor: pointer;
 }
-  
 .descr{
     font-family: 'Source Sans Pro';
     color: #393731;
     font-size: 2vw;
 }
-
 .box , .box2 {
     margin: 1%;
     width: calc(400px - 2%);
     position: relative;
 }
-
 .favori{
+  margin-top: 7vh;
   cursor: pointer;
   background-color: transparent;
   border: none;
   position: absolute;
   right: 2%;
-  top: 85%;
   font-size: 2.5vw;
   color: #DBB071;
 }
-
 .boxInner {
     border: 3px solid #393731; 
     padding: 2%;
     box-sizing: border-box; 
 }
-
-.Author, .descr {
-    margin-top: 3%;
-}
-
 .Readmore{
   margin-top: 7vh;
   margin-bottom: 4vh;
