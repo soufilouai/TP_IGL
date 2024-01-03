@@ -8,5 +8,5 @@ urlpatterns = [
     path('<int:pk>/', ArticleDetails.as_view(), name='article-details'),
     path('mod/', ArticlesModAPIView.as_view(), name='article-list-mod'),
     path('<int:pk>/mod/', ArticleDetailsMod.as_view(), name='article-details-mod'),
-    path('results/' , search_Article ) ,
+    path('results/' , SearchResults.as_view() ) ,
 ] 
