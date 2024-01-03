@@ -1,11 +1,11 @@
-
-import React, {useEffect, useState } from "react";
-import '../CSS/Css2.css';
+import React, {useState } from "react";
 import "../CSS/Css1.css";
+import '../CSS/Css2.css';
 import iconImage from "../images/logo.png"
 import logo2 from "../images/Logo2.png"
 import disvoverImage from "../images/Discover.png"
 import imageFleches from "../images/fleches.png"
+import logo3 from "../images/logoalt.png"
 
 
 export const Recherche= () => {
@@ -39,7 +39,6 @@ export const Recherche= () => {
     }
 
     const data = await response.json();
-    
     const parsedData = JSON.parse(data);
     
     
@@ -57,6 +56,9 @@ return(
       <div className="barrerecherche">
         <div className="container">
           <img src={iconImage} alt='Icon' className="logo" />
+          <button className="button-alt" >
+           <img src={logo3} alt="Icon" className="logoalt" />
+          </button>
           <div >
               <button className='button1' style={{color : '#F2F0E6' , whiteSpace: 'nowrap'}}>
                ☆ My library
@@ -66,7 +68,8 @@ return(
               </button>
           </div>
           {showContent && (
-            <div  >
+            <div className="account-affichage"  >
+
             </div>
           )}
         </div>
@@ -84,16 +87,14 @@ return(
         <img src={disvoverImage} alt="Discover" className="discoverimage" />
      <div className="boxContainer">
         {articles.map((article) => (
-          <div key={article.title} className="box">
+          <div key={article.title} className="box2">
             <div className="boxInner">
              <h2 className="boxtitre" style={{ overflowWrap: 'break-word' }}>
              {article.title}
              </h2>
              <p className="descr">{article.summary}</p>
-      
-                {/* Render authors if available */}
               {article.author && (
-              <p className="Author">Author: {article.author.map((author) => `${author.name} (${author.institution})`).join(', ')}</p>
+              <p className="Author">Author: {article.author.map((author) => `${author.name}`)}</p>
              )}
 
                <button className="Readmore">Read more</button>
@@ -108,3 +109,5 @@ return(
        </div>
     )
 }
+
+

@@ -69,57 +69,54 @@
     width: 5%;
 
 }
-
-.pagination{
-    display: flex;
-    justify-content: center;
+.button-alt{
+  display: none;
 }
-
-.pagination-dot {
-    width: 0.3%;
-    height: 2%;
-    border-radius: 50%;
-    margin: 0.1%;
-    cursor: pointer;
-    border: 1px solid #DBB071;
-    background-color: #F2F2F2;
-    margin-bottom: 2%;
-  }
-  
-  .pagination-dot.active {
-    background-color: #B08B56;
-    border: 2px solid #B08B56;
-  }
-
-
-
-
-
 
   @media screen and (max-width:560px){
 /******************************second page ***********************/
 .barrerecherche{
     background-image: url('../images/background2media.png');
-    height: 140vh;
-  }
-  .barrerecherche .button1 {
+    height: 100vh;
+}
+.barrerecherche .logo{
     display: none;
-  }
-  
-  .logoetrecherche{
-    margin-top: 50vh;
-  }
-  
-  .barrerecherche .logo{
+}
+.barrerecherche .button1 {
     display: none;
-  }
+}
+.logoetrecherche{
+    margin-top: 40vh;
+}
+.logo2{
+    width: 75vw;
+    left: 30vw;
+}
 
-  .barre-recherche{
-    width: 70vw;
-  }
+.barre-recherche{
+  width: 35vw;
+  height: 4vh;  
+}
+.bouton-recherche{
+  height: 5vh ;
+  width: 8vw;
 
-  .bouton-recherche{
-    width: 10vw;
-  }
 
-  }
+}
+.button-alt{
+  display: block;
+  width: 12vw;
+  background: none;
+  border: none;
+  cursor: pointer;
+
+}
+
+.fleches{
+  top: 20vh;
+  width: 20%;
+
+}
+  
+
+}

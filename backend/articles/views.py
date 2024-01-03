@@ -2,8 +2,7 @@
 from rest_framework import generics
 from .models import Article
 from .serializers import *
-from rest_framework.views import APIView
-from rest_framework.decorators import api_view
+from rest_framework.decorators import APIView
 from django.http import JsonResponse
 from rest_framework.response import Response
 from django.contrib.auth.models import Permission , Group
@@ -131,7 +130,3 @@ class SearchResults(APIView):
         serialized_data = serializer.data
         
         return Response({'results': serialized_data}, status=status.HTTP_200_OK)"""
-
-  
-    
-

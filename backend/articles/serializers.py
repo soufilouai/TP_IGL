@@ -13,8 +13,11 @@ class AuthorSerializer(serializers.ModelSerializer):
 
 
 
+
+
 class Article_results(serializers.ModelSerializer):
     author = AuthorSerializer(many=True , read_only=True)
+    
     class Meta :
         model = Article
         fields = ['id' , 'title' , 'summary' , 'pdf' , 'author' ]

@@ -1,4 +1,4 @@
-import React from 'react';
+import './App.css';
 import { BrowserRouter as Router,Route,Switch } from 'react-router-dom';
 
 import Login from './Pages/Authpages/Login';
@@ -12,20 +12,26 @@ import Search from './Pages/Search';
 function App() {
   return (
     <Router>
-    <div className="App">
-      <Switch>
-        <Route exact path="/Login">
-          <Login/>
-        </Route>
-        <Route exact path="/Register">
-          <Register/>
-        </Route>
-      </Switch>
-       <Home />
-       <Search />
+      <div className="App">
+        <Switch>
+          <Route exact path="/Login">
+            <Login />
+          </Route>
+          <Route exact path="/Register">
+            <Register />
+          </Route>
+          <Route exact path="/Home">
+            <Home />
+          </Route>
+          <Route exact path="/Search">
+            <Search />
+          </Route>
+
+        </Switch>
 
 
-    </div>
+
+      </div>
     </Router>
   );
 }
