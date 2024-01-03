@@ -1,4 +1,5 @@
-import React, {useState , useEffect} from "react";
+
+import React, {useEffect, useState } from "react";
 import '../CSS/Css2.css';
 import "../CSS/Css1.css";
 import iconImage from "../images/logo.png"
@@ -7,16 +8,24 @@ import disvoverImage from "../images/Discover.png"
 import imageFleches from "../images/fleches.png"
 
 
-export const BarreDeRecherche= () => {
+export const Recherche= () => {
 
+  const [articles, setArticles] = useState([]);
+  const [isClicked, setIsClicked] = useState(false);
+  const [buttonContent, setButtonContent] = useState('☆');
   const [motsCles, setMotsCles] = useState("");
   const [showContent, setShowContent] = useState(false);
 
-  
+  const handleClick = () => {
+    setIsClicked(!isClicked);
+    setButtonContent(isClicked ? '☆' : '★');
+  };
+
   const handleRecherche = async () => {
     console.log("Mots-clés saisis :", motsCles);
-    const apiUrl = 'http://127.0.0.1:8000/api/articles/results/';
-    let response = await fetch(apiUrl, {
+          
+    const apiUrl = 'http://localhost:8000/api/articles/results/';
+    const response = await fetch(apiUrl, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -24,14 +33,27 @@ export const BarreDeRecherche= () => {
       },
       body: JSON.stringify({ keywords: motsCles }),
     })
-    .then(response => response.json())
-      .then(data => {
-        console.log('Donnes recues:', data);
-        onSearch(data);
-      })
-      .catch(error => console.error('Error:', error));
-  };
+    if (!response.ok){
+      console.log("erreur");
+      return;
+    }
+
+    const data = await response.json();
+    
+    const parsedData = JSON.parse(data);
+    
+    
+    console.log('Donnes recues:', data);
+
+    setArticles(parsedData);
+     
+    console.log("affichage2" , articles);
+  }; 
+
+
+
 return(
+  <div className="all">
       <div className="barrerecherche">
         <div className="container">
           <img src={iconImage} alt='Icon' className="logo" />
@@ -57,68 +79,32 @@ return(
             <img src={imageFleches} alt='icon' className="fleches" />
 
           </div>
-        </div>
-    )
-}
-
-
-
-export const Discoverrech = () => {
-  const articlesPerPage = 4;
-  const [articles, setArticles] = useState([]);
-  const [currentPage, setCurrentPage] = useState(1);
-  const [totalPages, setTotalPages] = useState(0);
-
-  useEffect(() => {
-    const apiUrl = 'http://localhost:8000/api/articles/Search';
-    fetch(apiUrl)
-    .then(response =>response.json)
-    .then(data => {
-    setTotalPages(Math.ceil(data.length / articlesPerPage));
-    const startIndex = (currentPage - 1) * articlesPerPage;
-    const endIndex = startIndex + articlesPerPage;
-    setArticles(data.slice(startIndex, endIndex));
-    })
-    .catch(error =>console.error('Error fetching articles :',error));
-  }, [currentPage]);
-
-  const [isClicked, setIsClicked] = useState(false);
-  const [buttonContent, setButtonContent] = useState('☆');
-
-  const handleClick = () => {
-    setIsClicked(!isClicked);
-    setButtonContent(isClicked ? '☆' : '★');
-  };
-
-  const loadPage = (pageNumber) => {
-    setCurrentPage(pageNumber);
-  };
-
-  return (
-    <div className="discoverecherche">
-      <img src={disvoverImage} alt="Discover" className="discoverimage" />
-      <div className="boxContainer">
+          </div>
+        <div className="discoverecherche">
+        <img src={disvoverImage} alt="Discover" className="discoverimage" />
+     <div className="boxContainer">
         {articles.map((article) => (
           <div key={article.title} className="box">
             <div className="boxInner">
-              <h2 className="boxtitre" style={{ overflowWrap: 'break-word' }}>
-                {article.title}
-              </h2>
-              <p className="descr">{article.summary}</p>
-              <p className="Author">Author: {article.author}</p>
-              <button className="Readmore">Read more</button>
-              <button className="favori" onClick={handleClick}>
-                {buttonContent}
-              </button>
-            </div>
-          </div>
-        ))}
-      </div>
-      <div className="pagination">
-        {Array.from({ length: totalPages }, (_, index) => (
-          <button key={index} className={`pagination-dot ${currentPage === index + 1 ? 'active' : ''}`} onClick={() => loadPage(index + 1)}></button>
-        ))}
-      </div>
-    </div>
-  );
-};
+             <h2 className="boxtitre" style={{ overflowWrap: 'break-word' }}>
+             {article.title}
+             </h2>
+             <p className="descr">{article.summary}</p>
+      
+                {/* Render authors if available */}
+              {article.author && (
+              <p className="Author">Author: {article.author.map((author) => `${author.name} (${author.institution})`).join(', ')}</p>
+             )}
+
+               <button className="Readmore">Read more</button>
+               <button className="favori" onClick={handleClick}>
+               {buttonContent}
+               </button>
+                </div>
+                </div>
+             ))}
+           </div>
+         </div>
+       </div>
+    )
+}
