@@ -171,7 +171,7 @@
     font-size: 2vw;
 }
 
-.box {
+.box , .box2 {
     margin: 1%;
     width: calc(400px - 2%);
     position: relative;
@@ -211,12 +211,6 @@
   width: 12vw;
   height: 5.5vh;
 }
-
-
-.box2{
-  display: none;
-}
-
 
 /* last section */
 .basdepage {
