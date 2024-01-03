@@ -4,6 +4,7 @@ import PyPDF2
 import re
 import json
 import ast
+import os 
 
 
 
@@ -12,17 +13,14 @@ def extractpdf(path):
     email="Amine18"
     passwd="^NhAm5nm8ZLAC3D"
 
-# Log in to huggingface and grant authorization to huggingchat
-    sign = Login(email, passwd)
-    cookies = sign.login()
 
-# Save cookies to the local directory
-    cookie_path_dir = "./cookies_snapshot"
-    sign.saveCookiesToDir(cookie_path_dir)
 
 # Load cookies when you restart your program:
-# sign = login(email, None)
-# cookies = sign.loadCookiesFromDir(cookie_path_dir) # This will detect if the JSON file exists, return cookies if it does and raise an Exception if it's not.
+    sign = Login(email, None)
+    current_directory = os.path.dirname(os.path.abspath(__file__))
+    cookies_path = os.path.join(current_directory ,'..' , '..', 'cookies_snapshot')
+    print(cookies_path)
+    cookies = sign.loadCookiesFromDir(cookies_path) # This will detect if the JSON file exists, return cookies if it does and raise an Exception if it's not.
 
 # Create a ChatBot
     chatbot = hugchat.ChatBot(cookies=cookies.get_dict())  # or cookie_path="usercookies/<email>.json"

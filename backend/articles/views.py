@@ -46,7 +46,7 @@ class ArticleDetails(generics.RetrieveUpdateDestroyAPIView):
 def extract(request):
   
         current_directory = os.path.dirname(os.path.abspath(__file__))
-        path = os.path.join(current_directory ,'..',  'drive-download-20231228T162223Z-001', f'Article_07.pdf')
+        path = os.path.join(current_directory ,'..',  'drive-download-20231228T162223Z-001', f'Article_03.pdf')
         Response = extractpdf(path)
     
         return JsonResponse(Response)
