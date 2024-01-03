@@ -39,10 +39,7 @@ export const Recherche= () => {
     }
 
     const data = await response.json();
-    
-
-    
-     console.log('Donnes recues:', data);
+    console.log('Donnes recues:', data);
 
      setArticles(data);
      
@@ -68,7 +65,8 @@ return(
               </button>
           </div>
           {showContent && (
-            <div  >
+            <div className="account-affichage"  >
+
             </div>
           )}
         </div>
