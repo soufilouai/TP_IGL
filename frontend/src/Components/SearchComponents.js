@@ -110,9 +110,11 @@ export const Recherche = () => {
               <button className="Mylibrary" >
                 My library
               </button>
-              <button className="Logout" >
-                Log Out
-              </button>
+              <Link to="/home">
+                <button className="Logout" >
+                  Log Out
+                </button>
+              </Link>
               <p className="copyrights-media">© 2023 all rights reserved</p>
             </div>
           )}

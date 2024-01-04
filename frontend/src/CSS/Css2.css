@@ -130,6 +130,7 @@
   .barrerecherche {
     background-image: url('../images/background2media.png');
     height: 100vh;
+
   }
 
   .barrerecherche .logo {
@@ -147,11 +148,13 @@
   .logo2 {
     width: 75vw;
     left: 30vw;
+    z-index: 1;
   }
 
   .barre-recherche {
     width: 30vw;
     height: 4vh;
+    z-index: 1;
   }
 
   .bouton-recherche {
@@ -181,13 +184,14 @@
 
   /************************* media frame account ***********************/
   .media-account-frame {
-    display: block;
     height: 80vh;
     width: 45vw;
     background-image: url("../images/mediaqueryaccount.png");
     position: absolute;
+    z-index: 2;
     left: 2%;
     top: 1%;
+    display: block;
   }
 
   .trois-traits {
