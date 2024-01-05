@@ -107,10 +107,12 @@ export const Recherche = () => {
               {/* afficher the username/email used when loging/signin up  */}
               <p className="username"> {usernameinput}</p>
               <p className="email"> {email} </p>
+              <Link to="/library">
               <button className="Mylibrary" >
                 My library
               </button>
-              <Link to="/home">
+              </Link>
+              <Link to="/">
                 <button className="Logout" >
                   Log Out
                 </button>
@@ -120,9 +122,11 @@ export const Recherche = () => {
           )}
           {/* fin affichage pour media query */}
           <div >
+            <Link to="/library">
             <button className='button1' style={{ color: '#F2F0E6', whiteSpace: 'nowrap' }}>
               ☆ My library
             </button>
+            </Link>
             <button className='button2' style={{ color: '#F2F0E6', whiteSpace: 'nowrap' }} onClick={() => { setShowContent(!showContent) }} >
               \/ My account
             </button>
