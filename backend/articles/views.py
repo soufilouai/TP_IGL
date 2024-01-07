@@ -11,6 +11,8 @@ from rest_framework.permissions import IsAuthenticated
 from .utils.extract_pdf import extractpdf
 from django.http import HttpResponse
 import os
+import dropbox 
+
 
 
 
@@ -43,10 +45,27 @@ class ArticleDetails(generics.RetrieveUpdateDestroyAPIView):
 
     
 
-def extract(request):
-  
+def upload(request):
+
+        ACCESS_TOKEN = "sl.BtP1DeW7grVaf7D8n3T7EjNvCzbmlI_5TACBriYkK15nnKBcn2MacPcDCTxQP1U1l0jS3gketxvH3GUOmRWcdW57zY88bCrbhVpH7jyspbPjMlnevKJp6VoCJeaSlGEQZP6OdcVk_5qo4ZQa-HgAm0c"
+        dbx = dropbox.Dropbox(ACCESS_TOKEN)
         current_directory = os.path.dirname(os.path.abspath(__file__))
         path = os.path.join(current_directory ,'..',  'drive-download-20231228T162223Z-001', f'Article_03.pdf')
-        Response = extractpdf(path)
+
+        with open(path, 'rb') as f:
+            dbx.files_upload(f.read(), '/PDF1.pdf')
+
+        
     
-        return JsonResponse(Response)
+        # current_directory = os.path.dirname(os.path.abspath(__file__))
+        # path = os.path.join(current_directory ,'..',  'drive-download-20231228T162223Z-001', f'Article_03.pdf')
+        # Response = extractpdf(path)
+    
+        return JsonResponse({"key" : "True"})
+
+
+
+def extract(request):
+    current_directory = os.path.dirname(os.path.abspath(__file__))
+    path = os.path.join(current_directory ,'..',  'drive-download-20231228T162223Z-001', f'Article_03.pdf')
+    return JsonResponse(extractpdf(path))
