@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 /* styles */
 import "../CSS/Css1.css";
 import "../CSS/Css2.css";
@@ -19,6 +19,7 @@ export const Recherche = () => {
 
   const location = useLocation();
   const usernameinput = location.state ? location.state.username : null;
+  const history = useHistory();
   /* use states */
   const email = location.state ? location.state.email : null;
   const [articles, setArticles] = useState([]);
@@ -57,12 +58,18 @@ export const Recherche = () => {
       const data = await response.json();
       const parsedData = JSON.parse(data);
       setArticles(parsedData);
+      console.log("les articles dans search", articles);
+      history.push({
+        pathname: "/Resultats",
+        state: { articles: parsedData },
+      });
       console.log("afficher les articles pour les resultats", articles);
     } catch (error) {
       console.error("Erreur lors de la récupération des données:", error);
     }
   };
-  /* getting the random articles pour discover */
+
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -81,12 +88,13 @@ export const Recherche = () => {
         const data2 = await response2.json();
         const parsedData2 = JSON.parse(data2);
         setArticles2(parsedData2);
+        console.log("les articles random", articles2);
       } catch (error) {
         console.error("Erreur lors de la récupération des données2:", error);
       }
     };
     fetchData();  /* just to make sure on a eu les articles */
-  }, []);
+  });
 
 
   return (
@@ -108,9 +116,9 @@ export const Recherche = () => {
               <p className="username"> {usernameinput}</p>
               <p className="email"> {email} </p>
               <Link to="/library">
-              <button className="Mylibrary" >
-                My library
-              </button>
+                <button className="Mylibrary" >
+                  My library
+                </button>
               </Link>
               <Link to="/">
                 <button className="Logout" >
@@ -123,9 +131,9 @@ export const Recherche = () => {
           {/* fin affichage pour media query */}
           <div >
             <Link to="/library">
-            <button className='button1' style={{ color: '#F2F0E6', whiteSpace: 'nowrap' }}>
-              ☆ My library
-            </button>
+              <button className='button1' style={{ color: '#F2F0E6', whiteSpace: 'nowrap' }}>
+                ☆ My library
+              </button>
             </Link>
             <button className='button2' style={{ color: '#F2F0E6', whiteSpace: 'nowrap' }} onClick={() => { setShowContent(!showContent) }} >
               \/ My account

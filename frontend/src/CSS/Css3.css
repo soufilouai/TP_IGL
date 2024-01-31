@@ -1,0 +1,176 @@
+.resultatsPage {
+    height: 13vh;
+    width: 100vw;
+    background-color: #F2F2F2;
+    box-shadow: 0 2px 8px gray;
+}
+
+.searchbar {
+    position: absolute;
+    left: 15vw;
+}
+
+.header-search {
+    position: absolute;
+    top: 0.2vh;
+    width: 30vw;
+    outline: 0.3vh solid #393731;
+    border: 0;
+    height: 4vh;
+}
+
+.boutton-image-recherche {
+    position: absolute;
+    top: 4.5vh;
+    left: 45.4vw;
+    outline: 0.3vh solid #393731;
+    border: 0;
+    background: none;
+    cursor: pointer;
+    font-weight: bold;
+    font-family: 'Source Sans Pro';
+    width: 3%;
+    height: 4.4vh;
+}
+
+.buttonlib {
+    position: absolute;
+    top: 4.5vh;
+    right: 15vw;
+    border: 0;
+    background: none;
+    cursor: pointer;
+    font-weight: bold;
+    font-family: 'Source Sans Pro';
+    width: 3%;
+}
+
+.buttonacc {
+    position: absolute;
+    right: 5vw;
+    top: 5vh;
+    border: 0;
+    background: none;
+    cursor: pointer;
+    font-weight: bold;
+    font-family: 'Source Sans Pro';
+    width: 3%;
+}
+
+.resultrecherche {
+    margin-top: 1vh;
+    width: 100vw;
+    height: 200vh;
+    background-color: #F2F2F2;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.resultimage,
+.librimage {
+    position: absolute;
+    left: 20vw;
+    width: 40vw;
+}
+
+.results_filtres {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+}
+
+.box-filtre {
+    position: absolute;
+    left: 1vw;
+    margin-top: 3vh;
+    height: auto;
+    width: 12vw;
+    border: 1.5px solid #393731;
+}
+
+.filter-titre {
+    font-family: 'Source Sans Pro';
+    color: #393731;
+    font-weight: 800;
+    margin-left: 2.5vw;
+}
+
+.annees {
+    display: flex;
+    flex-direction: column;
+}
+
+.date-sort {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-family: 'Source Sans Pro';
+}
+
+.customrange {
+    margin-top: 3vh;
+    font-family: 'Source Sans Pro';
+    color: #393731;
+    margin-left: 2.5vw;
+}
+
+.begin {
+    border: 1px solid #B08B56;
+    background: none;
+    width: 3vw;
+    height: 3vh;
+}
+
+.range {
+    display: flex;
+    flex-direction: row;
+    margin-left: 1.5vw;
+}
+
+.fleche {
+    background: none;
+    border: none;
+    color: #B08B56;
+}
+
+.horizontal-line {
+    border-top: 1px solid #393731;
+    width: 100%;
+    margin-top: 2vh;
+
+}
+
+
+.sort,
+.Reviewornot {
+    margin-top: 2vh;
+    display: flex;
+    flex-direction: column;
+
+}
+
+.Reviewornot {
+    margin-bottom: 2vh;
+}
+
+.containerforboxes {
+    position: absolute;
+    left: 20vw;
+    top: 6vh;
+    height: 90vh;
+    width: 78vw;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.boutton-filter {
+    background-color: #B08B56;
+    border: none;
+    color: #F2F2F2;
+    font-weight: 700;
+    font-family: 'Source Sans Pro';
+    margin-left: 4vw;
+    cursor: pointer;
+    margin-top: 2vh;
+    margin-bottom: 2vh;
+}

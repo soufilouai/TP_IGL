@@ -146,13 +146,13 @@
   font-weight: bolder;
   color: #393731;
   font-family: 'Source Sans Pro';
-  font-size: 2vw;
+  font-size: 1.8vw;
 }
 
 .boxtitre {
   font-family: 'Lora';
   font-weight: 900;
-  font-size: 3vw;
+  font-size: 2vw;
   color: #100F0E;
   background: none;
   border: none;
@@ -162,7 +162,7 @@
 .descr {
   font-family: 'Source Sans Pro';
   color: #393731;
-  font-size: 2vw;
+  font-size: 1.5vw;
 }
 
 .box,
