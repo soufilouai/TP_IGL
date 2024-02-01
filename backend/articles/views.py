@@ -138,18 +138,19 @@ class SearchResults(APIView):
 
 class Filter_results(APIView):
     permission_classes = [permissions.AllowAny]
-    def get(self, request):
-        if request.method == 'GET':
+    def post(self, request):
         
             data = request.data
-            keywords = data.get('keywords')
-            author = data.get('author')
-            institution = data.get('institution')
-            start_date = data.get('start_date')
-            end_date = data.get('end_date')
-            
-            
-            query = data.get('keyword')
+            k= data.get('keywords')
+            print("mots:",k)
+            keywords = k.get('keywords')
+            author = k.get('author')
+            institution = k.get('institution')
+            start_date = k.get('start_date')
+            end_date = k.get('end_date')
+
+
+            query = k.get('keyword')
             
         
             search_results_ids = search_Article(query)
