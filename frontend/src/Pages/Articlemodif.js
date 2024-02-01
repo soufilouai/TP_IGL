@@ -71,7 +71,7 @@ const Articlemodif = () => {
       }, [id,authtoken]);
 
     const addauthor = () => {
-        const author = {text:'author number '+ (Authors.length+1),institution:'institution number '+(Authors.length+1),email:'email number '+(Authors.length+1)};
+        const author = {name:'author number '+ (Authors.length+1),institution:'institution number '+(Authors.length+1),email:'email number '+(Authors.length+1)};
         setAuthors([...Authors,author]);
     }
     const valider = () => {
