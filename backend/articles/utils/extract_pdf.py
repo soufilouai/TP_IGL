@@ -77,7 +77,7 @@ def extract_sections(text):
 
 def clean_json_string(json_str):
     # Replace special double quotation marks with standard ones
-    cleaned_json_str = "".join(char for char in json_str if char.isprintable())
+    cleaned_json_str = "".join(char for char in json_str if char.printable())
     return cleaned_json_str
     
 
