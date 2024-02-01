@@ -7,6 +7,7 @@ import Register from './Pages/Authpages/Register';
 import Home from './Pages/Home';
 import Search from './Pages/Search';
 import Library from './Pages/Library';
+import Articlemodif from './Pages/Articlemodif';
 
 
 function App() {
@@ -36,6 +37,10 @@ function App() {
           <Route exact path="/">
             <Home />
           </Route>
+          <Route exact path="/Article">
+            <Articlemodif />
+          </Route>
+          <Route path="/Resultats/Articlemodif/:id" component={Articlemodif} />
         </Switch>
       </div>
     </Router>
