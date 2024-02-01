@@ -8,6 +8,7 @@ export const RegisterRequest = async (username,email,password) => {
         },
         body: JSON.stringify({'username': username,'password':password,'email':email})
     })
+    console.log("this is la reponse :",response);
     return response;
 };
 

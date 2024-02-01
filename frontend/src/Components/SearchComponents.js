@@ -16,7 +16,7 @@ import { useLocation } from "react-router-dom";
 
 
 export const Recherche = () => {
-
+  const accessToken = localStorage.getItem('token');
   const location = useLocation();
   const usernameinput = location.state ? location.state.username : null;
   const history = useHistory();
@@ -29,13 +29,62 @@ export const Recherche = () => {
   const [motsCles, setMotsCles] = useState("");
   const [showContent, setShowContent] = useState(false);
   const [showContent2, setShowContent2] = useState(false);
+  const [favoriteArticles, setFavoriteArticles] = useState([])
 
 
-  /* ajout favori (rajouter des trucs quand la page my library is ready */
-  const handleClick = () => {
-    setIsClicked(!isClicked);
-    setButtonContent(isClicked ? "☆" : "★");
+
+
+  const handleClick = (id) => {
+    setFavoriteArticles((prevFavoriteArticles) => {
+      if (prevFavoriteArticles.includes(id)) {
+        sendFavoriteArticleRemove(id);
+        return prevFavoriteArticles.filter((id) => id !== id);
+      } else {
+        sendFavoriteArticleAdd(id);
+        return [...prevFavoriteArticles, id];
+      }
+    });
   };
+
+  const sendFavoriteArticleAdd = (articleId) => {
+    const apiUrl = "http://localhost:8000/api/articles/favoritadd/";
+
+    fetch(apiUrl, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ articleId: articleId }),
+    }).then(response => {
+      if (!response.ok) {
+        console.log("Erreur lors de l'ajout aux favoris");
+      } else {
+        console.log("Article ajouté aux favoris avec succès !");
+      }
+    }).catch(error => {
+      console.error("Erreur lors de l'envoi des données au backend:", error);
+    });
+  };
+
+  const sendFavoriteArticleRemove = (articleId) => {
+    const apiUrl = "http://localhost:8000/api/articles/favoritremov/";
+    fetch(apiUrl, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ articleId: articleId }),
+    }).then(response => {
+      if (!response.ok) {
+        console.log("Erreur lors de la suppression dans favoris");
+      } else {
+        console.log("Article supprime de favoris avec succès !");
+      }
+    }).catch(error => {
+      console.error("Erreur lors de l'envoi des données au backend:", error);
+    });
+  };
+
 
   /* getting articles du backend pour les resultats de la recherche */
   const handleRecherche = async () => {
@@ -61,7 +110,10 @@ export const Recherche = () => {
       console.log("les articles dans search", articles);
       history.push({
         pathname: "/Resultats",
-        state: { articles: parsedData },
+        state: {
+          articles: parsedData,
+          motsCles: motsCles
+        },
       });
       console.log("afficher les articles pour les resultats", articles);
     } catch (error) {
@@ -81,10 +133,12 @@ export const Recherche = () => {
             Origin: "http://localhost:3000",
           },
         });
+
         if (!response2.ok) {
           console.log("Erreur2");
           return;
         }
+
         const data2 = await response2.json();
         const parsedData2 = JSON.parse(data2);
         setArticles2(parsedData2);
@@ -93,8 +147,9 @@ export const Recherche = () => {
         console.error("Erreur lors de la récupération des données2:", error);
       }
     };
-    fetchData();  /* just to make sure on a eu les articles */
-  });
+    fetchData();
+  }, []);
+
 
 
   return (
@@ -176,8 +231,8 @@ export const Recherche = () => {
                   <p className="Author">Author: {article.author.map((author) => `${author.name}`)}</p>
                 )}
                 <button className="Readmore">Read more</button>
-                <button className="favori" onClick={handleClick}>
-                  {buttonContent}
+                <button className="favori" style={{ color: favoriteArticles.includes(article.id) ? '#B08B56' : '#393731' }} onClick={() => handleClick(article.id)}>
+                  ☆
                 </button>
               </div>
             </div>

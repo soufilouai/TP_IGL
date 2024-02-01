@@ -7,6 +7,8 @@ import Register from './Pages/Authpages/Register';
 import Home from './Pages/Home';
 import Search from './Pages/Search';
 import Library from './Pages/Library';
+import ResultatsAd from './Pages/Resultsadmin';
+import ResultatsMod from './Pages/Resultatsmod';
 
 
 function App() {
@@ -32,6 +34,7 @@ function App() {
           />
           <Route exact path="/Resultats/" component={Resultats} />
           <Route exact path="/library/" component={Library} />
+          <Route path="/Resultatsmod/" component={ResultatsMod} />
           {/* par defaut : home  */}
           <Route exact path="/">
             <Home />

@@ -8,6 +8,7 @@ import LibImage from "../images/mylib.png"
 
 
 export const Filtres = () => {
+    const accessToken = localStorage.getItem('token');
     const [inputValue, setInputValue] = useState('');
     const [articlesfiltres, setArticlesFiltres] = useState([]);
     const [inputValue2, setInputValue2] = useState('');
@@ -65,12 +66,14 @@ export const Filtres = () => {
     }, [selectedButtons]);
 
     useEffect(() => {
+        console.log("LE TOKEN : ",accessToken);
         const fetchData = async () => {
             try {
                 const apiUrl2 = "http://localhost:8000/api/articles/favoris/";
                 const response2 = await fetch(apiUrl2, {
                     method: "GET",
                     headers: {
+                        "Authorization": `Bearer ${accessToken}`,
                         "Content-Type": "application/json",
                         Origin: "http://localhost:3000",
                     },
@@ -83,12 +86,15 @@ export const Filtres = () => {
                 const parsedData2 = JSON.parse(data2);
                 setArticles(parsedData2);
                 console.log("les articles favoris", articles);
+                console.log(`Response status: ${response2.status}`);
+                console.log(`Data received: ${JSON.stringify(data2)}`);
+
             } catch (error) {
                 console.error("Erreur lors de la récupération des articles favoris:", error);
             }
         };
-        fetchData();  /* just to make sure on a eu les articles */
-    });
+        fetchData();  
+    }, []);
 
     return (
         <div>

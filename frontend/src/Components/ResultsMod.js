@@ -6,10 +6,11 @@ import '../CSS/Css2.css'
 import '../CSS/Css3.css'
 import resultsImage from "../images/results.png"
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+import imageCorbeille from "../images/poubelle.png"
 
 
-export const Filtres = () => {
-
+export const Filtresmod = () => {
+    
     const accessToken = localStorage.getItem('token');
     const location = useLocation();
     const articles = location.state ? location.state.articles : null;
@@ -17,71 +18,15 @@ export const Filtres = () => {
     console.log("les mots cles ya sidi rebbi :", keyword);
     const [inputValue, setInputValue] = useState('');
     const [articlesfiltres, setArticlesFiltres] = useState([]);
-    const [favoriteArticles, setFavoriteArticles] = useState([])
     const [inputValue2, setInputValue2] = useState('');
     const [selectedFilters, setSelectedFilters] = useState({
-        keyword: keyword,
+        keyword: '',
         keywords: '',
         author: '',
         institution: '',
         start_date: '',
         end_date: '',
     });
-
-
-    const handleClick = (id) => {
-        setFavoriteArticles((prevFavoriteArticles) => {
-            if (prevFavoriteArticles.includes(id)) {
-                sendFavoriteArticleRemove(id);
-                return prevFavoriteArticles.filter((id) => id !== id);
-            } else {
-                sendFavoriteArticleAdd(id);
-                return [...prevFavoriteArticles, id];
-            }
-        });
-    };
-
-    const sendFavoriteArticleAdd = (articleId) => {
-        const apiUrl = "http://localhost:8000/api/articles/favoritadd/";
-
-        fetch(apiUrl, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({ articleId: articleId }),
-        }).then(response => {
-            if (!response.ok) {
-                console.log("Erreur lors de l'ajout aux favoris");
-            } else {
-                console.log("Article ajouté aux favoris avec succès !");
-            }
-        }).catch(error => {
-            console.error("Erreur lors de l'envoi des données au backend:", error);
-        });
-    };
-
-    const sendFavoriteArticleRemove = (articleId) => {
-        const apiUrl = "http://localhost:8000/api/articles/favoritremov/";
-        fetch(apiUrl, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({ articleId: articleId }),
-        }).then(response => {
-            if (!response.ok) {
-                console.log("Erreur lors de la suppression dans favoris");
-            } else {
-                console.log("Article supprime de favoris avec succès !");
-            }
-        }).catch(error => {
-            console.error("Erreur lors de l'envoi des données au backend:", error);
-        });
-    };
-
-
-
 
     const handleButtonClick = (buttonId) => {
         setSelectedFilters((prevFilters) => {
@@ -92,28 +37,22 @@ export const Filtres = () => {
         });
     };
     const openpdf = (link) => {
-        window.open(link, '_blank');
-    }
+        window.open(link,'_blank');}
     const history = useHistory();
 
     useEffect(() => {
         console.log("Updated state:", selectedFilters);
     }, [selectedFilters]);
 
-   useEffect(() => { 
+    const handleRequete = async () => {
         setSelectedFilters((prevFilters) => {
             return {
                 ...prevFilters,
-                //['keyword']: prevFilters['keyword'] === keyword ? '' : keyword,
                 ['start_date']: prevFilters['start_date'] === inputValue ? '' : inputValue,
-                ['end_date']: prevFilters['end_date'] === inputValue2 ? '' : inputValue2,
-                
+                ['end_date']: prevFilters['end_date'] == inputValue2 ? '' : inputValue2,
+                ['keyword']: prevFilters['keyword'] == keyword ? '' : keyword,
             };
-        });
-    }, [inputValue, inputValue2]);
-
-    const handleRequete = async () => {
-
+        })
         console.log("Liste des filtres:", selectedFilters);
         try {
             const apiUrl = "http://localhost:8000/api/articles/filter/";
@@ -186,9 +125,12 @@ export const Filtres = () => {
                                     {article.author && (
                                         <p className="Author">Author: {article.author.map((author) => `${author.name}`)}</p>
                                     )}
-                                    <button className="Readmore" onClick={() => { openpdf(article.pdf) }}>Read more</button>
-                                    <button className="favori" style={{ color: favoriteArticles.includes(article.id) ? '#B08B56' : '#393731' }} onClick={() => handleClick(article.id)}>
-                                        ☆
+                                    <button className="Readmore" onClick={() => {openpdf(article.pdf)}}>Read more</button>
+                                    <button className="favori" >
+                                    </button>
+                                    <button className="edit">Edit </button>
+                                    <button className="corbeille">
+                                        <img src={imageCorbeille} alt="Icon" className="imagepoubelle"></img>
                                     </button>
                                 </div>
                             </div>
@@ -197,6 +139,6 @@ export const Filtres = () => {
                     </div>
                 </div>
             </div>
-        </div >
+        </div>
     )
 }
