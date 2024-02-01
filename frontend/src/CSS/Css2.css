@@ -1,125 +1,264 @@
-/* first section */
-.barrerecherche{
-    width: 100vw;
-    height: 90vh; 
-    background-image: url("../images/recherche1.png");
-    background-size: cover ;
-    background-repeat: no-repeat; 
-    margin: 0;
-    
-}
-
-
-.logoetrecherche{
-    transform: translate(-50%, -50%);
-    position: absolute;
-    margin-top: 35vh;
-    margin-left: 50vw;
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    color: #F2F0E6;
-    width: 45vw;
-}
-
-.barre-recherche{
-    outline: 0.3vh solid #DBB071;
-    border: 0;
-    color: #F2F0E6;
-    font-family: 'Source Sans Pro';
-    background-color: transparent;
-    margin-top: 5vh;
-    width: 30vw;
-    height: 5vh;
-    
-}
-
-.bouton-recherche{
-    border: transparent;
-    color: #F2F0E6;
-    background-color: #B08B56;
-    height: 5.8vh ;
-    width: 8vw;
-    font-family: 'Lora';
-    font-weight: 400;
-    cursor: pointer;
-}
-
-.discoverecherche{
-    width: 100vw;
-    height: auto; 
-    background-color: #F2F2F2;
-    background-size: cover ;
-    background-repeat: no-repeat; 
-    margin: 0;
+/* first section of page 2  */
+.barrerecherche {
+  width: 100vw;
+  height: 90vh;
+  background-image: url("../images/recherche1.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  margin: 0;
 
 }
 
-.discoverimage{
-    width: 50%;
-    margin-top: 2.5%;
-    margin-left: 2%;
+
+.logoetrecherche {
+  transform: translate(-50%, -50%);
+  position: absolute;
+  margin-top: 35vh;
+  margin-left: 50vw;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #F2F0E6;
+  width: 45vw;
 }
 
-.fleches{
-    position: relative;
-    top: 10vh;
-    width: 5%;
+.barre-recherche {
+  outline: 0.3vh solid #DBB071;
+  border: 0;
+  color: #F2F0E6;
+  font-family: 'Source Sans Pro';
+  background-color: transparent;
+  margin-top: 5vh;
+  width: 30vw;
+  height: 5vh;
 
 }
 
-.pagination{
-    display: flex;
-    justify-content: center;
+.bouton-recherche {
+  border: transparent;
+  color: #F2F0E6;
+  background-color: #B08B56;
+  height: 5.8vh;
+  width: auto;
+  font-family: 'Lora';
+  font-weight: 400;
+  cursor: pointer;
 }
 
-.pagination-dot {
-    width: 0.3%;
-    height: 2%;
-    border-radius: 50%;
-    margin: 0.1%;
-    cursor: pointer;
-    border: 1px solid #DBB071;
-    background-color: #F2F2F2;
-    margin-bottom: 2%;
-  }
-  
-  .pagination-dot.active {
-    background-color: #B08B56;
-    border: 2px solid #B08B56;
-  }
+.discoverecherche {
+  width: 100vw;
+  height: auto;
+  background-color: #F2F2F2;
+  background-size: cover;
+  background-repeat: no-repeat;
+  margin: 0;
 
+}
 
+.discoverimage {
+  width: 50%;
+  margin-top: 2.5%;
+  margin-left: 2%;
+}
 
+.fleches {
+  position: relative;
+  top: 10vh;
+  width: 5%;
 
+}
 
+.button-alt {
+  display: none;
+}
 
-  @media screen and (max-width:560px){
-/******************************second page ***********************/
-.barrerecherche{
+/* the frame1 : account for desktop */
+
+.frame1 {
+  height: auto;
+  width: auto;
+  position: absolute;
+  top: 7%;
+  right: 1%;
+}
+
+.user-frame1 {
+  position: absolute;
+  top: 10%;
+  right: 6%;
+  font-family: 'Lora';
+  font-weight: bold;
+  color: #393731;
+}
+
+.email-frame1 {
+  position: absolute;
+  top: 15%;
+  right: 1%;
+
+}
+
+.logout-frame1 {
+  position: absolute;
+  border: none;
+  background: none;
+  cursor: pointer;
+  top: 29%;
+  right: 8%;
+  font-family: 'Lora';
+  font-weight: bold;
+  color: #393731;
+}
+
+.media-account-frame,
+.trois-traits,
+.Mylibrary,
+.black-logo,
+.Logout,
+.copyrights-media,
+.email,
+.username {
+  display: none;
+}
+
+/********************************** media query **************************************/
+@media screen and (max-width:560px) {
+
+  /******************************second page ***********************/
+  .barrerecherche {
     background-image: url('../images/background2media.png');
-    height: 140vh;
+    height: 100vh;
+
   }
+
+  .barrerecherche .logo {
+    display: none;
+  }
+
   .barrerecherche .button1 {
     display: none;
   }
-  
-  .logoetrecherche{
-    margin-top: 50vh;
+
+  .logoetrecherche {
+    margin-top: 40vh;
   }
-  
-  .barrerecherche .logo{
+
+  .logo2 {
+    width: 75vw;
+    left: 30vw;
+    z-index: 1;
+  }
+
+  .barre-recherche {
+    width: 30vw;
+    height: 4vh;
+    z-index: 1;
+  }
+
+  .bouton-recherche {
+    height: 5vh;
+    width: auto;
+
+
+  }
+
+  .button-alt {
+    display: block;
+    width: 12vw;
+    background: none;
+    border: none;
+    cursor: pointer;
+
+  }
+
+  .fleches {
+    top: 20vh;
+    width: 20%;
+
+  }
+
+
+
+
+  /************************* media frame account ***********************/
+  .media-account-frame {
+    height: 80vh;
+    width: 45vw;
+    background-image: url("../images/mediaqueryaccount.png");
+    position: absolute;
+    z-index: 2;
+    left: 2%;
+    top: 1%;
+    display: block;
+  }
+
+  .trois-traits {
+    display: inline;
+    background: none;
+    border: none;
+    cursor: pointer;
+  }
+
+  .black-logo {
+    display: inline;
+    width: 20vw;
+  }
+
+
+  .Mylibrary {
+    display: inline;
+    background: none;
+    border: none;
+    cursor: pointer;
+    position: absolute;
+    left: 3%;
+    height: 42.5vh;
+    color: #393731;
+  }
+
+  .Logout {
+    display: inline;
+    background: none;
+    border: none;
+    cursor: pointer;
+    left: 3%;
+    color: #393731;
+    position: absolute;
+    height: 55vh;
+  }
+
+  .username {
+    display: inline;
+    position: absolute;
+    left: 32%;
+    top: 9.5vh;
+  }
+
+  .email {
+    display: inline;
+    position: absolute;
+    left: 32%;
+    top: 12vh;
+  }
+
+  .copyrights-media {
+    display: inline;
+    position: absolute;
+    left: 5%;
+    width: 1%;
+    top: 90%;
+    white-space: nowrap;
+    color: gray;
+  }
+
+  .frame1,
+  .user-frame1,
+  .email-frame1,
+  .logout-frame1 {
     display: none;
   }
 
-  .barre-recherche{
-    width: 70vw;
-  }
 
-  .bouton-recherche{
-    width: 10vw;
-  }
-
-  }
+}

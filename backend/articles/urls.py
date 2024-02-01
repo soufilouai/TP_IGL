@@ -10,4 +10,5 @@ urlpatterns = [
     path('mod/', ArticlesModAPIView.as_view(), name='article-list-mod'),
     path('mod/<int:pk>/', ArticleDetailsMod.as_view(), name='article-details-mod'),
     path('results/' , SearchResults.as_view() ) ,
+
 ] 

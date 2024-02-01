@@ -1,232 +1,250 @@
 /* register.css */
-.body{
+.body {
   min-width: 1000px;
   min-height: 800px;
 }
+
 #Registercontainer {
-    display: flex;
-    width: 100vw;
-    height: 100vh;
+  display: flex;
+  width: 100vw;
+  height: 100vh;
 
-  }
-  
-  #presentationbox {
-    display: flex;
-    align-content: space-between;
-    position: relative;
-    width: 40%;
+}
 
-  }
-  
-  #registerimage {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    filter: brightness(0.5);
+button {
+  cursor: pointer;
+}
 
-  }
-  #logo{
-    width: 25%;
-    height: 10%;
-    position: absolute;
-    top: 7%;
-    left: 14%;
-  }
-  #welcommessage{
-    position: absolute;
-    top: 19%;
-    left: 14%;
-    font-size: 8vw;
-    font-size: 8vh;
-    font-weight: 500;
-    white-space: nowrap;
-    color: #F2F0E6;
-  }
-  #presentationmessage{
-    position: absolute;
-    top: 45%;
-    left: 14%;
-    font-size: 2vw;
-    font-size: 2vh;
-    font-weight: 100;
-    color: #F2F0E6;
-  }
-  #accountmessage{
-    position: absolute;
-    font-size: 0.9vh;
-    font-size: 0.9vw;
-    font-weight: 1;
-    top: 78%;
-    left: 14%;
-    white-space: nowrap;
-    color: #F2F0E6;
-  }
-  .redirectbutton{
-    position: absolute;
-    font-weight: 400;
-    width: 6vw;
-    height: 4vh;
-    top: 78%;
-    left: 70%;
-    white-space: nowrap;
-    overflow: hidden; 
-    background-color: rgb(219, 176, 113,0);
-    color: #DBB071;
-    border-top:2px solid #DBB071;
-    border-bottom: 2px solid #DBB071;
-    border-left: 0.2px solid #DBB071;
-    border-right: 0.2px solid #DBB071;
-  }
-    
-  #registerinfobox {
-    background-color: #F2F0E6;
-    width: 60%;
-  }
-  #textimage{
-    top:5%;
-    left: 59%;
-    position: absolute;
-    width: 35%;
-    height: 20%;
+#presentationbox {
+  display: flex;
+  align-content: space-between;
+  position: relative;
+  width: 40%;
 
-  }
-  #infocontainer{
-    position: absolute;
-    width: 27%;
-    height: 60%;
-    background-color: rgba(2, 2, 2,0);
-    border: 2px solid #333;
-    top: 18%;
-    left: 57%;
-    
-  }
-  #emaillabel{
-    font-family: Sourcesans;
-    font-weight: 600;
-    position: absolute;
-    width: 15%;
-    height: 15%;
-    top: 14%;
-    left: 7%;
-    white-space: nowrap;
-  }
-  .emailinput{
-    position: absolute;
-    width: 80%;
-    height: 3%;
-    top: 21%;
-    left: 7%;
-    border: none; 
-    border-bottom: 1px solid #393731B2;
-    background-color: transparent; 
-    padding: 5px;
-    outline: none;
-  }
-  #usernamelabel{
-    font-family: Sourcesans;
-    font-weight: 600;
-    position: absolute;
-    width: 15%;
-    height: 15%;
-    top: 31%;
-    left: 7%;
-    white-space: nowrap;
-  }
-  .usernameinput{
-    position: absolute;
-    width: 80%;
-    height: 3%;
-    top: 38%;
-    left: 7%;
-    border: none; 
-    border-bottom: 1px solid #393731B2;
-    background-color: transparent; 
-    padding: 5px;
-    outline: none;
-  }
-  #passwordlabel{
-    font-family: Sourcesans;
-    font-weight: 600;
-    position: absolute;
-    width: 12%;
-    height: 15%;
-    top: 54%;
-    left: 7%;
-    white-space: nowrap;
-  }
-  .passwordinput{
-    position: absolute;
-    width: 80%;
-    height: 3%;
-    top: 61%;
-    left: 7%;
-    border: none; 
-    border-bottom: 1px solid #393731B2;
-    background-color: transparent; 
-    padding: 5px;
-    outline: none;
-  }
-  .submitbutton{
-    font-family: Lora;
-    position: absolute;
-    top: 80%;
-    left: 7%;
-    width: 84%;
-    height: 8%;
-    background-color: #B08B56;
-    border: #B08B56;
-    color: white;
-  }
-  #checkboxlabel{
-    position: absolute;
-    font-family: Sourcesans;
-    color: #393731;
-    font-weight: 600;
-    top: 70%;
-    left: 7%;
-    width: 50%;
-    height: 3%;
-    white-space: nowrap;
+}
 
-  }
-  .checkbox{
-    background-color: #B08B56;
-    color:#B08B56;
-  }
-  .errorlabel{
-    position: absolute;
-    display: flex;
-    white-space: nowrap;
-    overflow: hidden; 
-    top: 4%;
-    left: 7%;
-    width: 84%;
-    height: 9%;
-    border: 2px solid #9D4141;
-    border-width: 2.5px;
-    background-color: #ECD3D3;
-  }
-  .errormessage{
-    position: absolute;
-    font-family: Sourcesans;
-    white-space: nowrap; 
-    text-overflow: ellipsis;
-    overflow: hidden; 
-    font-weight:bolder;
-    top: 28%;
-    left: 12%;
-    font-size: 90%;
-    color: #9D4141 ;
-  }
-  .closebutton{
-    position: absolute;
-    top: 33%;
-    left: 95%;
-    width: 4%;
-  }
-  .warningsign{
-    position: absolute;
-    top: 28%;
-    left: 3%;
-    width: 7%;
-  }
+#registerimage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(0.5);
+
+}
+
+#logo {
+  width: 25%;
+  height: 10%;
+  position: absolute;
+  top: 7%;
+  left: 14%;
+}
+
+#welcommessage {
+  position: absolute;
+  top: 19%;
+  left: 14%;
+  font-size: 8vh;
+  font-weight: bold;
+  white-space: nowrap;
+  color: #F2F0E6;
+}
+
+#presentationmessage {
+  position: absolute;
+  top: 45%;
+  left: 14%;
+  font-size: 3vh;
+  font-weight: 100;
+  color: #F2F0E6;
+}
+
+#accountmessage {
+  position: absolute;
+  font-size: 0.9vw;
+  font-weight: 1;
+  top: 78%;
+  left: 14%;
+  white-space: nowrap;
+  color: #F2F0E6;
+}
+
+.redirectbutton {
+  position: absolute;
+  font-weight: 400;
+  width: 6vw;
+  height: 4vh;
+  top: 78%;
+  left: 70%;
+  white-space: nowrap;
+  overflow: hidden;
+  background-color: rgb(219, 176, 113, 0);
+  color: #DBB071;
+}
+
+#registerinfobox {
+  background-color: #F2F0E6;
+  width: 60%;
+}
+
+#textimage {
+  top: 5%;
+  left: 59%;
+  position: absolute;
+  width: 35%;
+  height: 20%;
+
+}
+
+#infocontainer {
+  position: absolute;
+  width: 27%;
+  height: 60%;
+  background-color: rgba(2, 2, 2, 0);
+  border: 2px solid #333;
+  top: 18%;
+  left: 57%;
+
+}
+
+#emaillabel {
+  font-family: Sourcesans;
+  font-weight: 600;
+  position: absolute;
+  width: 15%;
+  height: 15%;
+  top: 14%;
+  left: 7%;
+  white-space: nowrap;
+}
+
+.emailinput {
+  position: absolute;
+  width: 80%;
+  height: 3%;
+  top: 21%;
+  left: 7%;
+  border: none;
+  border-bottom: 1px solid #393731B2;
+  background-color: transparent;
+  padding: 5px;
+  outline: none;
+}
+
+#usernamelabel {
+  font-family: Sourcesans;
+  font-weight: 600;
+  position: absolute;
+  width: 15%;
+  height: 15%;
+  top: 31%;
+  left: 7%;
+  white-space: nowrap;
+}
+
+.usernameinput {
+  position: absolute;
+  width: 80%;
+  height: 3%;
+  top: 38%;
+  left: 7%;
+  border: none;
+  border-bottom: 1px solid #393731B2;
+  background-color: transparent;
+  padding: 5px;
+  outline: none;
+}
+
+#passwordlabel {
+  font-family: Sourcesans;
+  font-weight: 600;
+  position: absolute;
+  width: 12%;
+  height: 15%;
+  top: 54%;
+  left: 7%;
+  white-space: nowrap;
+}
+
+.passwordinput {
+  position: absolute;
+  width: 80%;
+  height: 3%;
+  top: 61%;
+  left: 7%;
+  border: none;
+  border-bottom: 1px solid #393731B2;
+  background-color: transparent;
+  padding: 5px;
+  outline: none;
+}
+
+.submitbutton {
+  font-family: Lora;
+  position: absolute;
+  top: 80%;
+  left: 7%;
+  width: 84%;
+  height: 8%;
+  background-color: #B08B56;
+  border: #B08B56;
+  color: white;
+}
+
+#checkboxlabel {
+  position: absolute;
+  font-family: Sourcesans;
+  color: #393731;
+  font-weight: 600;
+  top: 70%;
+  left: 7%;
+  width: 50%;
+  height: 3%;
+  white-space: nowrap;
+
+}
+
+.checkbox {
+  background-color: #B08B56;
+  color: #B08B56;
+}
+
+.errorlabel {
+  position: absolute;
+  display: flex;
+  white-space: nowrap;
+  overflow: hidden;
+  top: 4%;
+  left: 7%;
+  width: 84%;
+  height: 9%;
+  border: 2px solid #9D4141;
+  border-width: 2.5px;
+  background-color: #ECD3D3;
+}
+
+.errormessage {
+  position: absolute;
+  font-family: Sourcesans;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  font-weight: bolder;
+  top: 28%;
+  left: 12%;
+  font-size: 90%;
+  color: #9D4141;
+}
+
+.closebutton {
+  position: absolute;
+  top: 33%;
+  left: 95%;
+  width: 4%;
+}
+
+.warningsign {
+  position: absolute;
+  top: 28%;
+  left: 3%;
+  width: 7%;
+}

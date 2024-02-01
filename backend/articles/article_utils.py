@@ -5,6 +5,8 @@ from elasticsearch_dsl import Search , Q , DateRange
 from elasticsearch_dsl.query import MultiMatch
 from datetime import date
 
+Discover_num = 10
+
 
 def search_Article(q) : 
    
@@ -103,3 +105,18 @@ def filter_date(result_ids , date_debut , date_fin ) :
     filtered_result_ids = [hit.id for hit in response]
 
     return filtered_result_ids
+
+
+def discover_Article():
+   s = Search(using='default', index='article_index')
+   s = s.sort('-date')
+   s = s.extra(size=Discover_num)
+   response = s.execute()
+   list = [] 
+
+   for hit in response :
+     list.append(hit.id)
+    
+   return list
+   
+ 

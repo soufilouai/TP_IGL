@@ -1,0 +1,159 @@
+button {
+    cursor: pointer;
+  }
+
+.mainsection {
+    position: relative;    
+    height:auto;
+    width: 100vw; 
+}
+#modif{
+    font-family: Lora;
+    width: auto;
+    height: auto;
+    font-weight: bold; 
+    font-size: calc(1.5vh + 1.5vw);
+    display: flex;
+    position: relative;
+    margin-top: 2%;
+    margin-left: 7%;
+} 
+#title{
+    font-family: Lora;
+    font-weight: 500;
+    font-size: calc(1vh + 1vw);
+    display: flex;
+    position: relative;
+    margin-top: 2%;
+    margin-left: 7%;
+}
+#summary{
+    font-family: Lora;
+    font-weight: 500;
+    font-size: calc(0.8vh + 0.8vw);
+    display: flex;
+    position: relative;
+    margin-left: 7%;
+    margin-top: 2%;
+}
+#keyword{
+    font-family: Lora;
+    font-weight: 500;
+    font-size: calc(0.8vh + 0.8vw);
+    display: flex;
+    position: relative;
+    margin-left: 7%;
+    margin-top: 2%;
+}
+#author{
+    font-family: Lora;
+    font-weight: 500;
+    font-size: calc(0.8vh + 0.8vw);
+    display: flex;
+    position: relative;
+    margin-left: 7%;
+    margin-top: 2%;
+}
+#institution{
+    font-family: Lora;
+    font-weight: 500;
+    font-size: calc(0.8vh + 0.8vw);
+    display: flex;
+    position: relative;
+    margin-left: 7%;
+    margin-top: 2%;
+}
+#e-mail{
+    font-family: Lora;
+    font-weight: 500;
+    font-size: calc(0.8vh + 0.8vw);
+    display: flex;
+    position: relative;
+    margin-left: 7%;
+    margin-top: 2%;
+}
+#content{
+    font-family: Lora;
+    font-weight: 500;
+    font-size: calc(0.8vh + 0.8vw);
+    display: flex;
+    position: relative;
+    margin-left: 7%;
+    margin-top: 2%;
+}
+#refrences{
+    font-family: Lora;
+    font-weight: 500;
+    font-size: calc(0.8vh + 0.8vw);
+    display: flex;
+    position: relative;
+    margin-left: 7%;
+    margin-top: 2%;
+}
+#date{
+    font-family: Lora;
+    font-weight: 500;
+    font-size: calc(0.8vh + 0.8vw);
+    display: flex;
+    position: relative;
+    margin-left: 7%;
+    margin-top: 2%;
+}
+.modifiabletextfield{
+    border-color: #aaaaaa;
+    border-width: 1px;
+    padding: 10px;
+    padding-bottom: 0;
+    background-color: #D9D9D9;
+    font-family: Lora;
+    font-size: calc(0.8vh + 0.8vw);
+    margin-left: 7%;
+    display: flex;
+    position: relative;
+    margin-top: 1%;
+    width: 85%;
+    height: 6vh;
+}
+#authortextfield{
+    margin-top: 0.5%;
+}
+
+#contenttextfield{
+
+    height: 70vh;
+}
+#summarytextfield{    
+    height: 35vh;
+}
+#addauthor{
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  margin-top: 2%;
+  width: 7vw;
+  margin-right: 20%;
+  margin-left: 86.4vw;
+  background-color: rgba(219, 176, 113, 0);
+  color: #B08B56;
+  border-top: 2px solid #B08B56;
+  border-bottom: 2px solid #B08B56;
+  border-left: 2px solid #B08B56;
+  border-right: 2px solid #B08B56;
+}
+#save{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    margin-top: 2%;
+    width: 7vw;
+    margin-right: 20%;
+    margin-left: 86.4vw;
+    background-color: rgba(219, 176, 113, 0);
+    color: #B08B56;
+    border-top: 2px solid #B08B56;
+    border-bottom: 2px solid #B08B56;
+    border-left: 2px solid #B08B56;
+    border-right: 2px solid #B08B56;
+    margin-bottom: 4%;
+}
+
