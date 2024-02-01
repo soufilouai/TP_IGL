@@ -32,10 +32,14 @@ export const getArticleInfo = async (articleId, authToken) => {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
-          Origin: "http://localhost:3000",
-          'Authorization': `Bearer ${authToken}` // Include your authentication token here
-        }
-      });
+        //   Origin: "http://localhost:3000",
+        //   'Authorization': `Bearer ${authToken}` // Include your authentication token here
+        },
+        mode : 'no-cors',
+      }
+      
+      );
+      
   
       if (!response.ok) {
         throw new Error('Failed to fetch article information');
@@ -48,6 +52,9 @@ export const getArticleInfo = async (articleId, authToken) => {
       throw error;
     }
   };
+
+
+
 export const modifyArticle = async(articleId,updatedArticle) =>{
     try {
         const response = await fetch(`http://127.0.0.1:8000/api/articles/mod/${articleId}`, {

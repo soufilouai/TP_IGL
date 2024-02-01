@@ -94,6 +94,9 @@ CORS_ALLOW_ALL_ORIGINS = True
 
 
 
+CORS_ORIGIN_ALLOW_ALL = True
+
+
 
 CORS_ALLOW_CREDENTIALS = True
 
@@ -101,6 +104,7 @@ CORS_ALLOW_HEADERS = [
     'access-control-allow-headers',
     'Access-Control-Allow-Origin',
     'Content-Type',
+    'Authorization',
 ]
 
 ROOT_URLCONF = 'backend.urls'
