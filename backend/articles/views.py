@@ -43,9 +43,7 @@ class ArticleDetails(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = ArticleSerializer
     permission_classes = [IsAuthenticated]
 
-    
-def extract(pdf_path):
-    return extractpdf(pdf_path)   
+     
 
 def upload_to_dropbox(pdf_path):
 
@@ -76,8 +74,7 @@ def upload(request):
         
 
    
-            json_data = extract(pdf_path)
-            print(json_data["Introduction"])
+            json_data = extractpdf(pdf_path)
             article  = Article.objects.create(title=json_data["title"],summary=json_data["abstract"],keywords=json_data["keywords"],pdf=filename,date=json_data["date"])
             article.add_authors(json_data["authors"])
             authors_data = json_data.get("authors", [])
