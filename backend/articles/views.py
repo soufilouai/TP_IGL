@@ -37,13 +37,36 @@ class ArticleDetails(generics.RetrieveAPIView):
 class ArticlesModAPIView(generics.ListCreateAPIView):
     queryset = Article.objects.all()
     serializer_class = ArticleSerializer
-    permission_classes = [IsAuthenticated,CanModerateContentPermission]
+    permission_classes = [permissions.AllowAny]
+    # permission_classes = [IsAuthenticated,CanModerateContentPermission]
    
 
 class ArticleDetailsMod(generics.RetrieveUpdateDestroyAPIView):
     queryset = Article.objects.all()
     serializer_class = ArticleSerializer
-    permission_classes = [IsAuthenticated,CanModerateContentPermission]
+    permission_classes = [permissions.AllowAny]
+    # permission_classes = [IsAuthenticated,CanModerateContentPermission]
+    
+    
+    
+class ArticleAddFav(generics.RetrieveUpdateAPIView):
+    queryset = Article.objects.all()
+    serializer_class = ArticleSerializer
+    def post(self, request,*args, **kwargs):
+        article = self.get_object()
+        user = request.user  # Assuming you have authentication enabled
+
+        if user.is_authenticated:
+            # Add the article to the user's favorites
+            if (user.favorite_articles.filter(pk=article.pk).exists()):
+                user.favorite_articles.remove(article)
+                return Response({'detail': 'Article removed from favorites successfully.'}, status=status.HTTP_200_OK)
+            else:
+                user.favorite_articles.add(article)
+                return Response({'detail': 'Article added to favorites successfully.'}, status=status.HTTP_200_OK)
+        else:
+            return Response({'detail': 'Authentication required to add favorites.'}, status=status.HTTP_401_UNAUTHORIZED)
+    
 
 
 

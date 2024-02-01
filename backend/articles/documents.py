@@ -66,8 +66,8 @@ class ArticleDocument(Document):
   def prepare_authors(self, instance):
         return [
             {
-                'full_name': author.fullname,
-                'institut_name': author.institut,
+                'full_name': author.name,
+                'institut_name': author.institution,
             }
             for author in instance.author.all()
         ]
