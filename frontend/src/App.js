@@ -9,6 +9,7 @@ import Search from './Pages/Search';
 import Library from './Pages/Library';
 import ResultatsAd from './Pages/Resultsadmin';
 import ResultatsMod from './Pages/Resultatsmod';
+import Articlemodif from './Pages/Articlemodif';
 
 
 function App() {
@@ -39,8 +40,8 @@ function App() {
           <Route exact path="/">
             <Home />
           </Route>
-          <Route exact path="/Article">
-            <Articlemodif />
+          <Route exact path="/Article" component= {Articlemodif}>
+            
           </Route>
           <Route path="/Resultats/Articlemodif/:id" component={Articlemodif} />
         </Switch>

@@ -24,8 +24,8 @@ const Articlemodif = () => {
     const [Keyword,setKeyword] = useState("key words")
     const [Authors,setAuthors] = useState([{id:'1',name:'author number 1',institution:'institution number 1', email:'email number 1'},
                                           {id:'2',name:'author number 2',institution:'institution number 2', email:'email number 2'},])
-    const [Content, setContent] = useState("content")
-    const [Refrences,setRefrences] = useState("refrences")
+    
+    
     const [Date,setDate]= useState("Date")
    
     const handlechangetitle = (event) => {
@@ -37,12 +37,8 @@ const Articlemodif = () => {
     const handlechangesummary = (event) => {
         setSummary(event.target.value);
     }
-    const handlechangecontent = (event) => {
-        setContent(event.target.value);
-    }
-    const handlechangerefrences = (event) => {
-        setRefrences(event.target.value);
-    }
+    
+    
     const handlechangedate = (event) =>{
         setDate(event.target.value);
     }
@@ -65,8 +61,7 @@ const Articlemodif = () => {
             setKeyword(Articledata.keywords);
             setSummary(Articledata.summary);
             setDate(Articledata.date);
-            setRefrences(Articledata.Refrences);
-            setContent(Articledata.content);
+            
             setAuthors(Articledata.author);
             } catch (error) {
             console.error(error);
@@ -86,8 +81,7 @@ const Articlemodif = () => {
             'summary':Summary,
             'keywords':Keyword,
             'author': Authors,
-            'content':Content,
-            'refrences':Refrences,
+            
             'date':Date,
         }
         modifyArticle(updatedarticle.id,updatedarticle);
@@ -107,8 +101,9 @@ const Articlemodif = () => {
                 
                 {Authors.map(author => (
                     <div>
+                        
                     <label id="author">Author</label>
-                    <Articlecomponents.Modifiabletextfield id="authortextfield" IsMod={true} onchange={e=>handlechangeauthor(e,author.id)} content={author.text} />
+                    <Articlecomponents.Modifiabletextfield id="authortextfield" IsMod={true} onchange={e=>handlechangeauthor(e,author.id)} content={author.name} />
                     <label id="institution">Institution</label>
                     <Articlecomponents.Modifiabletextfield id="institutiontextfield" IsMod={true} onchange={e=>handlechangeinstitution(e,author.id)} content={author.institution} />
                     <label id="e-mail">E-mail</label>
@@ -120,10 +115,8 @@ const Articlemodif = () => {
                 }}>
                    + Add author
                 </button>
-                <label id="content">Content</label>
-                <Articlecomponents.Modifiabletextfield id={"contenttextfield"} IsMod={true} onchange={handlechangecontent} content={Content} />
-                <label id="refrences">Refrences</label>
-                <Articlecomponents.Modifiabletextfield id={"refrencestextfield"} IsMod={true} onchange={handlechangerefrences} content={Refrences} />
+                
+               
                 <label id="date">Date</label>
                 <Articlecomponents.Modifiabletextfield id={"datetextfield"} IsMod={true} onchange={handlechangedate} content={Date} />
                 <button id="save" onClick={() => {

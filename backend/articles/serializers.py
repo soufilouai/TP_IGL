@@ -4,14 +4,16 @@ from .models import *
 class AuthorSerializer(serializers.ModelSerializer):
     class Meta:
         model = Author
-        fields = ['id', 'name', 'email']
+        fields = ['id', 'name', 'email','institution']
+
+
 
 
 class ArticleSerializer(serializers.ModelSerializer):
     author = AuthorSerializer(many=True)
     class Meta:
         model = Article
-        fields = ('id' , 'title' ,'summary', 'keywords','author' )
+        fields = ('id' , 'title' ,'summary', 'keywords','author', 'date' )
         
         
     def update(self, instance, validated_data):
@@ -57,13 +59,6 @@ class Article_results(serializers.ModelSerializer):
         model = Article
         fields = ['id' , 'title' , 'summary' , 'pdf' , 'author' ,'pdf'  ]
 
-
-class Article_modification(serializers.ModelSerializer):
-    author = AuthorSerializer(many=True , read_only=True)
-    
-    class Meta :
-        model = Article
-        fields = ['id' , 'title' , 'summary' , 'keywords' , 'author' , 'content' , 'pdf'  ]
 
 
 

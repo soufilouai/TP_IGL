@@ -50,8 +50,8 @@ export const getArticleInfo = async (articleId, authToken) => {
   };
 export const modifyArticle = async(articleId,updatedArticle) =>{
     try {
-        const response = await fetch(`http://your-api-url/articles/${articleId}`, {
-            method: 'POST',
+        const response = await fetch(`http://127.0.0.1:8000/api/articles/mod/${articleId}`, {
+            method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
                 
