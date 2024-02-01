@@ -5,6 +5,7 @@ from .serializers import *
 from rest_framework.decorators import APIView
 from django.http import JsonResponse
 from rest_framework.response import Response
+from django.shortcuts import get_object_or_404
 from django.contrib.auth.models import Permission , Group
 from rest_framework import status,permissions
 from rest_framework.permissions import IsAuthenticated
@@ -73,25 +74,21 @@ class ArticleAddFav(generics.RetrieveUpdateAPIView):
 class SearchResults(APIView):
     
     permission_classes = [permissions.AllowAny]
-    def get(self, request):
-        if request.method == 'GET':
-            resultat = discover_Article()
-            articles = Article.objects.filter(id__in=resultat)
-            
-            
-            serializer = Article_results(articles, many=True)
-            serialized_data = serializer.data
-            json_data = json.dumps(serialized_data)
-            print(json_data)
-            return Response(json_data, status=status.HTTP_200_OK)
-        
     def post(self, request):
         if request.method == 'POST':
         
             data = request.data
+            
+    
             query = data.get('keywords')
+            
+        
             search_results_ids = search_Article(query)
+            
+            
             articles = Article.objects.filter(id__in=search_results_ids)
+            
+            
             serializer = Article_results(articles, many=True)
             serialized_data = serializer.data
             json_data = json.dumps(serialized_data)
@@ -126,7 +123,107 @@ class SearchResults(APIView):
 
             #     response_data.append(article_data)
         
-   
+    def get(self, request):
+        if request.method == 'GET':
+            resultat = discover_Article()
+            articles = Article.objects.filter(id__in=resultat)
+            
+            
+            serializer = Article_results(articles, many=True)
+            serialized_data = serializer.data
+            json_data = json.dumps(serialized_data)
+            print(json_data)
+            return Response(json_data, status=status.HTTP_200_OK)
+        
+
+class Filter_results(APIView):
+    permission_classes = [permissions.AllowAny]
+    def get(self, request):
+        if request.method == 'GET':
+        
+            data = request.data
+            keywords = data.get('keywords')
+            author = data.get('author')
+            institution = data.get('institution')
+            start_date = data.get('start_date')
+            end_date = data.get('end_date')
+            
+            
+            query = data.get('keyword')
+            
+        
+            search_results_ids = search_Article(query)
+            results = filter_results(search_results_ids ,institution , author , keywords)
+            if (start_date!=None and  end_date !=None and start_date<= end_date) :
+              results = filter_date(results , start_date , end_date)
+
+            
+            articles = Article.objects.filter(id__in=results)
+            
+            
+            serializer = Article_results(articles, many=True)
+            serialized_data = serializer.data
+            json_data = json.dumps(serialized_data)
+
+        
+            return Response(json_data, status=status.HTTP_200_OK)
+        
+
+
+class Favorislist(APIView):
+    permission_classes = [permissions.AllowAny]
+    def get(self, request):
+        if request.method == 'GET':
+            user = request.user
+            user_favorite_article_ids = user.favorite_articles.values_list('id', flat=True)
+            articles = Article.objects.filter(id__in=user_favorite_article_ids)
+
+            serializer = Article_Favoris(articles, many=True)
+            serialized_data = serializer.data
+            json_data = json.dumps(serialized_data)
+            return Response(json_data, status=status.HTTP_200_OK)
+        
+
+
+class Favoris(APIView):
+    permission_classes = [permissions.AllowAny]
+    def get(self, request):
+        if request.method == 'GET':
+            user = request.user
+            user_favorite_article_ids = user.favorite_articles.values_list('id', flat=True)
+            articles = Article.objects.filter(id__in=user_favorite_article_ids)
+
+            serializer = Article_results(articles, many=True)
+            serialized_data = serializer.data
+            json_data = json.dumps(serialized_data)
+            return Response(json_data, status=status.HTTP_200_OK)
+        
+        
+
+class Article_modification(APIView):
+    permission_classes = [permissions.AllowAny]
+    def get(self, request):
+        if request.method == 'GET':
+            id = request.id 
+            article = Article.objects.filter(id__in=id)
+            serializer = Article_modification(article)
+            serialized_data = serializer.data
+            json_data = json.dumps(serialized_data)
+
+            return Response(json_data, status=status.HTTP_200_OK)
+        
+    def put(self, request, pk):
+        instance = get_object_or_404(Article, pk=pk)
+        serializer = ArticleSerializer(instance, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+           
+
+
 
                 
             
