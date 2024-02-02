@@ -16,8 +16,8 @@ import { useLocation } from "react-router-dom";
 
 
 export const Recherche = () => {
-  const accessToken = localStorage.accessToken;
-
+  //const accessToken = localStorage.accessToken;
+  const accessToken = '';
   const location = useLocation();
   const usernameinput = location.state ? location.state.username : null;
   const email = location.state ? location.state.email : null;

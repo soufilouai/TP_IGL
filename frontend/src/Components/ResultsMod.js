@@ -10,7 +10,8 @@ import imageCorbeille from "../images/poubelle.png"
 
 
 export const Filtresmod = () => {
-    const accessToken = localStorage.getItem('token');
+    //const accessToken = localStorage.getItem('token');
+    const accessToken = '';
     const location = useLocation();
     const articles = location.state ? location.state.articles : null;
     const keyword = location.state ? location.state.motsCles : null;
@@ -125,10 +126,11 @@ export const Filtresmod = () => {
     };
     /********************************supprimer un article***************************************/
     const removeArticle = (articleId) => {
-        const apiUrl = `http://localhost:8000/api/articles/mod/${articleId}`
+        const apiUrl = `http://localhost:8000/api/articles/mod/${articleId}/`
         fetch(apiUrl, {
             method: 'DELETE',
             headers: {
+                "Authorization": `Bearer ${accessToken}`,
                 'Content-Type': 'application/json',
             },
         })

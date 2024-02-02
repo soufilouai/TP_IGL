@@ -9,11 +9,10 @@ from django.shortcuts import get_object_or_404
 from django.contrib.auth.models import Permission , Group
 from rest_framework import status,permissions
 from rest_framework.permissions import IsAuthenticated
-import json
 
 
 from .article_utils import *
-
+import json 
 
 
 class CanModerateContentPermission(permissions.BasePermission):

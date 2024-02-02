@@ -89,6 +89,7 @@ export const Filtres = () => {
     }, [inputValue, inputValue2]);
     /*********************************************************************************************8*/
     /************************************** Lancer le filtre **************************************/
+
     const history = useHistory();
     const handleRequete = async () => {
         try {
@@ -120,7 +121,6 @@ export const Filtres = () => {
     const handlePagination = (pageNumber) => {
         setCurrentPage(pageNumber);
     };
-
 
 
     return (
@@ -172,7 +172,7 @@ export const Filtres = () => {
                     <div className="pagination1">
                         {Array.from({ length: Math.ceil(articles.length / articlesPerPage) }, (_, index) => (
                             <button className='button-pagination1' key={index} onClick={() => handlePagination(index + 1)}>
-                             🔘
+                                🔘
                             </button>
                         ))}
                     </div>

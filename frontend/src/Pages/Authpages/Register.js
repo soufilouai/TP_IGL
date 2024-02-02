@@ -42,9 +42,9 @@ const Register = () => {
     console.log(
       "ur username is :",
       usernameinput +
-        "ur email is : " +
-        emailinput +
-        " and your password is :",
+      "ur email is : " +
+      emailinput +
+      " and your password is :",
       passwordinput
     );
     const response = await RegisterRequest(
@@ -60,15 +60,14 @@ const Register = () => {
       const data2 = await response2.json();
 
       if (response2.status === 200) {
-        console.log("u r loged in ", data2);
         localStorage.setItem("token", JSON.stringify(data2.access));
         localStorage.setItem("refresh token", JSON.stringify(data2.refresh));
 
         // Redirect to the search page
         history.push({
-            pathname: "/Search",
-            state: { username: usernameinput, email: emailinput },
-          });
+          pathname: "/Search",
+          state: { username: usernameinput, email: emailinput },
+        });
       } else {
         console.log("there's some err", data2);
         seterror(true);
@@ -108,35 +107,35 @@ const Register = () => {
   const handlesubmit = (e) => {
     e.preventDefault();
   };
-    return ( 
-        <body>
-            <div id="Registercontainer">
-                <div id="presentationbox">
-                    <img id="registerimage" src="Sources/Images/loginimage.png" alt="loginpageimage"/>
-                    <h1 id="welcommessage">Start your<br></br>journey</h1>
-                    <h3 id="presentationmessage">Your geteway to a rich repository of academic<br></br>articles spanning diverse fields</h3>
-                    <h3 id="accountmessage">Already have an account?</h3>
-                    <Authcomponennts.Redirectbutton content={'Log in'} page={'/Login'} handlebutton = {toLogin}/>
-                    <img id="logo" src="Sources/Images/logo.png" alt="logo"/>
-                    
-                </div>
-                <div id="registerinfobox">
-                <img id="textimage" src="Sources/Images/text2.png" alt="text "/>
-                    <div id="infocontainer">
-                        <form onSubmit={handlesubmit}>
-                            {error && <Authcomponennts.Errormessage content={errormessage} handleclosebutton={handleclosebutton}/>} 
-                            <Authcomponennts.Emailinput email={emailinput} handlechange={handleemailchange}/>
-                            <Authcomponennts.Usernameinput username={usernameinput} handlechange={handleusernamechange}/>
-                            <Authcomponennts.Passwordinput showpassword={showpassword} password={passwordinput} handlechange={handlpasswordchange}/>
-                            <Authcomponennts.Checkbox content={"Show password"} check={showpassword} handlechange={handlecheckbox}/>
-                            <Authcomponennts.Submitbutton content={'Get started'} submitfunction={register}/>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </body>
+  return (
+    <body>
+      <div id="Registercontainer">
+        <div id="presentationbox">
+          <img id="registerimage" src="Sources/Images/loginimage.png" alt="loginpageimage" />
+          <h1 id="welcommessage">Start your<br></br>journey</h1>
+          <h3 id="presentationmessage">Your geteway to a rich repository of academic<br></br>articles spanning diverse fields</h3>
+          <h3 id="accountmessage">Already have an account?</h3>
+          <Authcomponennts.Redirectbutton content={'Log in'} page={'/Login'} handlebutton={toLogin} />
+          <img id="logo" src="Sources/Images/logo.png" alt="logo" />
 
-     );
+        </div>
+        <div id="registerinfobox">
+          <img id="textimage" src="Sources/Images/text2.png" alt="text " />
+          <div id="infocontainer">
+            <form onSubmit={handlesubmit}>
+              {error && <Authcomponennts.Errormessage content={errormessage} handleclosebutton={handleclosebutton} />}
+              <Authcomponennts.Emailinput email={emailinput} handlechange={handleemailchange} />
+              <Authcomponennts.Usernameinput username={usernameinput} handlechange={handleusernamechange} />
+              <Authcomponennts.Passwordinput showpassword={showpassword} password={passwordinput} handlechange={handlpasswordchange} />
+              <Authcomponennts.Checkbox content={"Show password"} check={showpassword} handlechange={handlecheckbox} />
+              <Authcomponennts.Submitbutton content={'Get started'} submitfunction={register} />
+            </form>
+          </div>
+        </div>
+      </div>
+    </body>
+
+  );
 }
- 
+
 export default Register;

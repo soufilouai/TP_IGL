@@ -1,4 +1,5 @@
 import React from "react"
+
 import { useHistory } from "react-router-dom";
 import { useState, useEffect } from "react";
 import '../CSS/Css1.css';
@@ -9,9 +10,9 @@ import { useLocation } from "react-router-dom/cjs/react-router-dom.min";
 
 
 export const Filtres = () => {
-    const accessToken = localStorage.getItem('token');
+
     const location = useLocation();
-    const articles = location.state ? location.state.articles : null;
+    const [articles, setArticles] = useState([]);
     const keyword = location.state ? location.state.motsCles : null;
     /* use states */
     const [inputValue, setInputValue] = useState('');
@@ -45,6 +46,37 @@ export const Filtres = () => {
             }
         });
     };
+
+    useEffect(() => {
+        //const accessToken = localStorage.getItem('token');
+        const accessToken = '';
+        const fetchData = async () => {
+            try {
+                const apiUrl2 = "http://localhost:8000/api/articles/favoris/";
+                const response2 = await fetch(apiUrl2, {
+                    method: "GET",
+                    headers: {
+                        "Authorization": `Bearer ${accessToken}`,
+                        "Content-Type": "application/json",
+                    },
+                });
+                if (!response2.ok) {
+                    console.log("Erreur2");
+                    return;
+                }
+                const data2 = await response2.json();
+                const parsedData2 = JSON.parse(data2);
+                setArticles(parsedData2);
+                console.log("les articles favoris", articles);
+                console.log(`Response status: ${response2.status}`);
+                console.log(`Data received: ${JSON.stringify(data2)}`);
+
+            } catch (error) {
+                console.error("Erreur lors de la récupération des articles favoris:", error);
+            }
+        };
+        fetchData();
+    }, []);
 
     /*********************** ouvrir l'article dans un nouvel onglet ************************/
     const openpdf = (link) => {
