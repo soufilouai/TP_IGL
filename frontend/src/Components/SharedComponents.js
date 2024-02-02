@@ -64,6 +64,7 @@ export const ResultsHeader = () => {
     const location = useLocation();
     const usernameinput = location.state ? location.state.username : null;
     const email = location.state ? location.state.email : null;
+    const accessToken = localStorage.getItem("token");
 
     /*******************get articles pour la recherche faite dans la page results ************************/
     const handleRecherche = async () => {
@@ -73,6 +74,7 @@ export const ResultsHeader = () => {
             const response = await fetch(apiUrl, {
                 method: "POST",
                 headers: {
+                    "Authorization": `Bearer ${accessToken}`,
                     "Content-Type": "application/json",
                     Origin: "http://localhost:3000",
                 },

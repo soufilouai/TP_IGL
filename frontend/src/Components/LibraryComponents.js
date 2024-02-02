@@ -34,6 +34,8 @@ export const Filtres = () => {
     const indexOfLastArticle = currentPage * articlesPerPage;
     const indexOfFirstArticle = indexOfLastArticle - articlesPerPage;
 
+    const accessToken = localStorage.getItem("token");
+
     /*********************** ajouter lid  la liste des favoris when clicking sur l'etoile *************/
     const handleClick = (id) => {
         setFavoriteArticles((prevFavoriteArticles) => {
@@ -48,8 +50,8 @@ export const Filtres = () => {
     };
 
     useEffect(() => {
-        //const accessToken = localStorage.getItem('token');
-        const accessToken = '';
+        const accessToken = localStorage.getItem('token');
+        // const accessToken = '';
         const fetchData = async () => {
             try {
                 const apiUrl2 = "http://localhost:8000/api/articles/favoris/";
@@ -85,7 +87,7 @@ export const Filtres = () => {
 
     /**************************** Requetes pour ajout et suppression de favoris *******************/
     const sendFavoriteArticle = (articleId) => {
-        const apiUrl = `http://localhost:8000/api/articles/${articleId}/addFav`;
+        const apiUrl = `http://localhost:8000/api/articles/${articleId}/addFav/`;
 
         fetch(apiUrl, {
             method: "POST",
@@ -130,6 +132,7 @@ export const Filtres = () => {
             const response = await fetch(apiUrl, {
                 method: "POST",
                 headers: {
+                    "Authorization": `Bearer ${accessToken}`,
                     "Content-Type": "application/json",
                     Origin: "http://localhost:3000",
                 },

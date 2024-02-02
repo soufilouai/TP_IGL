@@ -19,14 +19,14 @@ const Articlemodif = () => {
     
 
     
-    const [Titre,setTitre] = useState("article titre")
-    const [Summary,setSummary] = useState("Summary")
-    const [Keyword,setKeyword] = useState("key words")
+    const [Titre,setTitre] = useState("")
+    const [Summary,setSummary] = useState("")
+    const [Keyword,setKeyword] = useState("")
     const [Authors,setAuthors] = useState([{id:'1',name:'author number 1',institution:'institution number 1', email:'email number 1'},
                                           {id:'2',name:'author number 2',institution:'institution number 2', email:'email number 2'},])
     
     
-    const [Date,setDate]= useState("Date")
+    const [Date,setDate]= useState("")
    
     const handlechangetitle = (event) => {
         setTitre(event.target.value);
@@ -57,6 +57,7 @@ const Articlemodif = () => {
         const fetchArticle = async () => {
           try {
             const Articledata = await getArticleInfo(id,authtoken);
+            console.log("data :::::::", Articledata)
             setTitre(Articledata.title);
             setKeyword(Articledata.keywords);
             setSummary(Articledata.summary);

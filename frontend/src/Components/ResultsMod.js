@@ -10,8 +10,8 @@ import imageCorbeille from "../images/poubelle.png"
 
 
 export const Filtresmod = () => {
-    //const accessToken = localStorage.getItem('token');
-    const accessToken = '';
+    const accessToken = localStorage.getItem('token');
+    
     const location = useLocation();
     const articles = location.state ? location.state.articles : null;
     const keyword = location.state ? location.state.motsCles : null;
@@ -54,11 +54,12 @@ export const Filtresmod = () => {
 
     /**************************** Requetes pour ajout et suppression de favoris *******************/
     const sendFavoriteArticle = (articleId) => {
-        const apiUrl = `http://localhost:8000/api/articles/${articleId}/addFav`;
+        const apiUrl = `http://localhost:8000/api/articles/${articleId}/addFav/`;
 
         fetch(apiUrl, {
             method: "POST",
             headers: {
+                "Authorization": `Bearer ${accessToken}`,
                 "Content-Type": "application/json",
             },
         }).then(response => {
@@ -100,6 +101,7 @@ export const Filtresmod = () => {
             const response = await fetch(apiUrl, {
                 method: "POST",
                 headers: {
+                    "Authorization": `Bearer ${accessToken}`,
                     "Content-Type": "application/json",
                     Origin: "http://localhost:3000",
                 },
@@ -130,6 +132,7 @@ export const Filtresmod = () => {
         fetch(apiUrl, {
             method: 'DELETE',
             headers: {
+
                 "Authorization": `Bearer ${accessToken}`,
                 'Content-Type': 'application/json',
             },
