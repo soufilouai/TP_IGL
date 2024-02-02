@@ -37,13 +37,36 @@ class ArticleDetails(generics.RetrieveAPIView):
 class ArticlesModAPIView(generics.ListCreateAPIView):
     queryset = Article.objects.all()
     serializer_class = ArticleSerializer
-    permission_classes = [IsAuthenticated,CanModerateContentPermission]
+    permission_classes = [permissions.AllowAny]
+    # permission_classes = [IsAuthenticated,CanModerateContentPermission]
    
 
 class ArticleDetailsMod(generics.RetrieveUpdateDestroyAPIView):
     queryset = Article.objects.all()
     serializer_class = ArticleSerializer
-    permission_classes = [IsAuthenticated,CanModerateContentPermission]
+    permission_classes = [permissions.AllowAny]
+    # permission_classes = [IsAuthenticated,CanModerateContentPermission]
+    
+    
+    
+class ArticleAddFav(generics.RetrieveUpdateAPIView):
+    queryset = Article.objects.all()
+    serializer_class = ArticleSerializer
+    def post(self, request,*args, **kwargs):
+        article = self.get_object()
+        user = request.user  # Assuming you have authentication enabled
+
+        if user.is_authenticated:
+            # Add the article to the user's favorites
+            if (user.favorite_articles.filter(pk=article.pk).exists()):
+                user.favorite_articles.remove(article)
+                return Response({'detail': 'Article removed from favorites successfully.'}, status=status.HTTP_200_OK)
+            else:
+                user.favorite_articles.add(article)
+                return Response({'detail': 'Article added to favorites successfully.'}, status=status.HTTP_200_OK)
+        else:
+            return Response({'detail': 'Authentication required to add favorites.'}, status=status.HTTP_401_UNAUTHORIZED)
+    
 
 
 
@@ -176,31 +199,13 @@ class Favoris(APIView):
             return Response(json_data, status=status.HTTP_200_OK)
     
         
-        
-
-class Article_modification(APIView):
-    permission_classes = [permissions.AllowAny]
-    def get(self, request):
-        if request.method == 'GET':
-            id = request.id 
-            article = Article.objects.filter(id__in=id)
-            serializer = Article_modification(article)
-            serialized_data = serializer.data
-            json_data = json.dumps(serialized_data)
-
-            return Response(json_data, status=status.HTTP_200_OK)
-        
-    def put(self, request, pk):
-        instance = get_object_or_404(Article, pk=pk)
-        serializer = ArticleSerializer(instance, data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
            
 
 
 
+                
+            
         
+

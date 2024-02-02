@@ -10,6 +10,7 @@ import Library from './Pages/Library';
 import ResultatsAd from './Pages/Resultsadmin';
 import ResultatsMod from './Pages/Resultatsmod';
 import Articlemodif from './Pages/Articlemodif';
+import SearchAdmin from './Pages/SearchAdmin';
 
 
 function App() {
@@ -37,6 +38,7 @@ function App() {
           <Route exact path="/library/" component={Library} />
           <Route exact path="/Resultatsmod/" component={ResultatsMod} />
           <Route exact path="/Resultatsadmin/" component={ResultatsAd} />
+          <Route exact path="/SearchAdmin/" component={SearchAdmin} />
           {/* par defaut : home  */}
           <Route exact path="/">
             <Home />

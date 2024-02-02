@@ -86,45 +86,10 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
         related_name='user_permissions_set',  # Set a unique related_name
     )
     
-    # def save(self, *args, **kwargs):
-        
-    #     super().save(*args, **kwargs)
-        
-    #     moderator_group = Group.objects.get(name='Moderator')
-    #     permission= Permission.objects.get(codename='can_moderate_content')
-    #     id = (self.id)
-    #     print('le id', id)
-    #     user = CustomUser.objects.get(id=id)
-        
-    #     if user.is_moderator:
-    #         user.groups.add(moderator_group)
-    #         user.user_permissions.add(permission)
-    #     else:
-    #         user.groups.remove(moderator_group)
-    #         user.user_permissions.remove(permission)
-            
-        
-    
-        
-    #     moderator = user.groups.filter(name='Moderator').exists()
-    #     if moderator:
-    #         print('User :' , user.username ,user.id ,' is in the Moderator group')
-    #         print(user.groups.all())
-    #     else:
-    #         print('User '+ user.username +' is not in the Moderator group')
-    #         print(user.groups.all())
-        
-    #     super().save(*args,**kwargs)
-        
-
-
-          
-        
-
     
 
-    # def __str__(self):
-    #     return self.username
+    def __str__(self):
+        return self.username
     
     
     

@@ -56,6 +56,18 @@
     font-family: 'Source Sans Pro';
     width: 3%;
 }
+.buttonupload1{
+    position: absolute;
+    top: 3vh;
+    right: 35vw;
+    border: 0;
+    background: none;
+    cursor: pointer;
+    font-weight: bold;
+    font-family: 'Source Sans Pro';
+    width: 3%;
+    color: #F2F2F2;
+}
 
 .buttonmod {
     position: absolute;
@@ -69,6 +81,18 @@
     width: 3%;
 }
 
+.buttonmod1{
+    position: absolute;
+    top: 3vh;
+    right: 25vw;
+    border: 0;
+    background: none;
+    cursor: pointer;
+    font-weight: bold;
+    font-family: 'Source Sans Pro';
+    width: 3%;
+    color : #F2F2F2
+}
 .buttonacc {
     position: absolute;
     right: 5vw;
@@ -84,7 +108,7 @@
 .resultrecherche {
     margin-top: 1vh;
     width: 100vw;
-    height: 170vh;
+    height: 250vh;
     background-color: #F2F2F2;
     background-size: cover;
     background-repeat: no-repeat;
@@ -201,7 +225,7 @@
 }
 
 .pagination1 {
-    margin-top: 160vh;
+    margin-top: 240vh;
     margin-left: 45vw;
 }
 

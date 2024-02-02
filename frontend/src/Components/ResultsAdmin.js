@@ -48,7 +48,7 @@ export const Enteteadmin = () => {
             console.log("les articles dans search", articles);
             /**************************redirect to results page ******************/
             history.push({
-                pathname: "/Resultats/",
+                pathname: "/Resultatsadmin/",
                 state: {
                     articles: parsedData,
                     motsCles: motsCles

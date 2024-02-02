@@ -4,6 +4,7 @@ import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import Authcomponennts from "../../Components/AuthComponents";
 import { RegisterRequest, Loginrequest } from "../../Services/Api";
 import "../../Styles/Authpages/register.css";
+import { jwtDecode } from "jwt-decode";
 
 const Register = () => {
   const history = useHistory();
@@ -64,10 +65,26 @@ const Register = () => {
         localStorage.setItem("refresh token", JSON.stringify(data2.refresh));
 
         // Redirect to the search page
-        history.push({
-          pathname: "/Search",
-          state: { username: usernameinput, email: emailinput },
-        });
+        const decodedtoken= jwtDecode(data2.access);
+            
+          if(decodedtoken.is_admin){
+              history.push({
+                  pathname: "/SearchAdmin",
+                  state: { username: usernameinput },
+              });
+          }else{
+              if(decodedtoken.is_moderator){
+                  history.push({
+                  pathname: "/Search",
+                  state: { username: usernameinput },
+              });
+          }else{
+              history.push({
+              pathname: "/Search",
+              state: { username: usernameinput },
+              });
+          }
+      }
       } else {
         console.log("there's some err", data2);
         seterror(true);
