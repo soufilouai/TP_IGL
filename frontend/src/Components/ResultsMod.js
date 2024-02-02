@@ -112,7 +112,7 @@ export const Filtresmod = () => {
             const data = await response.json();
             const parsedData = JSON.parse(data);
             history.push({
-                pathname: "/Resultats",
+                pathname: "/Resultatsmod",
                 state: { articles: parsedData },
             });
         } catch (error) {
