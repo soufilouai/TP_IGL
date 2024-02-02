@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link, useHistory } from 'react-router-dom';
+
 /* styles */
 import "../CSS/Css1.css";
 import "../CSS/Css2.css";
@@ -13,6 +14,7 @@ import logo4 from "../images/trois.png"
 import blacklogo from "../images/logoblack.png"
 import frame1 from "../images/frame1.png"
 import { useLocation } from "react-router-dom";
+import { jwtDecode } from "jwt-decode";
 
 
 export const Recherche = () => {
