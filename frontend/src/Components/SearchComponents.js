@@ -13,6 +13,7 @@ import logo4 from "../images/trois.png"
 import blacklogo from "../images/logoblack.png"
 import frame1 from "../images/frame1.png"
 import { useLocation } from "react-router-dom";
+import { jwtDecode } from "jwt-decode";
 
 
 export const Recherche = () => {
@@ -95,13 +96,35 @@ export const Recherche = () => {
       setArticles(parsedData);
       console.log("les articles dans search", articles);
       /**************************redirect to results page ******************/
-      history.push({
-        pathname: "/Resultatsmod/",
-        state: {
-          articles: parsedData,
-          motsCles: motsCles
-        },
-      });
+      const token = localStorage.getItem("token");
+      const decodedtoken = jwtDecode(JSON.parse(token));
+      if(decodedtoken.is_admin){
+        history.push({
+          pathname: "/Resultatsadmin/",
+          state: {
+            articles: parsedData,
+            motsCles: motsCles
+          },
+        });
+      }else{
+        if(decodedtoken.is_moderator){
+          history.push({
+            pathname: "/Resultatsmod/",
+            state: {
+              articles: parsedData,
+              motsCles: motsCles
+            },
+          });
+        }else{
+          history.push({
+            pathname: "/Resultats/",
+            state: {
+              articles: parsedData,
+              motsCles: motsCles
+            },
+          });
+        }
+      }
       console.log("afficher les articles pour les resultats", articles);
     } catch (error) {
       console.error("Erreur lors de la récupération des données:", error);

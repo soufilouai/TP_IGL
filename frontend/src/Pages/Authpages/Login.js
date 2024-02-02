@@ -3,6 +3,7 @@ import { useHistory } from "react-router-dom";
 import Authcomponennts from "../../Components/AuthComponents";
 import { Loginrequest } from "../../Services/Api";
 import "../../Styles/Authpages/login.css";
+import { jwtDecode } from "jwt-decode";
 
 const Login = () => {
     const history = useHistory();
@@ -35,16 +36,30 @@ const Login = () => {
         console.log("ur username is : ", usernameinput + " and your password is :", passwordinput);
         const response = await Loginrequest(usernameinput, passwordinput);
         const data = await response.json();
-
+        
         if (response.status === 200) {
             localStorage.setItem("token", JSON.stringify(data.access));
             localStorage.setItem("refresh token", JSON.stringify(data.refresh));
-
+            const decodedtoken= jwtDecode(data.access);
             // Redirect to the search page
-            history.push({
+            if(decodedtoken.is_admin){
+                history.push({
+                    pathname: "/SearchAdmin",
+                    state: { username: usernameinput },
+                });
+            }else{
+                if(decodedtoken.is_moderator){
+                    history.push({
+                    pathname: "/Search",
+                    state: { username: usernameinput },
+                });
+            }else{
+                history.push({
                 pathname: "/Search",
                 state: { username: usernameinput },
-            });
+                });
+            }
+        }
         } else {
             console.log("there's some err", data);
             seterror(true);

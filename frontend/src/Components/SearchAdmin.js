@@ -96,7 +96,7 @@ export const Recherche = () => {
             console.log("les articles dans search", articles);
             /**************************redirect to results page ******************/
             history.push({
-                pathname: "/Resultatsmod/",
+                pathname: "/Resultatsadmin/",
                 state: {
                     articles: parsedData,
                     motsCles: motsCles
