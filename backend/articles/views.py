@@ -174,6 +174,7 @@ class Favoris(APIView):
             serialized_data = serializer.data
             json_data = json.dumps(serialized_data)
             return Response(json_data, status=status.HTTP_200_OK)
+    
         
         
 
@@ -202,22 +203,4 @@ class Article_modification(APIView):
 
 
 
-                
-            
         
-
-
-
-    
-"""def filter_results(request , ids):
-    if request.method == 'GET':
-        query = request.GET.get('query', '')
-        search_results_ids = search_Article(query)
-        
-        articles = Article.objects.filter(id__in=search_results_ids)
-        
-        
-        serializer = Article_results(articles, many=True)
-        serialized_data = serializer.data
-        
-        return Response({'results': serialized_data}, status=status.HTTP_200_OK)"""
