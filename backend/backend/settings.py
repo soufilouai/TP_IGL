@@ -161,7 +161,9 @@ DATABASES = {
         'USER': user,
         'PASSWORD': pwd,
         'HOST': '127.0.0.1',
-        'PORT': '3306'
+        'PORT': '3306',
+        'CHARSET' : 'utf8mb4' ,
+        'COLLATION' : 'utf8mb4_unicode_ci'
 
     }
 }

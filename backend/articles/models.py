@@ -1,6 +1,7 @@
 from django.db import models
 from ckeditor.fields import RichTextField
 import subprocess
+from datetime import datetime
 
 
 # Create your models here.
@@ -21,15 +22,17 @@ class Article(models.Model):
     author = models.ManyToManyField(Author, related_name='author', blank=True)
     keywords = models.CharField(max_length=255)
     content = models.TextField(
-        blank=True,
-        null=True,
         db_column='content',
         db_index=True,
         default=None,
         db_collation='utf8mb4_general_ci'  # Adjust to your needs
     )
     pdf = models.CharField(max_length=255)
-    date = models.DateTimeField()
+    date = models.DateTimeField(
+        default=datetime.now,
+        null=True,
+        blank=True
+    )
 
     def __str__(self):
         return self.title
