@@ -84,7 +84,7 @@
 .resultrecherche {
     margin-top: 1vh;
     width: 100vw;
-    height: 170vh;
+    height: 250vh;
     background-color: #F2F2F2;
     background-size: cover;
     background-repeat: no-repeat;
@@ -201,7 +201,7 @@
 }
 
 .pagination1 {
-    margin-top: 160vh;
+    margin-top: 240vh;
     margin-left: 45vw;
 }
 
