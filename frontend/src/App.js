@@ -9,6 +9,7 @@ import Search from './Pages/Search';
 import Library from './Pages/Library';
 import ResultatsAd from './Pages/Resultsadmin';
 import ResultatsMod from './Pages/Resultatsmod';
+import Articlemodif from './Pages/Articlemodif';
 
 
 function App() {
@@ -34,11 +35,15 @@ function App() {
           />
           <Route exact path="/Resultats/" component={Resultats} />
           <Route exact path="/library/" component={Library} />
-          <Route path="/Resultatsmod/" component={ResultatsMod} />
+          <Route exact path="/Resultatsmod/" component={ResultatsMod} />
+          <Route exact path="/Resultatsadmin/" component={ResultatsAd} />
           {/* par defaut : home  */}
           <Route exact path="/">
             <Home />
           </Route>
+          <Route exact path="/Article" component= {Articlemodif}>       
+          </Route>
+          <Route path="/Resultats/Articlemodif/:id" component={Articlemodif} />
         </Switch>
       </div>
     </Router>

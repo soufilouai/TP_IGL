@@ -16,12 +16,15 @@ export const Enteteadmin = () => {
 
     const [motsCles, setMotsCles] = useState("");
     const [articles, setArticles] = useState([]);
-    const history = useHistory();
     const [showContent, setShowContent] = useState(false);
+
     const location = useLocation();
     const usernameinput = location.state ? location.state.username : null;
     const email = location.state ? location.state.email : null;
 
+
+    /*********** getting articles du backend pour les resultats de la recherche ******************/
+    const history = useHistory();
     const handleRecherche = async () => {
         console.log("Mots-clés saisis:", motsCles);
         try {
@@ -43,15 +46,20 @@ export const Enteteadmin = () => {
             const parsedData = JSON.parse(data);
             setArticles(parsedData);
             console.log("les articles dans search", articles);
+            /**************************redirect to results page ******************/
             history.push({
-                pathname: "/Resultats",
-                state: { articles: parsedData },
+                pathname: "/Resultats/",
+                state: {
+                    articles: parsedData,
+                    motsCles: motsCles
+                },
             });
             console.log("afficher les articles pour les resultats", articles);
         } catch (error) {
             console.error("Erreur lors de la récupération des données:", error);
         }
     };
+
     return (
         <div className="resultatsPage">
             <header className='main_header'>
@@ -65,9 +73,7 @@ export const Enteteadmin = () => {
                             <input type="text" placeholder="Search.." className="header-search" value={motsCles} onChange={(e) => setMotsCles(e.target.value)} />
                         </div>
                     </div>
-                    <Link to='/upload'>
                     <button className="buttonupload" style={{ color: '#393731', whiteSpace: 'nowrap' }}>Upload article</button>
-                    </Link>
                     <button className="buttonmod" style={{ color: '#393731', whiteSpace: 'nowrap' }}>Moderator management </button>
                     <Link to='/library/'>
                         <button className='buttonlib' style={{ color: '#393731', whiteSpace: 'nowrap' }}>

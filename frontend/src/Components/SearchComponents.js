@@ -16,12 +16,12 @@ import { useLocation } from "react-router-dom";
 
 
 export const Recherche = () => {
-  const accessToken = localStorage.getItem('token');
+  const accessToken = localStorage.accessToken;
+
   const location = useLocation();
   const usernameinput = location.state ? location.state.username : null;
-  const history = useHistory();
-  /* use states */
   const email = location.state ? location.state.email : null;
+  /* use states */
   const [articles, setArticles] = useState([]);
   const [articles2, setArticles2] = useState([]);
   const [isClicked, setIsClicked] = useState(false);
@@ -31,30 +31,33 @@ export const Recherche = () => {
   const [showContent2, setShowContent2] = useState(false);
   const [favoriteArticles, setFavoriteArticles] = useState([])
 
+  /********** Pour les bouttons switch to other pages (affichage articles) ********************/
+  const [currentPage, setCurrentPage] = useState(1);
+  const articlesPerPage = 3; 
+  const indexOfLastArticle = currentPage * articlesPerPage;
+  const indexOfFirstArticle = indexOfLastArticle - articlesPerPage;
 
-
-
+  /*********************** ajouter lid  la liste des favoris when clicking sur l'etoile *************/
   const handleClick = (id) => {
     setFavoriteArticles((prevFavoriteArticles) => {
       if (prevFavoriteArticles.includes(id)) {
-        sendFavoriteArticleRemove(id);
+        sendFavoriteArticle(id);
         return prevFavoriteArticles.filter((id) => id !== id);
       } else {
-        sendFavoriteArticleAdd(id);
+        sendFavoriteArticle(id);
         return [...prevFavoriteArticles, id];
       }
     });
   };
-
-  const sendFavoriteArticleAdd = (articleId) => {
-    const apiUrl = "http://localhost:8000/api/articles/favoritadd/";
+  /**************************** Requetes pour ajout et suppression de favoris *******************/
+  const sendFavoriteArticle = (articleId) => {
+    const apiUrl = `http://localhost:8000/api/articles/${articleId}/addFav`;
 
     fetch(apiUrl, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ articleId: articleId }),
     }).then(response => {
       if (!response.ok) {
         console.log("Erreur lors de l'ajout aux favoris");
@@ -66,27 +69,10 @@ export const Recherche = () => {
     });
   };
 
-  const sendFavoriteArticleRemove = (articleId) => {
-    const apiUrl = "http://localhost:8000/api/articles/favoritremov/";
-    fetch(apiUrl, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ articleId: articleId }),
-    }).then(response => {
-      if (!response.ok) {
-        console.log("Erreur lors de la suppression dans favoris");
-      } else {
-        console.log("Article supprime de favoris avec succès !");
-      }
-    }).catch(error => {
-      console.error("Erreur lors de l'envoi des données au backend:", error);
-    });
-  };
+  /********************************************************************************************/
 
-
-  /* getting articles du backend pour les resultats de la recherche */
+  /*********** getting articles du backend pour les resultats de la recherche ******************/
+  const history = useHistory();
   const handleRecherche = async () => {
     console.log("Mots-clés saisis:", motsCles);
     try {
@@ -108,8 +94,9 @@ export const Recherche = () => {
       const parsedData = JSON.parse(data);
       setArticles(parsedData);
       console.log("les articles dans search", articles);
+      /**************************redirect to results page ******************/
       history.push({
-        pathname: "/Resultats",
+        pathname: "/Resultats/",
         state: {
           articles: parsedData,
           motsCles: motsCles
@@ -120,8 +107,7 @@ export const Recherche = () => {
       console.error("Erreur lors de la récupération des données:", error);
     }
   };
-
-
+  /*************************get the random articles pour la page discover ******************/
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -133,12 +119,10 @@ export const Recherche = () => {
             Origin: "http://localhost:3000",
           },
         });
-
         if (!response2.ok) {
           console.log("Erreur2");
           return;
         }
-
         const data2 = await response2.json();
         const parsedData2 = JSON.parse(data2);
         setArticles2(parsedData2);
@@ -150,6 +134,9 @@ export const Recherche = () => {
     fetchData();
   }, []);
 
+  const handlePagination = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  };
 
 
   return (
@@ -170,7 +157,7 @@ export const Recherche = () => {
               {/* afficher the username/email used when loging/signin up  */}
               <p className="username"> {usernameinput}</p>
               <p className="email"> {email} </p>
-              <Link to="/library">
+              <Link to='/library'>
                 <button className="Mylibrary" >
                   My library
                 </button>
@@ -220,7 +207,7 @@ export const Recherche = () => {
         <img src={disvoverImage} alt="Discover" className="discoverimage" />
         <div className="boxContainer">
           {/* affichage des articles recuperees du back  */}
-          {articles2.map((article) => (
+          {articles2.slice(indexOfFirstArticle, indexOfLastArticle).map((article) => (
             <div key={article.title} className="box2">
               <div className="boxInner">
                 <h2 className="boxtitre" style={{ overflowWrap: 'break-word' }}>
@@ -236,6 +223,13 @@ export const Recherche = () => {
                 </button>
               </div>
             </div>
+          ))}
+        </div>
+        <div className="pagination">
+          {Array.from({ length: Math.ceil(articles2.length / articlesPerPage) }, (_, index) => (
+            <button  className='button-pagination'key={index} onClick={() => handlePagination(index + 1)}>
+              🔘
+            </button>
           ))}
         </div>
       </div>

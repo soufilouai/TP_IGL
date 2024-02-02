@@ -3,18 +3,18 @@ import '../CSS/Css1.css';
 import '../CSS/Css2.css';
 import '../CSS/Css3.css'
 import { useState } from "react";
+import { Link, useHistory, useLocation } from 'react-router-dom';
 /* les logos des reseaux sociaux */
 import fbImage from "../images/facebook.png"
 import instaImage from "../images/instagram.png"
 import iconImage from "../images/logo.png"   /* le logo du bas de page */
 import blacklogo from "../images/logoblack.png"
 import iconsearch from "../images/searchicon.png"
-import { Link, useHistory, useLocation } from 'react-router-dom';
 import frame1 from "../images/frame1.png"
 
 
-export const BasDePage = () => {
 
+export const BasDePage = () => {
     return (
         <div className='basdepage'>
             <div className='extreme'>
@@ -65,6 +65,7 @@ export const ResultsHeader = () => {
     const usernameinput = location.state ? location.state.username : null;
     const email = location.state ? location.state.email : null;
 
+    /*******************get articles pour la recherche faite dans la page results ************************/
     const handleRecherche = async () => {
         console.log("Mots-clés saisis:", motsCles);
         try {
@@ -88,13 +89,18 @@ export const ResultsHeader = () => {
             console.log("les articles dans search", articles);
             history.push({
                 pathname: "/Resultats",
-                state: { articles: parsedData },
+                state: {
+                    articles: parsedData,
+                    motsCles: motsCles
+                },
             });
             console.log("afficher les articles pour les resultats", articles);
         } catch (error) {
             console.error("Erreur lors de la récupération des données:", error);
         }
     };
+
+
     return (
         <div className="resultatsPage">
             <header className='main_header'>

@@ -1,24 +1,22 @@
-import React from "react"
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import '../CSS/Css1.css';
 import '../CSS/Css2.css'
 import '../CSS/Css3.css'
-import resultsImage from "../images/results.png"
-import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
-
+import resultsImage from "../images/results.png";
 
 export const Filtres = () => {
-
     const accessToken = localStorage.getItem('token');
     const location = useLocation();
     const articles = location.state ? location.state.articles : null;
     const keyword = location.state ? location.state.motsCles : null;
-    console.log("les mots cles ya sidi rebbi :", keyword);
+    /* use states */
     const [inputValue, setInputValue] = useState('');
     const [articlesfiltres, setArticlesFiltres] = useState([]);
-    const [favoriteArticles, setFavoriteArticles] = useState([])
+    const [favoriteArticles, setFavoriteArticles] = useState([]);
     const [inputValue2, setInputValue2] = useState('');
+    /* c'est pour l'envoi des filtres au back */
     const [selectedFilters, setSelectedFilters] = useState({
         keyword: keyword,
         keywords: '',
@@ -28,28 +26,38 @@ export const Filtres = () => {
         end_date: '',
     });
 
+    const [currentPage, setCurrentPage] = useState(1);
+    const articlesPerPage = 3;
+    const indexOfLastArticle = currentPage * articlesPerPage;
+    const indexOfFirstArticle = indexOfLastArticle - articlesPerPage;
 
+    /*********************** ajouter lid  la liste des favoris when clicking sur l'etoile *************/
     const handleClick = (id) => {
         setFavoriteArticles((prevFavoriteArticles) => {
             if (prevFavoriteArticles.includes(id)) {
-                sendFavoriteArticleRemove(id);
+                sendFavoriteArticle(id);
                 return prevFavoriteArticles.filter((id) => id !== id);
             } else {
-                sendFavoriteArticleAdd(id);
+                sendFavoriteArticle(id);
                 return [...prevFavoriteArticles, id];
             }
         });
     };
 
-    const sendFavoriteArticleAdd = (articleId) => {
-        const apiUrl = "http://localhost:8000/api/articles/favoritadd/";
+    /*********************** ouvrir l'article dans un nouvel anglais ************************/
+    const openpdf = (link) => {
+        window.open(link, '_blank');
+    }
+
+    /**************************** Requetes pour ajout et suppression de favoris *******************/
+    const sendFavoriteArticle = (articleId) => {
+        const apiUrl = `http://localhost:8000/api/articles/${articleId}/addFav`;
 
         fetch(apiUrl, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
             },
-            body: JSON.stringify({ articleId: articleId }),
         }).then(response => {
             if (!response.ok) {
                 console.log("Erreur lors de l'ajout aux favoris");
@@ -60,61 +68,29 @@ export const Filtres = () => {
             console.error("Erreur lors de l'envoi des données au backend:", error);
         });
     };
-
-    const sendFavoriteArticleRemove = (articleId) => {
-        const apiUrl = "http://localhost:8000/api/articles/favoritremov/";
-        fetch(apiUrl, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({ articleId: articleId }),
-        }).then(response => {
-            if (!response.ok) {
-                console.log("Erreur lors de la suppression dans favoris");
-            } else {
-                console.log("Article supprime de favoris avec succès !");
-            }
-        }).catch(error => {
-            console.error("Erreur lors de l'envoi des données au backend:", error);
-        });
-    };
-
-
-
-
+    /********************************************************************************************/
+    /************rajouter les filtres a la liste qd les bouttons correspondants sont selectionnes*******/
     const handleButtonClick = (buttonId) => {
-        setSelectedFilters((prevFilters) => {
-            return {
-                ...prevFilters,
-                [buttonId]: prevFilters[buttonId] === keyword ? '' : keyword,
-            };
-        });
+        setSelectedFilters((prevFilters) => ({
+            ...prevFilters,
+            [buttonId]: prevFilters[buttonId] === keyword ? '' : keyword,
+        }));
     };
-    const openpdf = (link) => {
-        window.open(link, '_blank');
-    }
-    const history = useHistory();
-
     useEffect(() => {
-        console.log("Updated state:", selectedFilters);
-    }, [selectedFilters]);
-
-   useEffect(() => { 
         setSelectedFilters((prevFilters) => {
             return {
                 ...prevFilters,
                 //['keyword']: prevFilters['keyword'] === keyword ? '' : keyword,
                 ['start_date']: prevFilters['start_date'] === inputValue ? '' : inputValue,
                 ['end_date']: prevFilters['end_date'] === inputValue2 ? '' : inputValue2,
-                
+
             };
         });
     }, [inputValue, inputValue2]);
-
+    /*********************************************************************************************8*/
+    /************************************** Lancer le filtre **************************************/
+    const history = useHistory();
     const handleRequete = async () => {
-
-        console.log("Liste des filtres:", selectedFilters);
         try {
             const apiUrl = "http://localhost:8000/api/articles/filter/";
             const response = await fetch(apiUrl, {
@@ -125,29 +101,26 @@ export const Filtres = () => {
                 },
                 body: JSON.stringify({ keywords: selectedFilters }),
             });
-
             if (!response.ok) {
                 console.log("Erreur");
                 return;
             }
             const data = await response.json();
             const parsedData = JSON.parse(data);
-            setArticlesFiltres(parsedData);
-            console.log("les articles filtres", articlesfiltres);
             history.push({
                 pathname: "/Resultats",
                 state: { articles: parsedData },
             });
-            console.log("afficher les articles filtres", articles);
         } catch (error) {
             console.error("Erreur lors de la récupération des données:", error);
         }
-
+    };
+    const handlePagination = (pageNumber) => {
+        setCurrentPage(pageNumber);
     };
 
-    useEffect(() => {
-        console.log("Updated state2:", selectedFilters);
-    }, [selectedFilters]);
+
+
     return (
         <div>
             <div className="resultrecherche">
@@ -158,9 +131,9 @@ export const Filtres = () => {
                             <p className="filter-titre">Filter results </p>
                         </div>
                         <div className="sort">
-                            <button className="date-sort" onClick={() => handleButtonClick('keywords')}>• Sort by keywords</button>
-                            <button className="date-sort" onClick={() => handleButtonClick('author')}>•Sort by authors </button>
-                            <button className="date-sort" onClick={() => handleButtonClick('institution')}>•Sort by institutions</button>
+                            <button className="date-sort" style={{ color: selectedFilters['keywords'] !== '' ? '#B08B56' : '#393731' }} onClick={() => handleButtonClick('keywords')}>• Sort by keywords</button>
+                            <button className="date-sort" style={{ color: selectedFilters['author'] !== '' ? '#B08B56' : '#393731' }} onClick={() => handleButtonClick('author')}>•Sort by authors </button>
+                            <button className="date-sort" style={{ color: selectedFilters['institution'] !== '' ? '#B08B56' : '#393731' }} onClick={() => handleButtonClick('institution')}>•Sort by institutions</button>
                         </div>
                         <div className="horizontal-line"></div>
                         <p className="customrange" >Custom range...</p>
@@ -172,11 +145,11 @@ export const Filtres = () => {
                                 onChange={(e) => setInputValue2(e.target.value)}></input>
                         </div>
                         <div className="horizontal-line"></div>
-                        <button className="boutton-filter" onClick={handleRequete}> Filter</button>
+                        <button className="boutton-filter" onClick={() => handleRequete()}> Filter</button>
                     </div>
                     <div className="containerforboxes">
                         {/* affichage des articles recuperees du back  */}
-                        {articles.map((article) => (
+                        {articles.slice(indexOfFirstArticle, indexOfLastArticle).map((article) => (
                             <div key={article.title} className="box2">
                                 <div className="boxInner">
                                     <h2 className="boxtitre" style={{ overflowWrap: 'break-word' }}>
@@ -193,7 +166,13 @@ export const Filtres = () => {
                                 </div>
                             </div>
                         ))}
-
+                    </div>
+                    <div className="pagination1">
+                        {Array.from({ length: Math.ceil(articles.length / articlesPerPage) }, (_, index) => (
+                            <button className='button-pagination1' key={index} onClick={() => handlePagination(index + 1)}>
+                             🔘
+                            </button>
+                        ))}
                     </div>
                 </div>
             </div>
