@@ -46,7 +46,7 @@ export const Filtresmod = () => {
         });
     };
 
-    /*********************** ouvrir l'article dans un nouvel anglais ************************/
+    /*********************** ouvrir l'article dans un nouvel onglet ************************/
     const openpdf = (link) => {
         window.open(link, '_blank');
     }

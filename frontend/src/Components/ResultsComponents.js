@@ -44,7 +44,7 @@ export const Filtres = () => {
         });
     };
 
-    /*********************** ouvrir l'article dans un nouvel anglais ************************/
+    /*********************** ouvrir l'article dans un nouvel onglet ************************/
     const openpdf = (link) => {
         window.open(link, '_blank');
     }
@@ -115,6 +115,8 @@ export const Filtres = () => {
             console.error("Erreur lors de la récupération des données:", error);
         }
     };
+
+    /*********** les bouttons pour afficher plus d'articles***************************************/
     const handlePagination = (pageNumber) => {
         setCurrentPage(pageNumber);
     };

@@ -33,7 +33,7 @@ export const Recherche = () => {
 
   /********** Pour les bouttons switch to other pages (affichage articles) ********************/
   const [currentPage, setCurrentPage] = useState(1);
-  const articlesPerPage = 3; 
+  const articlesPerPage = 3;
   const indexOfLastArticle = currentPage * articlesPerPage;
   const indexOfFirstArticle = indexOfLastArticle - articlesPerPage;
 
@@ -133,7 +133,13 @@ export const Recherche = () => {
     };
     fetchData();
   }, []);
+  /*********************** ouvrir l'article dans un nouvel onglet ************************/
+  const openpdf = (link) => {
+    window.open(link, '_blank');
+  }
 
+
+  /*********** les bouttons pour afficher plus d'articles***************************************/
   const handlePagination = (pageNumber) => {
     setCurrentPage(pageNumber);
   };
@@ -217,7 +223,7 @@ export const Recherche = () => {
                 {article.author && (
                   <p className="Author">Author: {article.author.map((author) => `${author.name}`)}</p>
                 )}
-                <button className="Readmore">Read more</button>
+                <button className="Readmore" onClick={() => { openpdf(article.pdf) }}>Read more</button>
                 <button className="favori" style={{ color: favoriteArticles.includes(article.id) ? '#B08B56' : '#393731' }} onClick={() => handleClick(article.id)}>
                   ☆
                 </button>
@@ -227,7 +233,7 @@ export const Recherche = () => {
         </div>
         <div className="pagination">
           {Array.from({ length: Math.ceil(articles2.length / articlesPerPage) }, (_, index) => (
-            <button  className='button-pagination'key={index} onClick={() => handlePagination(index + 1)}>
+            <button className='button-pagination' key={index} onClick={() => handlePagination(index + 1)}>
               🔘
             </button>
           ))}

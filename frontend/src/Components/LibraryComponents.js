@@ -46,7 +46,7 @@ export const Filtres = () => {
         });
     };
 
-    /*********************** ouvrir l'article dans un nouvel anglais ************************/
+    /*********************** ouvrir l'article dans un nouvel onglet ************************/
     const openpdf = (link) => {
         window.open(link, '_blank');
     }
@@ -118,9 +118,11 @@ export const Filtres = () => {
         }
     };
 
+    /*********** les bouttons pour afficher plus d'articles***************************************/
     const handlePagination = (pageNumber) => {
         setCurrentPage(pageNumber);
     };
+
 
     return (
         <div>
@@ -160,7 +162,7 @@ export const Filtres = () => {
                                     {article.author && (
                                         <p className="Author">Author: {article.author.map((author) => `${author.name}`)}</p>
                                     )}
-                                    <button className="Readmore">Read more</button>
+                                    <button className="Readmore" onClick={() => { openpdf(article.pdf) }}>Read more</button>
                                     <button className="favori" >
                                     </button>
                                 </div>
