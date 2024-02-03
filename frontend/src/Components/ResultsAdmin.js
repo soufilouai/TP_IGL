@@ -17,6 +17,7 @@ export const Enteteadmin = () => {
     const [motsCles, setMotsCles] = useState("");
     const [articles, setArticles] = useState([]);
     const [showContent, setShowContent] = useState(false);
+    const accessToken = localStorage.getItem("token");
 
     const location = useLocation();
     const usernameinput = location.state ? location.state.username : null;
@@ -32,6 +33,7 @@ export const Enteteadmin = () => {
             const response = await fetch(apiUrl, {
                 method: "POST",
                 headers: {
+                    "Authorization": `Bearer ${accessToken}`,
                     "Content-Type": "application/json",
                     Origin: "http://localhost:3000",
                 },

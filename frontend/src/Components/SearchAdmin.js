@@ -16,8 +16,8 @@ import { useLocation } from "react-router-dom";
 
 
 export const Recherche = () => {
-    //const accessToken = localStorage.accessToken;
-    const accessToken = '';
+    const accessToken = localStorage.getItem("token");
+    // const accessToken = '';
     const location = useLocation();
     const usernameinput = location.state ? location.state.username : null;
     const email = location.state ? location.state.email : null;
@@ -51,7 +51,7 @@ export const Recherche = () => {
     };
     /**************************** Requetes pour ajout et suppression de favoris *******************/
     const sendFavoriteArticle = (articleId) => {
-        const apiUrl = `http://localhost:8000/api/articles/${articleId}/addFav`;
+        const apiUrl = `http://localhost:8000/api/articles/${articleId}/addFav/`;
 
         fetch(apiUrl, {
             method: "POST",
@@ -80,6 +80,7 @@ export const Recherche = () => {
             const response = await fetch(apiUrl, {
                 method: "POST",
                 headers: {
+                    "Authorization": `Bearer ${accessToken}`,
                     "Content-Type": "application/json",
                     Origin: "http://localhost:3000",
                 },

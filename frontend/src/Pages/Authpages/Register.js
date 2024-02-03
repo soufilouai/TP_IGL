@@ -61,8 +61,8 @@ const Register = () => {
       const data2 = await response2.json();
 
       if (response2.status === 200) {
-        localStorage.setItem("token", JSON.stringify(data2.access));
-        localStorage.setItem("refresh token", JSON.stringify(data2.refresh));
+        localStorage.setItem("token", data2.access);
+        localStorage.setItem("refresh token", data2.refresh);
 
         // Redirect to the search page
         const decodedtoken= jwtDecode(data2.access);

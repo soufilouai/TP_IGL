@@ -51,11 +51,12 @@ export const Filtres = () => {
 
     /**************************** Requetes pour ajout et suppression de favoris *******************/
     const sendFavoriteArticle = (articleId) => {
-        const apiUrl = `http://localhost:8000/api/articles/${articleId}/addFav`;
+        const apiUrl = `http://localhost:8000/api/articles/${articleId}/addFav/`;
 
         fetch(apiUrl, {
             method: "POST",
             headers: {
+                "Authorization": `Bearer ${accessToken}`,
                 "Content-Type": "application/json",
             },
         }).then(response => {
@@ -97,8 +98,9 @@ export const Filtres = () => {
             const response = await fetch(apiUrl, {
                 method: "POST",
                 headers: {
+                    "Authorization": `Bearer ${accessToken}`,
                     "Content-Type": "application/json",
-                    Origin: "http://localhost:3000",
+                    // Origin: "http://localhost:3000",
                 },
                 body: JSON.stringify({ keywords: selectedFilters }),
             });

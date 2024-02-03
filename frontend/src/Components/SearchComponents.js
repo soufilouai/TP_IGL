@@ -17,8 +17,8 @@ import { jwtDecode } from "jwt-decode";
 
 
 export const Recherche = () => {
-  //const accessToken = localStorage.accessToken;
-  const accessToken = '';
+  const accessToken = localStorage.getItem("token");
+  // const accessToken = '';
   const location = useLocation();
   const usernameinput = location.state ? location.state.username : null;
   const email = location.state ? location.state.email : null;
@@ -52,11 +52,12 @@ export const Recherche = () => {
   };
   /**************************** Requetes pour ajout et suppression de favoris *******************/
   const sendFavoriteArticle = (articleId) => {
-    const apiUrl = `http://localhost:8000/api/articles/${articleId}/addFav`;
+    const apiUrl = `http://localhost:8000/api/articles/${articleId}/addFav/`;
 
     fetch(apiUrl, {
       method: "POST",
       headers: {
+        "Authorization": `Bearer ${accessToken}`,
         "Content-Type": "application/json",
       },
     }).then(response => {
@@ -97,7 +98,7 @@ export const Recherche = () => {
       console.log("les articles dans search", articles);
       /**************************redirect to results page ******************/
       const token = localStorage.getItem("token");
-      const decodedtoken = jwtDecode(JSON.parse(token));
+      const decodedtoken = jwtDecode(token);
       if(decodedtoken.is_admin){
         history.push({
           pathname: "/Resultatsadmin/",
@@ -138,6 +139,7 @@ export const Recherche = () => {
         const response2 = await fetch(apiUrl2, {
           method: "GET",
           headers: {
+
             "Content-Type": "application/json",
             Origin: "http://localhost:3000",
           },

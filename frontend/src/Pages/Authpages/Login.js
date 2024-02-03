@@ -38,8 +38,13 @@ const Login = () => {
         const data = await response.json();
         
         if (response.status === 200) {
-            localStorage.setItem("token", JSON.stringify(data.access));
-            localStorage.setItem("refresh token", JSON.stringify(data.refresh));
+            localStorage.setItem("token",data.access);
+            localStorage.setItem("refresh token", data.refresh);
+
+
+            console.log('le token')
+            console.log(localStorage.getItem('token'))
+
             const decodedtoken= jwtDecode(data.access);
             // Redirect to the search page
             if(decodedtoken.is_admin){

@@ -1,4 +1,7 @@
 
+const accessToken = localStorage.getItem("token");
+
+
 export const RegisterRequest = async (username,email,password) => {
     let response  = fetch('http://127.0.0.1:8000/api/users/register/', {
         method:'POST',
@@ -27,19 +30,21 @@ export const Loginrequest = async (username,password) => {
 
 };
 
-export const getArticleInfo = async (articleId, authToken) => {
+export const getArticleInfo = async (articleId,authToken) => {
     try {
-      const response = await fetch(`http://127.0.0.1:8000/api/articles/${articleId}`, {
+      const response = await fetch(`http://127.0.0.1:8000/api/articles/${articleId}/`, {
         method: 'GET',
         headers: {
+            "Authorization": `Bearer ${authToken}`,
           'Content-Type': 'application/json',
         //   Origin: "http://localhost:3000",
-        //   'Authorization': `Bearer ${authToken}` // Include your authentication token here
+          
         },
-        mode : 'no-cors',
+       
       }
       
       );
+      
       
   
       if (!response.ok) {
@@ -58,9 +63,10 @@ export const getArticleInfo = async (articleId, authToken) => {
 
 export const modifyArticle = async(articleId,updatedArticle) =>{
     try {
-        const response = await fetch(`http://127.0.0.1:8000/api/articles/mod/${articleId}`, {
+        const response = await fetch(`http://127.0.0.1:8000/api/articles/mod/${articleId}/`, {
             method: 'PUT',
             headers: {
+                "Authorization": `Bearer ${accessToken}`,
                 'Content-Type': 'application/json',
                 
             },
