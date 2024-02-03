@@ -9,7 +9,7 @@ from django.http import JsonResponse
 import jsonlint 
 import openai 
 from .credentials import API_KEY
-
+import string
 
 
 
@@ -33,7 +33,7 @@ def extractpdf(path):
     # Extract text from PDF
     text, page0 = extract_text_from_pdf(path)
 
-    prompt=f"extract these sections as json '{{'title', 'authors'('name' ,'affiliation' , 'email'), 'keywords', ' date': 'yyyy-mm-dd' which is the event date or available online date(let it empty if there isn t or isnt yyyy-mm-dd), 'asbtract'}}' as they are from: {page0} don't add the introduction all in utf8 respect the quotations and that the strings are terminated"
+    prompt=f"extract these sections as json '{{'title', 'authors'('name' ,'affiliation' , 'email'), 'keywords', ' date': 'yyyy-mm-dd' which is the date of publish , 'asbtract'}}' as they are from: {page0} don't add the introduction all in utf8 respect the quotations and that the strings are terminated"
     response = openai.ChatCompletion.create(
     model="gpt-3.5-turbo",
     messages=[{'role':'user' , 'content': prompt }]
@@ -58,12 +58,12 @@ def extract_text_from_pdf(pdf_path):
     text = ""
     page0 = ""
 
-    with open(pdf_path, 'rb') as pdf_file:
-        pdf_reader = PyPDF2.PdfReader(pdf_file)
-        for i in range(len(pdf_reader.pages)):
-            text += pdf_reader.pages[i].extract_text()
-            if i == 0:
-                page0 = pdf_reader.pages[0].extract_text()
+    pdf_reader = PyPDF2.PdfReader(pdf_path)
+    for i in range(len(pdf_reader.pages)):
+                    text += pdf_reader.pages[i].extract_text()
+                    if i == 0:
+                        page0 = pdf_reader.pages[0].extract_text()
+               
 
 
     return text, page0
@@ -84,18 +84,21 @@ def extract_text_from_pdf(pdf_path):
 
 def extract_sections(text):
     
-    content = clean_json_string(text)
+    content = copy_printable_chars(clean_json_string(text))
 
     references_pattern = re.compile(r'References.*', re.IGNORECASE | re.DOTALL)
     references_text = references_pattern.findall(text)
 
     return content, references_text
 
-# def clean_json_string(json_str):
+def clean_json_string(json_str):
 #     # Replace special double quotation marks with standard ones
-#     cleaned_json_str = "".join(char for char in json_str if char.isprintable())
-#     return cleaned_json_str
+     cleaned_json_str = "".join(char for char in json_str if char.isprintable())
+     return cleaned_json_str
     
 
-    
+def copy_printable_chars(input_str):
+    printable_chars = set(string.printable)
+    result_str = ''.join(char for char in input_str if char in printable_chars)
+    return result_str  
 

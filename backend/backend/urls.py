@@ -29,7 +29,7 @@ from articles.article_utils import *
 
 def home(request) : 
     
-    """new_article = Article(
+    new_article = Article(
     title='delete',
     summary='rien de special',
     keywords='keyword1, keyword2',
@@ -38,7 +38,7 @@ def home(request) :
     date='2023-01-01T12:00:00Z'  # Adjust the date format as needed
     )  
     new_article.save()
-    new_article.delete"""
+    new_article.delete
 
     #new_article.title = "gorgeous"  
     #new_article.save()

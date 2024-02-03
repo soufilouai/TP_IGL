@@ -13,9 +13,10 @@ import logo4 from "../images/trois.png"
 import blacklogo from "../images/logoblack.png"
 import frame1 from "../images/frame1.png"
 import { useLocation } from "react-router-dom";
-
+import { jwtDecode } from 'jwt-decode';
 
 export const Recherche = () => {
+  const ACCESSTOKEN = process.env.ACCESSTOKEN
   //const accessToken = localStorage.accessToken;
   const accessToken = '';
   const location = useLocation();
@@ -166,6 +167,11 @@ export const Recherche = () => {
     setCurrentPage(pageNumber);
   };
 
+  
+
+      
+
+
 
   return (
     <div className="all">
@@ -245,7 +251,7 @@ export const Recherche = () => {
                 {article.author && (
                   <p className="Author">Author: {article.author.map((author) => `${author.name}`)}</p>
                 )}
-                <button className="Readmore" onClick={() => { openpdf(article.pdf) }}>Read more</button>
+                <button className="Readmore" onClick={() => { console.log(article.pdf);openpdf(`uploadedarticles/${article.pdf}`) }}>Read more</button>
                 <button className="favori" style={{ color: favoriteArticles.includes(article.id) ? '#B08B56' : '#393731' }} onClick={() => handleClick(article.id)}>
                   ☆
                 </button>

@@ -1,4 +1,3 @@
-import React from "react"
 import { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import '../CSS/Css1.css';
@@ -10,7 +9,8 @@ import blacklogo from "../images/logoblack.png"
 import frame1 from "../images/frame1.png"
 import { Link } from "react-router-dom/cjs/react-router-dom.min";
 import iconsearch from "../images/searchicon.png"
-
+import axios from 'axios'
+import React, { useRef } from 'react';
 
 export const Enteteadmin = () => {
 
@@ -18,9 +18,68 @@ export const Enteteadmin = () => {
     const [articles, setArticles] = useState([]);
     const [showContent, setShowContent] = useState(false);
 
+    const [file , setFile] = useState(null);
+    const [progress , setProgress] = useState( {started : false , pc : 0})
+    const [msg , setMsg] = useState()
+
+    // function handleupload() {
+    //     if (!file) {
+    //         console.log("No file selected");
+    //         return
+    //     }
+    //     const pdf_path = new FormData();
+    //     pdf_path.append('file',file);
+
+    //     )
+
+
+    // }
+
     const location = useLocation();
     const usernameinput = location.state ? location.state.username : null;
     const email = location.state ? location.state.email : null;
+
+
+        const fileInputRef = useRef(null);
+
+        const handleUploadClick = () => {
+            // Trigger click on the file input
+            if (fileInputRef.current) {
+              fileInputRef.current.click();
+            }
+          };
+          
+          const handleFileChange = async (event) => {
+            // Handle file selection here
+            const selectedFile = event.target.files[0];
+            
+            if (selectedFile) {
+              // Create a FormData object to send the file
+              const formData = new FormData();
+              formData.append('pdf_file', selectedFile);
+          
+              // Perform any additional actions with the selected file
+              const apiUrl = "http://localhost:8000/api/articles/upload/";
+              try {
+                const response = await fetch(apiUrl, {
+                  method: "POST",
+                  body: formData,
+                  headers: {
+                    // No need to set Origin header for CORS, the browser will handle it
+                  },
+                });
+          
+                if (response.ok) {
+                  const data = await response.json();
+                  console.log("File uploaded successfully:", data);
+                } else {
+                  console.error("File upload failed. Server returned:", response.status, response.statusText);
+                }
+              } catch (error) {
+                console.error("Error uploading file:", error);
+              }
+            }
+          };
 
 
     /*********** getting articles du backend pour les resultats de la recherche ******************/
@@ -73,7 +132,10 @@ export const Enteteadmin = () => {
                             <input type="text" placeholder="Search.." className="header-search" value={motsCles} onChange={(e) => setMotsCles(e.target.value)} />
                         </div>
                     </div>
-                    <button className="buttonupload" style={{ color: '#393731', whiteSpace: 'nowrap' }}>Upload article</button>
+                    <div>
+                    <button  className="buttonupload" style={{ color: '#393731', whiteSpace: 'nowrap' }} onClick={handleUploadClick}>Upload article</button>
+                    <input type="file" ref={fileInputRef} style={{ display: 'none' }} onChange={handleFileChange} accept=".pdf"/>
+                    </div>
                     <button className="buttonmod" style={{ color: '#393731', whiteSpace: 'nowrap' }}>Moderator management </button>
                     <Link to='/library/'>
                         <button className='buttonlib' style={{ color: '#393731', whiteSpace: 'nowrap' }}>

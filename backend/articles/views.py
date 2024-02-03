@@ -23,8 +23,6 @@ from datetime import datetime
 from dateutil.parser import parse
 
 
-
-
 from .article_utils import *
 import json 
 
@@ -134,7 +132,6 @@ class Filter_results(APIView):
             data = request.data
             k= data.get('keywords')
             keywords = k.get('keywords')
-            print("these are keywords",keywords)
             author = k.get('author')
             institution = k.get('institution')
             start_date = k.get('start_date')
@@ -213,18 +210,8 @@ class Article_modification(APIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-           
-
-
-
-                
-            
-        
-
-
-
     
-"""def filter_results(request , ids):
+def filter_results(request , ids):
     if request.method == 'GET':
         query = request.GET.get('query', '')
         search_results_ids = search_Article(query)
@@ -235,74 +222,82 @@ class Article_modification(APIView):
         serializer = Article_results(articles, many=True)
         serialized_data = serializer.data
         
-        return Response({'results': serialized_data}, status=status.HTTP_200_OK)"""
+        return Response({'results': serialized_data}, status=status.HTTP_200_OK)
     permission_classes = [IsAuthenticated]
 
     
 def extract(pdf_path):
     return extractpdf(pdf_path)   
 
-def upload_to_dropbox(pdf_path):
 
 
-    # Initialize Dropbox client
-    dbx = dropbox.Dropbox(ACCESS_TOKEN)
+def upload_to_folder(pdf_file):
+
+    current_directory = os.path.dirname(os.path.abspath(__file__))
+    
+    
 
     # Generate a unique filename using the current timestamp
     timestamp = int(time.time())
     filename = f'PDF_{timestamp}.pdf'
+    path = os.path.join(current_directory ,'..', '..','frontend' ,'uploadedarticles', filename)
+    with open(path, 'wb') as destination:
+            for chunk in pdf_file.chunks():
+                destination.write(chunk)
 
-    # Upload the file with the generated filename
-    # with open(pdf_path, 'rb') as f:
-    #     dbx.files_upload(f.read(), '/' + filename)
+
+    
 
     return filename
 
 
 
-def upload(request):
+class Uploadarticle(APIView):
+
+        permission_classes = [permissions.AllowAny]
 
 
-    if request.method=='POST':
-        current_directory = os.path.dirname(os.path.abspath(__file__))
-     
-        pdf_path = os.path.join(current_directory ,'..',  'EchantillonsArticles', f'Article_0{i}.pdf' if i<10 else f'Article_{i}.pdf')
-        #pdf_path = request.GET.get('pdf_path', None)
+        def post(self, request, *args, **kwargs):
+              if request.method == 'POST':
+                pdf_file = request.FILES.get('pdf_file')
+                #pdf_path = request.GET.get('pdf_path', None)
 
-        if pdf_path:
-            filename=upload_to_dropbox(pdf_path=pdf_path)
-   
-            json_data = extract(pdf_path)
-            if json_data.get('date')!='' and len(json_data.get('date'))>9:
-             try:
-                article  = Article.objects.create(title=json_data["title"],summary=json_data["abstract"],keywords=json_data["keywords"],pdf=filename,date=json_data["date"],content=json_data["Introduction"])
-             except:
-                article = Article.objects.create(title=json_data["title"],summary=json_data["abstract"],keywords=json_data["keywords"],pdf=filename,date=json_data["date"])
-            
-            else:
-                try:
-                    print('sewy')
-                    article  = Article.objects.create(title=json_data["title"],summary=json_data["abstract"],keywords=json_data["keywords"],pdf=filename,content=json_data["Introduction"])
-                except :
-                     article  = Article.objects.create(title=json_data["title"],summary=json_data["abstract"],keywords=json_data["keywords"],pdf=filename)
+                if pdf_file:
+                         # Process the uploaded file here
+                    filename = upload_to_folder(pdf_file)
+                    
+        
+                    json_data = extract(pdf_file)
+                    print(json_data.get('date'))
+                    if json_data.get('date')!='' :
 
 
-
-            article.add_authors(json_data["authors"])
-            authors_data = json_data.get("authors", [])
-
-            for author_info in json_data.get("authors", []):
-                author, created = Author.objects.get_or_create(
-                name=author_info['name'],
-                institution=author_info['affiliation'],
-                email=author_info['email']
-     )
-                author.save()
+                        article  = Article.objects.create(title=json_data["title"],summary=json_data["abstract"],keywords=json_data["keywords"],pdf=filename,date=json_data["date"],content=json_data["Introduction"])
+         
+                    
+                    else:
+    
+                        article  = Article.objects.create(title=json_data["title"],summary=json_data["abstract"],keywords=json_data["keywords"],pdf=filename,content=json_data["Introduction"])
+                        
+                        
 
 
-            article.save()
-        else:
-          return HttpResponse("PDF path not provided in the request.")
+
+                    article.add_authors(json_data["authors"])
+                    authors_data = json_data.get("authors", [])
+
+                    for author_info in json_data.get("authors", []):
+                        author, created = Author.objects.get_or_create(
+                        name=author_info['name'],
+                        institution=author_info['affiliation'],
+                        email=author_info['email']
+            )
+                        author.save()
+
+
+                    article.save()
+                else:
+                 return HttpResponse("PDF path not provided in the request.")
         
         
 
@@ -313,7 +308,7 @@ def upload(request):
         # Response = extractpdf(path)
     
     
-    return HttpResponse()
+              return HttpResponse()
 
 
 

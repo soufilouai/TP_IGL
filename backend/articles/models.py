@@ -27,11 +27,9 @@ class Article(models.Model):
     summary = models.TextField()
     author = models.ManyToManyField(Author, related_name='author', blank=True)
     keywords = models.CharField(max_length=255)
-    content = models.TextField(
+    content = RichTextField(
         db_column='content',
-        db_index=True,
         default=None,
-        db_collation='utf8mb4_general_ci'  # Adjust to your needs
     )
     pdf = models.CharField(max_length=255)
     date = models.DateField(
