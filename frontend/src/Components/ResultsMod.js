@@ -157,29 +157,7 @@ export const Filtresmod = () => {
     };
 
 
-    const getarticle = (path) => {
-        const dropboxUrl = 'https://www.dropbox.com/home/Apps/ManagePdfs/';
-        const accessToken = ACCESSTOKEN;
 
-        axios({
-            method: 'get',
-            url: dropboxUrl,
-            headers: {
-              Authorization: `Bearer ${accessToken}`,
-              'Content-Type': 'application/octet-stream',
-            },
-            responseType: 'blob',
-          })
-            .then((response) => {
-              // Convert the blob to a data URL
-              const dataUrl = URL.createObjectURL(new Blob([response.data], { type: 'application/pdf' }));
-              return(dataUrl)
-            })
-            .catch((error) => {
-              console.error('Error fetching PDF from Dropbox:', error);
-            });
-
-    }
 
 
     return (
@@ -220,7 +198,7 @@ export const Filtresmod = () => {
                                     {article.author && (
                                         <p className="Author">Author: {article.author.map((author) => `${author.name}`)}</p>
                                     )}
-                                    <button className="Readmore" onClick={() => { openpdf(getarticle(article.pdf)) }}>Read more</button>
+                                    <button className="Readmore" onClick={() => { openpdf(article.pdf) }}>Read more</button>
                                     <button className="favori" >
                                     </button>
                                     <button className="edit" onClick={() => handleEditClick(article.id)}>Edit </button>
