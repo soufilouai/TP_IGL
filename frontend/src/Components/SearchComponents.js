@@ -169,6 +169,11 @@ export const Recherche = () => {
     setCurrentPage(pageNumber);
   };
 
+  
+
+      
+
+
 
   return (
     <div className="all">
@@ -248,7 +253,7 @@ export const Recherche = () => {
                 {article.author && (
                   <p className="Author">Author: {article.author.map((author) => `${author.name}`)}</p>
                 )}
-                <button className="Readmore" onClick={() => { openpdf(article.pdf) }}>Read more</button>
+                <button className="Readmore" onClick={() => { console.log(article.pdf);openpdf(`uploadedarticles/${article.pdf}`) }}>Read more</button>
                 <button className="favori" style={{ color: favoriteArticles.includes(article.id) ? '#B08B56' : '#393731' }} onClick={() => handleClick(article.id)}>
                   ☆
                 </button>

@@ -2,6 +2,8 @@
 from rest_framework import generics
 from .models import Article
 from .serializers import *
+from .models import Article , Author
+from .serializers import ArticleSerializer
 from rest_framework.decorators import APIView
 from django.http import JsonResponse
 from rest_framework.response import Response
@@ -9,6 +11,16 @@ from django.shortcuts import get_object_or_404
 from django.contrib.auth.models import Permission , Group
 from rest_framework import status,permissions
 from rest_framework.permissions import IsAuthenticated
+from .utils.extract_pdf import extractpdf
+from django.http import HttpResponse
+import os
+import dropbox 
+import json
+import ast
+import time 
+from .utils.credentials import ACCESS_TOKEN
+from datetime import datetime
+from dateutil.parser import parse
 
 
 from .article_utils import *
@@ -21,6 +33,7 @@ class CanModerateContentPermission(permissions.BasePermission):
         
        
         return request.user.is_moderator
+
 class ArticlesAPIView(generics.ListCreateAPIView):
     queryset = Article.objects.all()
     serializer_class = ArticleSerializer
@@ -146,7 +159,6 @@ class Filter_results(APIView):
             data = request.data
             k= data.get('keywords')
             keywords = k.get('keywords')
-            print("these are keywords",keywords)
             author = k.get('author')
             institution = k.get('institution')
             start_date = k.get('start_date')
@@ -204,6 +216,26 @@ class Favoris(APIView):
         
         
 
+class Article_modification(APIView):
+    permission_classes = [permissions.AllowAny]
+    def get(self, request):
+        if request.method == 'GET':
+            id = request.id 
+            article = Article.objects.filter(id__in=id)
+            serializer = Article_modification(article)
+            serialized_data = serializer.data
+            json_data = json.dumps(serialized_data)
+
+            return Response(json_data, status=status.HTTP_200_OK)
+        
+    def put(self, request, pk):
+        instance = get_object_or_404(Article, pk=pk)
+        serializer = ArticleSerializer(instance, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
 
            
 
@@ -211,5 +243,107 @@ class Favoris(APIView):
 
                 
             
+def extract(pdf_path):
+    return extractpdf(pdf_path)   
+
+
+
+def upload_to_folder(pdf_file):
+
+    current_directory = os.path.dirname(os.path.abspath(__file__))
+    
+    
+
+    # Generate a unique filename using the current timestamp
+    timestamp = int(time.time())
+    filename = f'PDF_{timestamp}.pdf'
+    path = os.path.join(current_directory ,'..', '..','frontend' ,'uploadedarticles', filename)
+    with open(path, 'wb') as destination:
+            for chunk in pdf_file.chunks():
+                destination.write(chunk)
+
+
+    
+
+    return filename
+
+
+
+class Uploadarticle(APIView):
+
+        permission_classes = [permissions.AllowAny]
+
+
+        def post(self, request, *args, **kwargs):
+              if request.method == 'POST':
+                pdf_file = request.FILES.get('pdf_file')
+                #pdf_path = request.GET.get('pdf_path', None)
+
+                if pdf_file:
+                         # Process the uploaded file here
+                    filename = upload_to_folder(pdf_file)
+                    
+        
+                    json_data = extract(pdf_file)
+                    print(json_data.get('date'))
+                    if json_data.get('date')!='' :
+
+
+                        article  = Article.objects.create(title=json_data["title"],summary=json_data["abstract"],keywords=json_data["keywords"],pdf=filename,date=json_data["date"],content=json_data["Introduction"])
+         
+                    
+                    else:
+    
+                        article  = Article.objects.create(title=json_data["title"],summary=json_data["abstract"],keywords=json_data["keywords"],pdf=filename,content=json_data["Introduction"])
+                        
+                        
+
+
+
+                    article.add_authors(json_data["authors"])
+                    authors_data = json_data.get("authors", [])
+
+                    for author_info in json_data.get("authors", []):
+                        author, created = Author.objects.get_or_create(
+                        name=author_info['name'],
+                        institution=author_info['affiliation'],
+                        email=author_info['email']
+            )
+                        author.save()
+
+
+                    article.save()
+                else:
+                 return HttpResponse("PDF path not provided in the request.")
+        
         
 
+        
+    
+        # current_directory = os.path.dirname(os.path.abspath(__file__))
+        # path = os.path.join(current_directory ,'..',  'drive-download-20231228T162223Z-001', f'Article_03.pdf')
+        # Response = extractpdf(path)
+    
+    
+              return HttpResponse()
+
+
+
+
+        
+
+
+
+    
+"""def filter_results(request , ids):
+    if request.method == 'GET':
+        query = request.GET.get('query', '')
+        search_results_ids = search_Article(query)
+        
+        articles = Article.objects.filter(id__in=search_results_ids)
+        
+        
+        serializer = Article_results(articles, many=True)
+        serialized_data = serializer.data
+        
+        return Response({'results': serialized_data}, status=status.HTTP_200_OK)"""

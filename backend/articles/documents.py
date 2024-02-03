@@ -43,12 +43,13 @@ class ArticleDocument(Document):
     ) 
 
   content  = fields.TextField(
-        fields={
-            'raw': {
-                'type': 'keyword',
+        # fields={
+        #     'raw': {
+        #         'type': 'keyword',
                 
-            }
-        },
+        #     }
+        # },
+         analyzer='english',  # Use an appropriate analyzer for your language
     )
   
   date = fields.DateField()

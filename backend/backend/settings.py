@@ -101,10 +101,15 @@ CORS_ORIGIN_ALLOW_ALL = True
 CORS_ALLOW_CREDENTIALS = True
 
 CORS_ALLOW_HEADERS = [
-    'access-control-allow-headers',
-    'Access-Control-Allow-Origin',
-    'authorization'
-    'Content-Type',
+    'accept',
+    'accept-encoding',
+    'authorization',
+    'content-type',
+    'dnt',
+    'origin',
+    'user-agent',
+    'x-csrftoken',
+    'x-requested-with',
     'Authorization',
 ]
 
@@ -213,7 +218,9 @@ DATABASES = {
         'USER': user,
         'PASSWORD': pwd,
         'HOST': '127.0.0.1',
-        'PORT': '3306'
+        'PORT': '3306',
+        'CHARSET' : 'utf8mb4' ,
+        'COLLATION' : 'utf8mb4_unicode_ci'
 
     }
 }
