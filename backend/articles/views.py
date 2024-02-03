@@ -74,11 +74,11 @@ class ArticleAddFav(generics.RetrieveUpdateAPIView):
             # Add the article to the user's favorites
             if (user.favorite_articles.filter(pk=article.pk).exists()):
                 user.favorite_articles.remove(article)
-                print('article romoved')
+               
                 return Response({'detail': 'Article removed from favorites successfully.'}, status=status.HTTP_200_OK)
             else:
                 user.favorite_articles.add(article)
-                print('article romoved')
+                
                 return Response({'detail': 'Article added to favorites successfully.'}, status=status.HTTP_200_OK)
                 
         else:
@@ -109,35 +109,9 @@ class SearchResults(APIView):
             serialized_data = serializer.data
             json_data = json.dumps(serialized_data)
 
-            #print(json_data)
-            #return Response({'results': serialized_data}, status=status.HTTP_200_OK)
             return Response(json_data, status=status.HTTP_200_OK)
 
-            # print(serialized_data)
-            # response_data = []
-            # for article in articles:
-            #     article_data = {
-            #         "title": article.title,
-            #         "summary": article.summary,
-            #         "keywords": article.keywords,
-            #         "content": article.content,
-            #         "pdf": article.pdf,
-            #         "date": article.date.strftime('%Y-%m-%d'),  # Format the date as needed
-            #     }
-                
-            #     # If there are multiple authors, include them in the response
-            #     if article.author.exists():
-            #         authors_data = []
-            #         for author in article.author.all():
-            #             author_data = {
-            #                 "name": author.name,
-            #                 "institution": author.institution,
-            #             }
-            #             authors_data.append(author_data)
-                    
-            #         article_data["author"] = authors_data
-
-            #     response_data.append(article_data)
+            
         
     def get(self, request):
         if request.method == 'GET':
@@ -334,16 +308,3 @@ class Uploadarticle(APIView):
 
 
 
-    
-"""def filter_results(request , ids):
-    if request.method == 'GET':
-        query = request.GET.get('query', '')
-        search_results_ids = search_Article(query)
-        
-        articles = Article.objects.filter(id__in=search_results_ids)
-        
-        
-        serializer = Article_results(articles, many=True)
-        serialized_data = serializer.data
-        
-        return Response({'results': serialized_data}, status=status.HTTP_200_OK)"""

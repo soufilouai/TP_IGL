@@ -10,16 +10,9 @@ Discover_num = 10
 
 def search_Article(q) : 
    
-    #query = MultiMatch(query='einstein', fields=['title' , 'keywords', 'content' , 'authors.full_name' ] )
     
     s = Search(using='default')
    
-    #s = s.query(query)
-    
-
-    #s = Search(using='default', index='article_index')
-    
-    #s = Search(index='article_index').query('match', authors_fullname="einstein")
 
     s = s.query('bool', should=[
         {'nested': {
@@ -44,14 +37,8 @@ def search_Article(q) :
     
     
     response = s.execute()
-    print(f"Number of hits: {response.hits.total.value}")
+   
 
-    for hit in response:
-     authors_nested = hit.authors
-
-     for author in authors_nested:
-        full_name = author.full_name
-        print(f"Author Full Name: {full_name}")
 
     list = [] 
 
@@ -100,7 +87,6 @@ def filter_date(result_ids , date_debut , date_fin ) :
 
     s.sort("-date")
     response = s.execute()
-    print(f"Found {len(response)} hits")
 
     filtered_result_ids = [hit.id for hit in response]
 

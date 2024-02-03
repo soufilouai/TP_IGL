@@ -57,7 +57,7 @@ const Articlemodif = () => {
         const fetchArticle = async () => {
           try {
             const Articledata = await getArticleInfo(id,authtoken);
-            console.log("data :::::::", Articledata)
+            
             setTitre(Articledata.title);
             setKeyword(Articledata.keywords);
             setSummary(Articledata.summary);

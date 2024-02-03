@@ -78,7 +78,3 @@ class ArticleDocument(Document):
         data['author'] = self.prepare_authors(instance)
         return data
   
-  """def get_authors_fullname(self, instance):
-        authors_fullname = [author.fullname for author in instance.authors.all()]
-       
-        return authors_fullname"""
