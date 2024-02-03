@@ -6,6 +6,12 @@ from datetime import datetime
 
 # Create your models here.
 
+
+
+
+
+
+
 class Author(models.Model):
     name = models.CharField(max_length=255)
     institution = models.CharField(max_length=255)
@@ -28,7 +34,7 @@ class Article(models.Model):
         db_collation='utf8mb4_general_ci'  # Adjust to your needs
     )
     pdf = models.CharField(max_length=255)
-    date = models.DateTimeField(
+    date = models.DateField(
         default=datetime.now,
         null=True,
         blank=True
@@ -51,6 +57,6 @@ class Article(models.Model):
             )
             self.author.add(author)  
     
-    
+
 
 
