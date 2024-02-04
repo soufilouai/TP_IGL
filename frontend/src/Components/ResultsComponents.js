@@ -125,6 +125,35 @@ export const Filtres = () => {
     };
 
 
+    const[url,getUrl] = useState("");
+
+    const handlepdf = (filename) => {
+        const apiUrl = `http://localhost:8000/api/articles/affichage/?filename=${filename}`;
+      
+        return fetch(apiUrl, {
+          method: "GET",
+          headers: {
+            // Include any headers you need
+            // For example, if you're sending JSON, you might include:
+            // 'Content-Type': 'application/json'
+          },
+        })
+          .then(response => response.json())
+          .then(data => {
+            // Handle the data returned from the server
+            const filePath = data.file_path;
+            getUrl(filePath)
+            // You can return the file path or handle it as needed
+            
+          })
+          .catch(error => {
+            // Handle any errors that occurred during the fetch
+            console.error('Error:', error);
+            throw error; // Rethrow the error to handle it in the calling code if needed
+          });
+      };
+    
+
     return (
         <div>
             <div className="resultrecherche">
@@ -152,7 +181,8 @@ export const Filtres = () => {
                         <button className="boutton-filter" onClick={() => handleRequete()}> Filter</button>
                     </div>
                     <div className="containerforboxes">
-                        {/* affichage des articles recuperees du back  */}
+                        {/* affichage des articles rec
+                        erees du back  */}
                         {articles.slice(indexOfFirstArticle, indexOfLastArticle).map((article) => (
                             <div key={article.title} className="box2">
                                 <div className="boxInner">
@@ -163,7 +193,7 @@ export const Filtres = () => {
                                     {article.author && (
                                         <p className="Author">Author: {article.author.map((author) => `${author.name}`)}</p>
                                     )}
-                                    <button className="Readmore" onClick={() => { openpdf(article.pdf) }}>Read more</button>
+                                    <button className="Readmore" onClick={() => { handlepdf(article.pdf);openpdf(url) }}>Read more</button>
                                     <button className="favori" style={{ color: favoriteArticles.includes(article.id) ? '#B08B56' : '#393731' }} onClick={() => handleClick(article.id)}>
                                         ☆
                                     </button>

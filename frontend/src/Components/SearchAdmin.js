@@ -13,6 +13,8 @@ import logo4 from "../images/trois.png"
 import blacklogo from "../images/logoblack.png"
 import frame1 from "../images/frame1.png"
 import { useLocation } from "react-router-dom";
+import { useRef } from 'react';
+
 
 
 export const Recherche = () => {
@@ -30,6 +32,7 @@ export const Recherche = () => {
     const [showContent, setShowContent] = useState(false);
     const [showContent2, setShowContent2] = useState(false);
     const [favoriteArticles, setFavoriteArticles] = useState([])
+    const[url,getUrl] = useState("");
 
     /********** Pour les bouttons switch to other pages (affichage articles) ********************/
     const [currentPage, setCurrentPage] = useState(1);
@@ -136,6 +139,9 @@ export const Recherche = () => {
     }, []);
     /*********************** ouvrir l'article dans un nouvel onglet ************************/
     const openpdf = (link) => {
+        console.log('the link is ' + link.file_path);
+
+      
         window.open(link, '_blank');
     }
 
@@ -144,6 +150,74 @@ export const Recherche = () => {
     const handlePagination = (pageNumber) => {
         setCurrentPage(pageNumber);
     };
+
+    const handlepdf = (filename) => {
+        const apiUrl = `http://localhost:8000/api/articles/affichage/?filename=${filename}`;
+      
+        return fetch(apiUrl, {
+          method: "GET",
+          headers: {
+            // Include any headers you need
+            // For example, if you're sending JSON, you might include:
+            // 'Content-Type': 'application/json'
+          },
+        })
+          .then(response => response.json())
+          .then(data => {
+            // Handle the data returned from the server
+            const filePath = data.file_path;
+            getUrl(filePath)
+            // You can return the file path or handle it as needed
+            
+          })
+          .catch(error => {
+            // Handle any errors that occurred during the fetch
+            console.error('Error:', error);
+            throw error; // Rethrow the error to handle it in the calling code if needed
+          });
+      };
+    
+      const fileInputRef = useRef(null);
+
+        const handleUploadClick = () => {
+            // Trigger click on the file input
+            if (fileInputRef.current) {
+              fileInputRef.current.click();
+            }
+          };
+          
+          const handleFileChange = async (event) => {
+            // Handle file selection here
+            const selectedFile = event.target.files[0];
+            
+            if (selectedFile) {
+              // Create a FormData object to send the file
+              const formData = new FormData();
+              formData.append('pdf_file', selectedFile);
+          
+              // Perform any additional actions with the selected file
+              const apiUrl = "http://localhost:8000/api/articles/upload/";
+              try {
+                const response = await fetch(apiUrl, {
+                  method: "POST",
+                  body: formData,
+                  headers: {
+                    // No need to set Origin header for CORS, the browser will handle it
+                  },
+                });
+          
+                if (response.ok) {
+                  const data = await response.json();
+                  console.log("File uploaded successfully:", data);
+                } else {
+                  console.error("File upload failed. Server returned:", response.status, response.statusText);
+                }
+              } catch (error) {
+                console.error("Error uploading file:", error);
+              }
+            }
+          };
+
 
 
     return (
@@ -179,7 +253,11 @@ export const Recherche = () => {
                     )}
                     {/* fin affichage pour media query */}
                     <div >
-                        <button className="buttonupload1" style={{  whiteSpace: 'nowrap' }}>Upload article</button>
+                    <div>
+                        <button className="buttonupload1" style={{  whiteSpace: 'nowrap' }}onClick={handleUploadClick}>Upload article</button>
+                        <input type="file" ref={fileInputRef} style={{ display: 'none' }} onChange={handleFileChange} accept=".pdf"/>
+
+                        </div>
                         <button className="buttonmod1" style={{  whiteSpace: 'nowrap' }}>Moderator management </button>
                         <Link to="/library">
                             <button className='button1' style={{ color: '#F2F0E6', whiteSpace: 'nowrap' }}>
@@ -226,7 +304,7 @@ export const Recherche = () => {
                                 {article.author && (
                                     <p className="Author">Author: {article.author.map((author) => `${author.name}`)}</p>
                                 )}
-                                <button className="Readmore" onClick={() => { openpdf(article.pdf) }}>Read more</button>
+                                <button className="Readmore" onClick={() => {handlepdf(article.pdf); openpdf(url) }}>Read more</button>
                                 <button className="favori" style={{ color: favoriteArticles.includes(article.id) ? '#B08B56' : '#393731' }} onClick={() => handleClick(article.id)}>
                                     ☆
                                 </button>

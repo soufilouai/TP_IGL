@@ -5,6 +5,7 @@ from .views import *
 
 urlpatterns = [
     path('', ArticlesAPIView.as_view(), name='article-list'),
+    path('affichage/', Geturlarticle.as_view(), name='affichage'),
     path('<int:pk>/', ArticleDetails.as_view(), name='article-details'),
     path('<int:pk>/addFav/', ArticleAddFav.as_view()),
     path('upload/', Uploadarticle.as_view(), name='upload'),
@@ -14,5 +15,5 @@ urlpatterns = [
     path('favorislist/' , Favorislist.as_view() ) ,
     path('filter/' , Filter_results.as_view() ) ,
     path('favoris/' , Favoris.as_view() ) ,
-
-] 
+    
+]

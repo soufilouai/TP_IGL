@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 from pathlib import Path
 from datetime import datetime, timedelta
 from .credentials import pwd, user
+import os
 
 
 
@@ -268,6 +269,10 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static'),
+]
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
@@ -293,3 +298,9 @@ CORS_ALLOW_HEADERS = [
     "x-csrftoken",
     "x-requested-with",
 ]
+
+
+current_directory = os.path.dirname(os.path.abspath(__file__))
+
+MEDIA_URL = 'media/'
+MEDIA_ROOT = os.path.join(current_directory ,'..' ,'media/')

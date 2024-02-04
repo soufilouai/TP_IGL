@@ -122,7 +122,7 @@ class SearchResults(APIView):
             serializer = Article_results(articles, many=True)
             serialized_data = serializer.data
             json_data = json.dumps(serialized_data)
-            print(json_data)
+
             return Response(json_data, status=status.HTTP_200_OK)
         
 
@@ -231,13 +231,10 @@ def upload_to_folder(pdf_file):
     # Generate a unique filename using the current timestamp
     timestamp = int(time.time())
     filename = f'PDF_{timestamp}.pdf'
-    path = os.path.join(current_directory ,'..', '..','frontend' ,'uploadedarticles', filename)
+    path = os.path.join(current_directory ,'..' ,'media', filename)
     with open(path, 'wb') as destination:
             for chunk in pdf_file.chunks():
                 destination.write(chunk)
-
-
-    
 
     return filename
 
@@ -259,7 +256,6 @@ class Uploadarticle(APIView):
                     
         
                     json_data = extract(pdf_file)
-                    print(json_data.get('date'))
                     if json_data.get('date')!='' :
 
 
@@ -289,19 +285,24 @@ class Uploadarticle(APIView):
                     article.save()
                 else:
                  return HttpResponse("PDF path not provided in the request.")
-        
-        
-
-        
-    
-        # current_directory = os.path.dirname(os.path.abspath(__file__))
-        # path = os.path.join(current_directory ,'..',  'drive-download-20231228T162223Z-001', f'Article_03.pdf')
-        # Response = extractpdf(path)
-    
     
               return HttpResponse()
+        
+        
 
 
+
+class Geturlarticle(APIView):
+
+        permission_classes = [permissions.AllowAny]
+
+        def get(self, request, *args, **kwargs):
+         filename = request.query_params.get('filename')
+         if filename:
+            print(filename)
+            return Response({"file_path": 'http://localhost:8000/media/'+filename})
+         else:
+            return Response({"error": "Filename not provided in the URL parameters."}, status=400)
 
 
         

@@ -24,8 +24,8 @@ from elasticsearch_dsl import Search , Q , DateRange
 from elasticsearch_dsl.query import MultiMatch
 from datetime import date
 from articles.article_utils import *
-
-
+from django.conf import settings
+from django.conf.urls.static import static
 
      
 
@@ -37,3 +37,8 @@ urlpatterns = [
     path('articles/', include('articles.urls')),  # Use the app name 'articles' in include
     # Add other URL patterns as needed
 ]
+
+
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

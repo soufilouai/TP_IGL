@@ -9,7 +9,6 @@ import blacklogo from "../images/logoblack.png"
 import frame1 from "../images/frame1.png"
 import { Link } from "react-router-dom/cjs/react-router-dom.min";
 import iconsearch from "../images/searchicon.png"
-import axios from 'axios'
 import React, { useRef } from 'react';
 
 export const Enteteadmin = () => {

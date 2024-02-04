@@ -156,6 +156,34 @@ export const Filtresmod = () => {
         setCurrentPage(pageNumber);
     };
 
+    const[url,getUrl] = useState("");
+
+    const handlepdf = (filename) => {
+        const apiUrl = `http://localhost:8000/api/articles/affichage/?filename=${filename}`;
+      
+        return fetch(apiUrl, {
+          method: "GET",
+          headers: {
+            // Include any headers you need
+            // For example, if you're sending JSON, you might include:
+            // 'Content-Type': 'application/json'
+          },
+        })
+          .then(response => response.json())
+          .then(data => {
+            // Handle the data returned from the server
+            const filePath = data.file_path;
+            getUrl(filePath)
+            // You can return the file path or handle it as needed
+            
+          })
+          .catch(error => {
+            // Handle any errors that occurred during the fetch
+            console.error('Error:', error);
+            throw error; // Rethrow the error to handle it in the calling code if needed
+          });
+      };
+
 
 
 
@@ -198,7 +226,7 @@ export const Filtresmod = () => {
                                     {article.author && (
                                         <p className="Author">Author: {article.author.map((author) => `${author.name}`)}</p>
                                     )}
-                                    <button className="Readmore" onClick={() => { openpdf(article.pdf) }}>Read more</button>
+                                    <button className="Readmore" onClick={() => { handlepdf(article.pdf);openpdf(url) }}>Read more</button>
                                     <button className="favori" >
                                     </button>
                                     <button className="edit" onClick={() => handleEditClick(article.id)}>Edit </button>
