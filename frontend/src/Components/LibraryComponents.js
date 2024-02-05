@@ -10,6 +10,7 @@ import LibImage from "../images/mylib.png"
 import { useLocation } from "react-router-dom/cjs/react-router-dom.min";
 
 
+
 export const Filtres = () => {
 
     const location = useLocation();
@@ -70,7 +71,6 @@ export const Filtres = () => {
                 const data2 = await response2.json();
                 const parsedData2 = JSON.parse(data2);
                 setArticles(parsedData2);
-                console.log("les articles favoris", articles);
                 console.log(`Response status: ${response2.status}`);
                 console.log(`Data received: ${JSON.stringify(data2)}`);
 
@@ -176,7 +176,7 @@ export const Filtres = () => {
           .then(data => {
             // Handle the data returned from the server
             const filePath = data.file_path;
-            getUrl(filePath)
+            window.open(filePath, '_blank');
             // You can return the file path or handle it as needed
             
           })
@@ -188,10 +188,13 @@ export const Filtres = () => {
       };
 
 
+      
+
+
     return (
         <div>
             <div className="resultrecherche">
-                <img src={LibImage} alt="Mylibrary" className="librimage" />
+                <img src={LibImage} alt="Mylibrary" className="librimage"  />
                 <div className="results_filtres">
                     <div className="box-filtre">
                         <div >
@@ -226,7 +229,7 @@ export const Filtres = () => {
                                     {article.author && (
                                         <p className="Author">Author: {article.author.map((author) => `${author.name}`)}</p>
                                     )}
-                                    <button className="Readmore" onClick={() => { handlepdf(article.pdf);openpdf(url) }}>Read more</button>
+                                    <button className="Readmore" onClick={() => { handlepdf(article.pdf);}}>Read more</button>
                                     <button className="favori" >
                                     </button>
                                 </div>

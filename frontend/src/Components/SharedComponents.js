@@ -3,6 +3,7 @@ import '../CSS/Css1.css';
 import '../CSS/Css2.css';
 import '../CSS/Css3.css'
 import { useState } from "react";
+import { jwtDecode } from "jwt-decode";
 import { Link, useHistory, useLocation } from 'react-router-dom';
 /* les logos des reseaux sociaux */
 import fbImage from "../images/facebook.png"
@@ -68,7 +69,6 @@ export const ResultsHeader = () => {
 
     /*******************get articles pour la recherche faite dans la page results ************************/
     const handleRecherche = async () => {
-        console.log("Mots-clés saisis:", motsCles);
         try {
             const apiUrl = "http://localhost:8000/api/articles/results/";
             const response = await fetch(apiUrl, {
@@ -88,15 +88,35 @@ export const ResultsHeader = () => {
             const data = await response.json();
             const parsedData = JSON.parse(data);
             setArticles(parsedData);
-            console.log("les articles dans search", articles);
-            history.push({
-                pathname: "/Resultats",
+            const token = localStorage.getItem("token");
+            const decodedtoken =jwtDecode(token);
+            if(decodedtoken.is_admin){
+                history.push({
+                pathname: "/Resultatsadmin/",
                 state: {
                     articles: parsedData,
                     motsCles: motsCles
                 },
-            });
-            console.log("afficher les articles pour les resultats", articles);
+                });
+            }else{
+                if(decodedtoken.is_moderator){
+                history.push({
+                    pathname: "/Resultatsmod/",
+                    state: {
+                    articles: parsedData,
+                    motsCles: motsCles
+                    },
+                });
+                }else{
+                history.push({
+                    pathname: "/Resultats/",
+                    state: {
+                    articles: parsedData,
+                    motsCles: motsCles
+                    },
+                });
+                }
+            }
         } catch (error) {
             console.error("Erreur lors de la récupération des données:", error);
         }
@@ -107,7 +127,7 @@ export const ResultsHeader = () => {
         <div className="resultatsPage">
             <header className='main_header'>
                 <div className='container'>
-                    <img src={blacklogo} alt='Icone' className='logo' />
+                    <img src={blacklogo} alt='Icone' className='logo' onClick={() => window.location.href='/search'} />
                     <button className='boutton-image-recherche' onClick={handleRecherche}>
                         <img src={iconsearch} alt='Icone' className='searchimage' />
                     </button>

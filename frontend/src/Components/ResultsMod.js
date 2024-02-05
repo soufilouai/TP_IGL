@@ -173,7 +173,8 @@ export const Filtresmod = () => {
           .then(data => {
             // Handle the data returned from the server
             const filePath = data.file_path;
-            getUrl(filePath)
+            window.open(filePath, '_blank');
+            
             // You can return the file path or handle it as needed
             
           })
@@ -226,7 +227,7 @@ export const Filtresmod = () => {
                                     {article.author && (
                                         <p className="Author">Author: {article.author.map((author) => `${author.name}`)}</p>
                                     )}
-                                    <button className="Readmore" onClick={() => { handlepdf(article.pdf);openpdf(url) }}>Read more</button>
+                                    <button className="Readmore" onClick={() => { handlepdf(article.pdf); }}>Read more</button>
                                     <button className="favori" >
                                     </button>
                                     <button className="edit" onClick={() => handleEditClick(article.id)}>Edit </button>

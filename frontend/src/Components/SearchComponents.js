@@ -76,7 +76,6 @@ export const Recherche = () => {
   /*********** getting articles du backend pour les resultats de la recherche ******************/
   const history = useHistory();
   const handleRecherche = async () => {
-    console.log("Mots-clés saisis:", motsCles);
     try {
       const apiUrl = "http://localhost:8000/api/articles/results/";
       const response = await fetch(apiUrl, {
@@ -95,7 +94,6 @@ export const Recherche = () => {
       const data = await response.json();
       const parsedData = JSON.parse(data);
       setArticles(parsedData);
-      console.log("les articles dans search", articles);
       /**************************redirect to results page ******************/
       const token = localStorage.getItem("token");
       const decodedtoken = jwtDecode(token);
@@ -151,7 +149,6 @@ export const Recherche = () => {
         const data2 = await response2.json();
         const parsedData2 = JSON.parse(data2);
         setArticles2(parsedData2);
-        console.log("les articles random", articles2);
       } catch (error) {
         console.error("Erreur lors de la récupération des données2:", error);
       }
@@ -185,7 +182,8 @@ const handlepdf = (filename) => {
       .then(data => {
         // Handle the data returned from the server
         const filePath = data.file_path;
-        getUrl(filePath)
+        window.open(filePath, '_blank');
+
         // You can return the file path or handle it as needed
         
       })
@@ -281,7 +279,7 @@ const handlepdf = (filename) => {
                 {article.author && (
                   <p className="Author">Author: {article.author.map((author) => `${author.name}`)}</p>
                 )}
-                <button className="Readmore" onClick={() => { handlepdf(article.pdf);openpdf(url) }}>Read more</button>
+                <button className="Readmore" onClick={() => { handlepdf(article.pdf); }}>Read more</button>
                 <button className="favori" style={{ color: favoriteArticles.includes(article.id) ? '#B08B56' : '#393731' }} onClick={() => handleClick(article.id)}>
                   ☆
                 </button>

@@ -22,8 +22,7 @@ const Articlemodif = () => {
     const [Titre,setTitre] = useState("")
     const [Summary,setSummary] = useState("")
     const [Keyword,setKeyword] = useState("")
-    const [Authors,setAuthors] = useState([{id:'1',name:'author number 1',institution:'institution number 1', email:'email number 1'},
-                                          {id:'2',name:'author number 2',institution:'institution number 2', email:'email number 2'},])
+    const [Authors,setAuthors] = useState([{id:'',name:'',institution:'', email:''}])
     
     
     const [Date,setDate]= useState("")

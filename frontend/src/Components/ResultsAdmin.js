@@ -71,7 +71,6 @@ export const Enteteadmin = () => {
           
                 if (response.ok) {
                   const data = await response.json();
-                  console.log("File uploaded successfully:", data);
                 } else {
                   console.error("File upload failed. Server returned:", response.status, response.statusText);
                 }
@@ -82,10 +81,14 @@ export const Enteteadmin = () => {
           };
 
 
+          const hanldemoderators = () => {
+            window.open('http://localhost:8000/admin/users/customuser')
+       } 
+
+
     /*********** getting articles du backend pour les resultats de la recherche ******************/
     const history = useHistory();
     const handleRecherche = async () => {
-        console.log("Mots-clés saisis:", motsCles);
         try {
             const apiUrl = "http://localhost:8000/api/articles/results/";
             const response = await fetch(apiUrl, {
@@ -105,7 +108,6 @@ export const Enteteadmin = () => {
             const data = await response.json();
             const parsedData = JSON.parse(data);
             setArticles(parsedData);
-            console.log("les articles dans search", articles);
             /**************************redirect to results page ******************/
             history.push({
                 pathname: "/Resultatsadmin/",
@@ -114,7 +116,6 @@ export const Enteteadmin = () => {
                     motsCles: motsCles
                 },
             });
-            console.log("afficher les articles pour les resultats", articles);
         } catch (error) {
             console.error("Erreur lors de la récupération des données:", error);
         }
@@ -123,8 +124,9 @@ export const Enteteadmin = () => {
     return (
         <div className="resultatsPage">
             <header className='main_header'>
-                <div className='container'>
-                    <img src={blacklogo} alt='Icone' className='logo' />
+                <div className='container'>                    
+                   
+                <img src={blacklogo} alt='Icone' className='logo' onClick={() => window.location.href='/searchadmin'} />
                     <button className='boutton-image-recherche' onClick={handleRecherche}>
                         <img src={iconsearch} alt='Icone' className='searchimage' />
                     </button>
@@ -137,7 +139,7 @@ export const Enteteadmin = () => {
                     <button  className="buttonupload" style={{ color: '#393731', whiteSpace: 'nowrap' }} onClick={handleUploadClick}>Upload article</button>
                     <input type="file" ref={fileInputRef} style={{ display: 'none' }} onChange={handleFileChange} accept=".pdf"/>
                     </div>
-                    <button className="buttonmod" style={{ color: '#393731', whiteSpace: 'nowrap' }}>Moderator management </button>
+                    <button className="buttonmod" style={{ color: '#393731', whiteSpace: 'nowrap' }} onClick={hanldemoderators}>Moderator management </button>
                     <Link to='/library/'>
                         <button className='buttonlib' style={{ color: '#393731', whiteSpace: 'nowrap' }}>
                             ☆My library

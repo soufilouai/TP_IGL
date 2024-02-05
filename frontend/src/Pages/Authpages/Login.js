@@ -42,8 +42,6 @@ const Login = () => {
             localStorage.setItem("refresh token", data.refresh);
 
 
-            console.log('le token')
-            console.log(localStorage.getItem('token'))
 
             const decodedtoken= jwtDecode(data.access);
             // Redirect to the search page
@@ -66,7 +64,6 @@ const Login = () => {
             }
         }
         } else {
-            console.log("there's some err", data);
             seterror(true);
 
             if (!("username" in data) && !("password" in data)) {

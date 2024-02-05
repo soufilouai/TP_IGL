@@ -40,14 +40,7 @@ const Register = () => {
   };
 
   const register = async () => {
-    console.log(
-      "ur username is :",
-      usernameinput +
-      "ur email is : " +
-      emailinput +
-      " and your password is :",
-      passwordinput
-    );
+    
     const response = await RegisterRequest(
       usernameinput,
       emailinput,
@@ -56,7 +49,6 @@ const Register = () => {
     const data = await response.json();
 
     if (response.status === 201) {
-      console.log("u r registered ", data);
       const response2 = await Loginrequest(usernameinput, passwordinput);
       const data2 = await response2.json();
 
@@ -86,12 +78,10 @@ const Register = () => {
           }
       }
       } else {
-        console.log("there's some err", data2);
         seterror(true);
         seterrormessage("Non existing account");
       }
     } else {
-      console.log("there's some err", data);
       seterror(true);
 
       if ("email" in data && "username" in data) {

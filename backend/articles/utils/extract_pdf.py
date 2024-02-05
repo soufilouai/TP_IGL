@@ -3,12 +3,9 @@ from hugchat.login import Login
 import PyPDF2
 import re
 import json
-import ast
-import os 
 from django.http import JsonResponse
-import jsonlint 
 import openai 
-from .credentials import API_KEY
+from .apicredentials import API_KEY
 import string
 
 
@@ -32,8 +29,9 @@ def extractpdf(path):
 
     # Extract text from PDF
     text, page0 = extract_text_from_pdf(path)
+ 
 
-    prompt=f"extract these sections as json '{{'title', 'authors'('name' ,'affiliation' , 'email'), 'keywords', ' date': 'yyyy-mm-dd' which is the date of publish , 'asbtract'}}' as they are from: {page0} don't add the introduction all in utf8 respect the quotations and that the strings are terminated"
+    prompt=f"extract these sections as json '{{'title', 'authors'('name' ,'affiliation' , 'email'), 'keywords', ' date': 'yyyy-mm-dd' which is the date of publish or announcement otherwise leave it blank  , 'abstract'}}' as they are from: {page0} don't add the introduction all in utf8 respect the quotations and that the strings are terminated"
     response = openai.ChatCompletion.create(
     model="gpt-3.5-turbo",
     messages=[{'role':'user' , 'content': prompt }]

@@ -77,7 +77,6 @@ export const Recherche = () => {
     /*********** getting articles du backend pour les resultats de la recherche ******************/
     const history = useHistory();
     const handleRecherche = async () => {
-        console.log("Mots-clés saisis:", motsCles);
         try {
             const apiUrl = "http://localhost:8000/api/articles/results/";
             const response = await fetch(apiUrl, {
@@ -97,7 +96,6 @@ export const Recherche = () => {
             const data = await response.json();
             const parsedData = JSON.parse(data);
             setArticles(parsedData);
-            console.log("les articles dans search", articles);
             /**************************redirect to results page ******************/
             history.push({
                 pathname: "/Resultatsadmin/",
@@ -106,7 +104,6 @@ export const Recherche = () => {
                     motsCles: motsCles
                 },
             });
-            console.log("afficher les articles pour les resultats", articles);
         } catch (error) {
             console.error("Erreur lors de la récupération des données:", error);
         }
@@ -130,7 +127,6 @@ export const Recherche = () => {
                 const data2 = await response2.json();
                 const parsedData2 = JSON.parse(data2);
                 setArticles2(parsedData2);
-                console.log("les articles random", articles2);
             } catch (error) {
                 console.error("Erreur lors de la récupération des données2:", error);
             }
@@ -139,7 +135,6 @@ export const Recherche = () => {
     }, []);
     /*********************** ouvrir l'article dans un nouvel onglet ************************/
     const openpdf = (link) => {
-        console.log('the link is ' + link.file_path);
 
       
         window.open(link, '_blank');
@@ -166,7 +161,8 @@ export const Recherche = () => {
           .then(data => {
             // Handle the data returned from the server
             const filePath = data.file_path;
-            getUrl(filePath)
+            window.open(filePath, '_blank');
+
             // You can return the file path or handle it as needed
             
           })
@@ -208,7 +204,6 @@ export const Recherche = () => {
           
                 if (response.ok) {
                   const data = await response.json();
-                  console.log("File uploaded successfully:", data);
                 } else {
                   console.error("File upload failed. Server returned:", response.status, response.statusText);
                 }
@@ -217,6 +212,10 @@ export const Recherche = () => {
               }
             }
           };
+
+          const hanldemoderators = () => {
+               window.open('http://localhost:8000/admin/users/customuser')
+          }
 
 
 
@@ -254,11 +253,11 @@ export const Recherche = () => {
                     {/* fin affichage pour media query */}
                     <div >
                     <div>
-                        <button className="buttonupload1" style={{  whiteSpace: 'nowrap' }}onClick={handleUploadClick}>Upload article</button>
+                        <button className="buttonupload1" style={{  whiteSpace: 'nowrap' }}onClick={ handleUploadClick}>Upload article</button>
                         <input type="file" ref={fileInputRef} style={{ display: 'none' }} onChange={handleFileChange} accept=".pdf"/>
 
                         </div>
-                        <button className="buttonmod1" style={{  whiteSpace: 'nowrap' }}>Moderator management </button>
+                        <button className="buttonmod1" style={{  whiteSpace: 'nowrap' }} onClick={hanldemoderators}  >Moderator management </button>
                         <Link to="/library">
                             <button className='button1' style={{ color: '#F2F0E6', whiteSpace: 'nowrap' }}>
                                 ☆ My library
@@ -304,7 +303,7 @@ export const Recherche = () => {
                                 {article.author && (
                                     <p className="Author">Author: {article.author.map((author) => `${author.name}`)}</p>
                                 )}
-                                <button className="Readmore" onClick={() => {handlepdf(article.pdf); openpdf(url) }}>Read more</button>
+                                <button className="Readmore" onClick={() => {handlepdf(article.pdf);  }}>Read more</button>
                                 <button className="favori" style={{ color: favoriteArticles.includes(article.id) ? '#B08B56' : '#393731' }} onClick={() => handleClick(article.id)}>
                                     ☆
                                 </button>

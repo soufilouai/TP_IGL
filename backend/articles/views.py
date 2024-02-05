@@ -14,11 +14,9 @@ from rest_framework.permissions import IsAuthenticated
 from .utils.extract_pdf import extractpdf
 from django.http import HttpResponse
 import os
-import dropbox 
 import json
-import ast
 import time 
-from .utils.credentials import ACCESS_TOKEN
+#from .utils.credentials import ACCESS_TOKEN
 from datetime import datetime
 from dateutil.parser import parse
 
@@ -299,7 +297,6 @@ class Geturlarticle(APIView):
         def get(self, request, *args, **kwargs):
          filename = request.query_params.get('filename')
          if filename:
-            print(filename)
             return Response({"file_path": 'http://localhost:8000/media/'+filename})
          else:
             return Response({"error": "Filename not provided in the URL parameters."}, status=400)
