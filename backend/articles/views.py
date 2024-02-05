@@ -32,38 +32,44 @@ class CanModerateContentPermission(permissions.BasePermission):
        
         return request.user.is_moderator
 
+class AdminPermission(permissions.BasePermission):
+    def has_permission(self, request, view):
+        # Check if the user has the admin  permission
+        
+       
+        return request.user.is_superuser
+
 class ArticlesAPIView(generics.ListCreateAPIView):
     queryset = Article.objects.all()
     serializer_class = ArticleSerializer
-    # permission_classes = [IsAuthenticated]
-    permission_classes = [permissions.AllowAny]
+    permission_classes = [IsAuthenticated]
+    
    
 
 class ArticleDetails(generics.RetrieveAPIView):
     queryset = Article.objects.all()
     serializer_class = ArticleSerializer
-    # permission_classes = [IsAuthenticated]
-    permission_classes = [permissions.AllowAny]
+    permission_classes = [IsAuthenticated]
+    
     
 class ArticlesModAPIView(generics.ListCreateAPIView):
     queryset = Article.objects.all()
     serializer_class = ArticleSerializer
-    permission_classes = [permissions.AllowAny]
-    # permission_classes = [IsAuthenticated,CanModerateContentPermission]
+    permission_classes = [IsAuthenticated,CanModerateContentPermission]
    
 
 class ArticleDetailsMod(generics.RetrieveUpdateDestroyAPIView):
     queryset = Article.objects.all()
     serializer_class = ArticleSerializer
-    permission_classes = [permissions.AllowAny]
-    # permission_classes = [IsAuthenticated,CanModerateContentPermission]
+    permission_classes = [IsAuthenticated,CanModerateContentPermission]
     
     
     
 class ArticleAddFav(generics.RetrieveUpdateAPIView):
     queryset = Article.objects.all()
     serializer_class = ArticleSerializer
-    permission_classes = [permissions.AllowAny]
+    permission_classes = [IsAuthenticated]
+    
     def post(self, request,*args, **kwargs):
         article = self.get_object()
         user = request.user  # Assuming you have authentication enabled
@@ -87,7 +93,7 @@ class ArticleAddFav(generics.RetrieveUpdateAPIView):
 
 class SearchResults(APIView):
     
-    permission_classes = [permissions.AllowAny]
+    permission_classes = [IsAuthenticated]
     def post(self, request):
         if request.method == 'POST':
         
@@ -125,7 +131,7 @@ class SearchResults(APIView):
         
 
 class Filter_results(APIView):
-    permission_classes = [permissions.AllowAny]
+    permission_classes = [IsAuthenticated]
     def post(self, request):
         
             data = request.data
@@ -139,10 +145,11 @@ class Filter_results(APIView):
 
             query = k.get('keyword')
             
-        
-            search_results_ids = search_Article(query)
+            if (query!="") : search_results_ids = search_Article(query)
+            
             results = filter_results(search_results_ids ,institution , author , keywords)
-            if (start_date!=None and  end_date !=None and start_date<= end_date) :
+           
+            if (start_date!="" and  end_date !="" and start_date<= end_date) :
               results = filter_date(results , start_date , end_date)
 
             
@@ -159,7 +166,7 @@ class Filter_results(APIView):
 
 
 class Favorislist(APIView):
-    permission_classes = [permissions.AllowAny]
+    permission_classes = [IsAuthenticated]
     def get(self, request):
         if request.method == 'GET':
             user = request.user
@@ -174,7 +181,7 @@ class Favorislist(APIView):
 
 
 class Favoris(APIView):
-    permission_classes = [permissions.AllowAny]
+    permission_classes = [IsAuthenticated]
     def get(self, request):
         if request.method == 'GET':
             user = request.user
@@ -188,30 +195,9 @@ class Favoris(APIView):
         
         
 
-class Article_modification(APIView):
-    permission_classes = [permissions.AllowAny]
-    def get(self, request):
-        if request.method == 'GET':
-            id = request.id 
-            article = Article.objects.filter(id__in=id)
-            serializer = Article_modification(article)
-            serialized_data = serializer.data
-            json_data = json.dumps(serialized_data)
-
-            return Response(json_data, status=status.HTTP_200_OK)
-        
-    def put(self, request, pk):
-        instance = get_object_or_404(Article, pk=pk)
-        serializer = ArticleSerializer(instance, data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-           
-
-
+    
 
                 
             
@@ -240,7 +226,7 @@ def upload_to_folder(pdf_file):
 
 class Uploadarticle(APIView):
 
-        permission_classes = [permissions.AllowAny]
+        permission_classes = [AdminPermission]
 
 
         def post(self, request, *args, **kwargs):

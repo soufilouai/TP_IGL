@@ -127,7 +127,7 @@ export const ResultsHeader = () => {
         <div className="resultatsPage">
             <header className='main_header'>
                 <div className='container'>
-                    <img src={blacklogo} alt='Icone' className='logo' onClick={() => window.location.href='/search'} />
+                    <img src={blacklogo} alt='Icone' className='logo'  />
                     <button className='boutton-image-recherche' onClick={handleRecherche}>
                         <img src={iconsearch} alt='Icone' className='searchimage' />
                     </button>
